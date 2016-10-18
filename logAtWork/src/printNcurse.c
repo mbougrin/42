@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/05 10:11:34 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/17 13:57:05 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/18 14:50:58 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ static int	weekTime(void)
 	{
 		if (day == 1)
 			break ;
-		if ((stc->dateNumber - 6) > ft_atoi(tmp->splitInfo[1]))
+		if ((stc->dateNumber - 6) >= ft_atoi(tmp->splitInfo[1]))
 			break ;
 		if (stc->month == tmp->month \
 				&& ft_strcmp(stc->year, tmp->splitInfo[3]) == 0)
@@ -143,6 +143,8 @@ static int	weekTime(void)
 		day--;
 		tmp = tmp->next;
 	}
+	if (day == 1)
+		count += tmp->timeWork;
 	return (count);
 }
 
