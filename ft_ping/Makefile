@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = logAtWork 
+NAME = ft_ping 
 CC = gcc
 RM = rm -f
 LIB = libft/libft.a
