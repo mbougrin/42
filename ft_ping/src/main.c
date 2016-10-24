@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/24 11:42:08 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/24 11:42:36 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ char					*arg(char **av)
 			return (av[i]);
 		i++;
 	}
+	exit(0);
 }
 
 int						main(int ac, char **av)
