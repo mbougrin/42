@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/24 14:46:34 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/24 14:47:55 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void					ipConnect(void)
 	hints.ai_socktype = SOCK_DGRAM; // datagram socket
 	hints.ai_flags = 0;
 	hints.ai_protocol = 0;
+	printf("|");
 	if ((getaddrinfo(stc->ip, NULL, &hints, &result)) != 0)
 		addrError();
 	printf("|");
