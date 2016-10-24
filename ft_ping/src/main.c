@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/24 13:33:23 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/24 13:50:33 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,27 @@ static void				showHelp(char *str)
 	printf("Usage: %s [-hv] destination IP\n", str);
 	free(singleton(NULL));
 	exit(-1);
+}
+
+static void				addrError(void)
+{
+	printf("getaddrinfo error\n");
+	exit(-1);
+}
+
+void					get_ip(void)
+{
+	t_stc		*stc = singleton(NULL);
+	t_addrinfo	hints;
+	t_addrinfo	*rp, *result;
+
+	//memset ?
+	hints.ai_family = AF_UNSPEC; // ipv4 and ipv6 all socket
+	hints.ai_socktype = SOCK_DGRAM; // datagram socket
+	hints.ai_flags = 0;
+	hints.ai_protocol = 0;
+	if ((getaddrinfo(stc->ip, NULL, &hint, &result)) != 0)
+		addrError();
 }
 
 char					*arg(char **av)
