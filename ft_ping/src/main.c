@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/24 13:23:48 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/24 13:25:08 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,14 @@ static unsigned short	checksum(void *b, int len)
 	return (result);
 }
 */
+static t_stc			*singleton(t_stc *stc)
+{
+	static t_stc	*singleton;
+
+	if (stc != NULL)
+		singleton = stc;
+	return (singleton);
+}
 
 static void				showHelp(char *str)
 {
@@ -53,14 +61,6 @@ char					*arg(char **av)
 	exit(-1);
 }
 
-t_stc					*singleton(t_stc *stc)
-{
-	static t_stc	*singleton;
-
-	if (stc != NULL)
-		singleton = stc;
-	return (singleton);
-}
 
 int						main(int ac, char **av)
 {
