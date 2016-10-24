@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/24 14:42:12 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/24 14:43:10 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ void					ipConnect(void)
 	while (tmp != NULL)
 	{
 		fd = socket(tmp->ai_family, tmp->ai_socktype, tmp->ai_protocol);
-		if (fd == -1)
-			continue ;
+//		if (fd == -1)
+//			continue ;
 		if (connect(fd, tmp->ai_addr, tmp->ai_addrlen) != -1)
 		{
 			close(fd);
