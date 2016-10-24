@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/24 14:43:10 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/24 14:46:34 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,11 @@ void					ipConnect(void)
 	hints.ai_protocol = 0;
 	if ((getaddrinfo(stc->ip, NULL, &hints, &result)) != 0)
 		addrError();
+	printf("|");
 	tmp = result;
 	while (tmp != NULL)
 	{
+	printf("|");
 		fd = socket(tmp->ai_family, tmp->ai_socktype, tmp->ai_protocol);
 //		if (fd == -1)
 //			continue ;
