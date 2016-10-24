@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/24 11:42:36 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/24 11:44:06 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,8 @@ int						main(int ac, char **av)
 {
 	char	*ip;
 
-	if (ac != 2)
-	{
-		printf("usage: %s <destination IP>\n", av[0]);
-		return (0);
-	}
+	if (ac == 1)
+		showHelp(av[0]);
 	ip = arg(av);
 	printf("%s\n", ip);
 	return (0);
