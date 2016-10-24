@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/24 13:50:33 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/24 14:38:19 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,22 +47,49 @@ static void				showHelp(char *str)
 static void				addrError(void)
 {
 	printf("getaddrinfo error\n");
+	free(singleton(NULL));
 	exit(-1);
 }
 
-void					get_ip(void)
+static void				connectError(void)
+{
+	printf("connect error\n");
+	free(singleton(NULL));
+	exit(-1);
+}
+
+void					ipConnect(void)
 {
 	t_stc		*stc = singleton(NULL);
 	t_addrinfo	hints;
-	t_addrinfo	*rp, *result;
+	t_addrinfo	*tmp;
+	t_addrinfo	*result;
+	int			fd;
 
 	//memset ?
 	hints.ai_family = AF_UNSPEC; // ipv4 and ipv6 all socket
 	hints.ai_socktype = SOCK_DGRAM; // datagram socket
 	hints.ai_flags = 0;
 	hints.ai_protocol = 0;
-	if ((getaddrinfo(stc->ip, NULL, &hint, &result)) != 0)
+	if ((getaddrinfo(stc->ip, NULL, &hints, &result)) != 0)
 		addrError();
+	tmp = result;
+	while (tmp != NULL)
+	{
+		fd = socket(tmp->ai_family, tmp->ai_socktype, tmp->ai_protocol);
+		if (fd == -1)
+			continue ;
+		if (connect(fd, rp->ai_addr, rp->ai_addrlen) != -1)
+		{
+			close(fd);
+			break ; // success
+		}
+		close(fd);
+		tmp = tmp->ai_next;
+	}
+	if (tmp == NULL)
+		connectError();
+	stc->addr = tmp;
 }
 
 char					*arg(char **av)
@@ -78,6 +105,7 @@ char					*arg(char **av)
 			return (av[i]);
 		i++;
 	}
+	ipConnect();
 	free(singleton(NULL));
 	exit(-1);
 }
