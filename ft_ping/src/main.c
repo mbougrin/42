@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/24 11:44:06 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/24 13:23:48 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static unsigned short	checksum(void *b, int len)
 static void				showHelp(char *str)
 {
 	printf("Usage: %s [-hv] destination IP\n", str);
+	free(singleton(NULL));
 	exit(-1);
 }
 
@@ -48,16 +49,28 @@ char					*arg(char **av)
 			return (av[i]);
 		i++;
 	}
-	exit(0);
+	free(singleton(NULL));
+	exit(-1);
+}
+
+t_stc					*singleton(t_stc *stc)
+{
+	static t_stc	*singleton;
+
+	if (stc != NULL)
+		singleton = stc;
+	return (singleton);
 }
 
 int						main(int ac, char **av)
 {
-	char	*ip;
+	t_stc	*stc;
 
+	stc = (t_stc*)malloc(sizeof(t_stc));
 	if (ac == 1)
 		showHelp(av[0]);
-	ip = arg(av);
-	printf("%s\n", ip);
+	stc->ip = arg(av);
+	printf("%s\n", stc->ip);
+	free(stc);
 	return (0);
 }

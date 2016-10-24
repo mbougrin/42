@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:55 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/24 11:41:55 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/24 13:22:10 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,12 @@ typedef struct sockaddr_in 	t_sockaddr_in;
 typedef struct sockaddr 	t_sockaddr;
 typedef struct icmphdr		t_icmphdr;
 typedef struct addrinfo 	t_addrinfo;
+
+typedef struct				s_stc
+{
+		char				*ip;
+		t_addrinfo			addr;
+}							t_stc;
 
 typedef struct				s_packet
 {
