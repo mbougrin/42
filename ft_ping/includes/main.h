@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:55 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/24 14:56:57 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/24 14:58:35 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct				s_stc
 	char					**av;
 	char					*ip;
 	t_addrinfo				*addr;
+	t_addrinfo				hints;
 }							t_stc;
 
 typedef struct				s_packet

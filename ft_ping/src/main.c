@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/24 14:56:55 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/24 15:00:24 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,18 +62,17 @@ static void				connectError(void)
 void					ipConnect(void)
 {
 	t_stc		*stc = singleton(NULL);
-	t_addrinfo	hints;
+//	t_addrinfo	hints;
 	t_addrinfo	*tmp;
 	t_addrinfo	*result;
 	int			fd;
 
-	//memset ?
 //	memset(&hints, 0, sizeof(t_addrinfo));
-	hints.ai_family = AF_UNSPEC; // ipv4 and ipv6 all socket
-	hints.ai_socktype = SOCK_DGRAM; // datagram socket
-	hints.ai_flags = 0;
-	hints.ai_protocol = 0;
-	if ((getaddrinfo(stc->ip, NULL, &hints, &result)) != 0)
+//	hints.ai_family = AF_UNSPEC; // ipv4 and ipv6 all socket
+//	hints.ai_socktype = SOCK_DGRAM; // datagram socket
+//	hints.ai_flags = 0;
+//	hints.ai_protocol = 0;
+	if ((getaddrinfo(stc->ip, NULL, &stc->hints, &result)) != 0)
 		addrError();
 	tmp = result;
 	while (tmp != NULL)
@@ -92,6 +91,16 @@ void					ipConnect(void)
 	if (tmp == NULL)
 		connectError();
 	stc->addr = tmp;
+}
+
+static void				initAddr(void)
+{
+	t_stc		*stc = singleton(NULL);
+
+	stc->hints.ai_family = AF_UNSPEC;
+	stc->hints.ai_socktype = SOCK_DGRAM;
+	stc->hints.ai_flags = 0;
+	stc->hints.ai_protocol = 0;
 }
 
 char					*arg(char **av)
