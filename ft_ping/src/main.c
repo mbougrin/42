@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/24 14:47:55 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/24 14:48:56 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void					ipConnect(void)
 	int			fd;
 
 	//memset ?
+	memset(&hints, 0, sizeof(t_addrinfo));
 	hints.ai_family = AF_UNSPEC; // ipv4 and ipv6 all socket
 	hints.ai_socktype = SOCK_DGRAM; // datagram socket
 	hints.ai_flags = 0;
