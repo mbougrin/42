@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/24 11:41:15 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/24 11:42:08 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static unsigned short	checksum(void *b, int len)
 
 static void				showHelp(char *str)
 {
-	printf("Usage: %s [-hv] destination IP\n");
+	printf("Usage: %s [-hv] destination IP\n", str);
 	exit(-1);
 }
 
