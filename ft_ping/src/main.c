@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/24 14:40:52 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/24 14:42:12 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,8 +118,8 @@ int						main(int ac, char **av)
 	if (ac == 1)
 		showHelp(av[0]);
 	stc->ip = arg(av);
-	ipConnect();
 	printf("%s\n", stc->ip);
+	ipConnect();
 	free(stc);
 	return (0);
 }
