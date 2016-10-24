@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/24 14:51:00 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/24 14:56:55 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,9 @@ static void				showHelp(char *str)
 
 static void				addrError(void)
 {
-	printf("getaddrinfo error\n");
-	free(singleton(NULL));
+	t_stc		*stc = singleton(NULL);
+	printf("%s: unknown host %s\n", stc->av[0], stc->ip);
+	free(stc);
 	exit(-1);
 }
 
@@ -118,6 +119,7 @@ int						main(int ac, char **av)
 	stc = (t_stc*)malloc(sizeof(t_stc));
 	if (ac == 1)
 		showHelp(av[0]);
+	stc->av = av;
 	stc->ip = arg(av);
 	singleton(stc);
 	printf("%s\n", stc->ip);
