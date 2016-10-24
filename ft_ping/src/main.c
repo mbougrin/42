@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/24 11:11:24 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/24 11:40:10 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,39 @@ static unsigned short	checksum(void *b, int len)
 }
 */
 
+static void				showHelp(char *str)
+{
+	printf("Usage: %s [-hv] destination IP\n");
+	exit(-1);
+}
+
+char					*arg(char **av)
+{
+	int			i;
+	char		*str;
+   
+	str	= av[0];
+	i = 1;
+	while (av[i])
+	{
+		if (ft_strcmp(av[i], "-h") == 0)
+			showHelp();
+		else if (ft_strcmp(av[i], "-v") != 0)
+			return (av[i]);
+		i++;
+	}
+}
+
 int						main(int ac, char **av)
 {
+	char	*ip;
+
 	if (ac != 2)
 	{
 		printf("usage: %s <destination IP>\n", av[0]);
 		return (0);
 	}
+	ip = arg(av);
+	printf("%s\n", ip)
 	return (0);
 }
