@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/24 14:48:56 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/24 14:50:02 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void					ipConnect(void)
 	int			fd;
 
 	//memset ?
-	memset(&hints, 0, sizeof(t_addrinfo));
+//	memset(&hints, 0, sizeof(t_addrinfo));
 	hints.ai_family = AF_UNSPEC; // ipv4 and ipv6 all socket
 	hints.ai_socktype = SOCK_DGRAM; // datagram socket
 	hints.ai_flags = 0;
@@ -122,6 +122,7 @@ int						main(int ac, char **av)
 	if (ac == 1)
 		showHelp(av[0]);
 	stc->ip = arg(av);
+	singleton(stc);
 	printf("%s\n", stc->ip);
 	ipConnect();
 	free(stc);
