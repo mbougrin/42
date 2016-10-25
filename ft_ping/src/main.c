@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/25 12:52:32 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/25 15:36:53 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ static void				showHelp(char *str)
 static void				addrError(void)
 {
 	t_stc		*stc = singleton(NULL);
+
 	printf("%s: unknown host %s\n", stc->name, stc->ip);
 	free(stc);
 	exit(-1);
@@ -174,16 +175,17 @@ void					ping(t_addrinfo *addr_info)
 		timeout.tv_usec = 0;
 		setsockopt(sd, SOL_SOCKET, SO_RCVTIMEO, (char *)&timeout, sizeof(struct timeval));
 
-
-		if (recvfrom(sd, &packet, sizeof(packet), 0, (t_sockaddr*)&r_addr, (socklen_t *)&len) > 0 )
+		int ret = 0;
+		if ((ret = recvfrom(sd, &packet, sizeof(packet), 0, (t_sockaddr*)&r_addr, (socklen_t *)&len)) > 0 )
 		{
 			clock_gettime(CLOCK_MONOTONIC, &tend);
 			stc->ms = ((double)tend.tv_sec + 1.0e-9 * tend.tv_nsec) -
 				((double)tstart.tv_sec + 1.0e-9 * tstart.tv_nsec);
-			struct icmp *pkt;
-			struct iphdr *iphdr = (struct iphdr *) &packet;
-			pkt = (struct icmp *) (&packet + (iphdr->ihl << 2));
-			if (pkt->icmp_type == ICMP_ECHOREPLY)
+		//	struct icmp *pkt;
+		//	struct iphdr *iphdr = (struct iphdr *) &packet;
+		//	pkt = (struct icmp *) (&packet + (iphdr->ihl << 2));
+		//	if (pkt->icmp_type == ICMP_ECHOREPLY)
+			if (ret > 0)
 			{
 				stc->success = 1;
 				print();
