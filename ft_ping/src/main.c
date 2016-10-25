@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/25 08:45:48 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/25 08:49:26 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ static void				print(void)
 		printf("Request timeout from icmp_seq %d\n", stc->count);
 }
 
-void					ping(void)
+void					ping(t_addrinfo *addr_info)
 {
 	t_stc *stc = singleton(NULL);
 	const int val=255;
@@ -154,7 +154,7 @@ void					ping(void)
 		packet.hdr.un.echo.id = pid;
 		packet.hdr.un.echo.sequence = stc->count + 1;
 		packet.hdr.checksum = checksum(&packet, sizeof(packet));
-		if (sendto(sd, &packet, sizeof(packet), 0, stc->addr->ai_addr, sizeof(*stc->addr->ai_addr)) <= 0)
+		if (sendto(sd, &packet, sizeof(packet), 0, addr_info->ai_addr, sizeof(*addr_info->ai_addr)) <= 0)
 			perror("sendto");
 		clock_gettime(CLOCK_MONOTONIC, &tstart);
 
@@ -208,7 +208,7 @@ int						main(int ac, char **av)
 	printf("%s\n", stc->ip);
 	initAddr();
 	ipConnect();
-	ping();
+	ping(stc->addr);
 	free(stc);
 	return (0);
 }
