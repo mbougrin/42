@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/25 08:55:50 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/25 08:56:29 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,7 +170,7 @@ void					ping(t_addrinfo *addr_info)
 			clock_gettime(CLOCK_MONOTONIC, &tend);
 			stc->ms = ((double)tend.tv_sec + 1.0e-9 * tend.tv_nsec) -
 				((double)tstart.tv_sec + 1.0e-9 * tstart.tv_nsec);
-	//		stc->ms = clock();
+			stc->ms = clock();
 			struct icmp *pkt;
 			struct iphdr *iphdr = (struct iphdr *) &packet;
 			pkt = (struct icmp *) (&packet + (iphdr->ihl << 2));
