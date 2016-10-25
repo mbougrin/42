@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/25 09:03:36 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/25 09:04:15 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ void					ping(t_addrinfo *addr_info)
 		int len = sizeof(r_addr);
 		struct timespec tstart={0,0}, tend={0,0};
 
-		ft_bzero(&packet, sizeof(packet));
+//		ft_bzero(&packet, sizeof(packet));
 		packet.hdr.type = ICMP_ECHO;
 		packet.hdr.un.echo.id = pid;
 		packet.hdr.un.echo.sequence = stc->count + 1;
