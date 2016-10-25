@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/24 15:02:07 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/25 08:38:41 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void				showHelp(char *str)
 static void				addrError(void)
 {
 	t_stc		*stc = singleton(NULL);
-	printf("%s: unknown host %s\n", stc->av[0], stc->ip);
+	printf("%s: unknown host %s\n", stc->name, stc->ip);
 	free(stc);
 	exit(-1);
 }
@@ -77,7 +77,7 @@ void					ipConnect(void)
 		if (connect(fd, tmp->ai_addr, tmp->ai_addrlen) != -1)
 		{
 			close(fd);
-			break ; // success
+			break ;
 		}
 		close(fd);
 		tmp = tmp->ai_next;
@@ -114,6 +114,85 @@ char					*arg(char **av)
 	exit(-1);
 }
 
+static void				print(void)
+{
+	t_stc	*stc = singleton(NULL);
+
+	if (stc->success)
+		printf("%d bytes from %s: icmp_seq=%d ttl=254 time=%f ms\n",\
+				PACKET_SIZE, stc->ip, stc->count, stc->ms);
+	else
+		printf("Request timeout from icmp_seq %d\n", stc->count);
+}
+
+void					ping(void)
+{
+	t_stc *stc = singleton(NULL);
+	const int val=255;
+	int sd = 0;
+	s_sockaddr_in r_addr;
+	int pid = getpid();
+
+	sd = socket(PF_INET, SOCK_RAW, IPPROTO_ICMP);
+	if (sd < 0) 
+	{
+		//printf error exit()
+//		perror("socket");
+		return;
+	}
+	if (setsockopt(sd, SOL_IP, IP_TTL, &val, sizeof(val)) != 0)
+		perror("Set TTL option");
+
+	for (stc->count = 0; stc->count < NB_PACKET; ++stc->count)
+	{
+		int len = sizeof(r_addr);
+		struct timespec tstart={0,0}, tend={0,0};
+
+	//	bzero(&packet, sizeof(packet));
+		packet.hdr.type = ICMP_ECHO;
+		packet.hdr.un.echo.id = pid;
+		packet.hdr.un.echo.sequence = iter + 1;
+		packet.hdr.checksum = checksum(&packet, sizeof(packet));
+		if (sendto(sd, &packet, sizeof(packet), 0, addr_info->ai_addr, sizeof(*addr_info->ai_addr)) <= 0)
+			perror("sendto");
+		clock_gettime(CLOCK_MONOTONIC, &tstart);
+
+
+		struct timeval tv;
+		tv.tv_sec = WAIT_TO_RECEIVE;
+		tv.tv_usec = 0;
+		setsockopt(sd, SOL_SOCKET, SO_RCVTIMEO, (char *)&tv,sizeof(struct timeval));
+
+
+		if (recvfrom(sd, &packet, sizeof(packet), 0, (s_sockaddr*)&r_addr, (socklen_t *)&len) > 0 )
+		{
+			clock_gettime(CLOCK_MONOTONIC, &tend);
+			stc->ms = ((double)tend.tv_sec + 1.0e-9 * tend.tv_nsec) -
+				((double)tstart.tv_sec + 1.0e-9 * tstart.tv_nsec);
+			struct icmp *pkt;
+			struct iphdr *iphdr = (struct iphdr *) &packet;
+			pkt = (struct icmp *) (&packet + (iphdr->ihl << 2));
+			if (pkt->icmp_type == ICMP_ECHOREPLY)
+			{
+				stc->success = 1;
+				print();
+			}
+			else 
+			{
+				stc->success = 0;
+				print();
+			}
+		}
+		else
+		{
+			stc->ms = 0.0;
+			stc->success = 0;
+			print();
+		}
+		sleep(1);
+	}
+
+}
 
 int						main(int ac, char **av)
 {
@@ -122,12 +201,13 @@ int						main(int ac, char **av)
 	stc = (t_stc*)malloc(sizeof(t_stc));
 	if (ac == 1)
 		showHelp(av[0]);
-	stc->av = av;
+	stc->name = av[0];
 	stc->ip = arg(av);
 	singleton(stc);
 	printf("%s\n", stc->ip);
 	initAddr();
 	ipConnect();
+	ping();
 	free(stc);
 	return (0);
 }
