@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/25 08:38:41 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/25 08:41:36 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,8 @@ void					ping(void)
 	t_stc *stc = singleton(NULL);
 	const int val=255;
 	int sd = 0;
-	s_sockaddr_in r_addr;
+	t_sockaddr_in 	r_addr;
+	t_packet		packet;
 	int pid = getpid();
 
 	sd = socket(PF_INET, SOCK_RAW, IPPROTO_ICMP);
@@ -143,7 +144,7 @@ void					ping(void)
 	if (setsockopt(sd, SOL_IP, IP_TTL, &val, sizeof(val)) != 0)
 		perror("Set TTL option");
 
-	for (stc->count = 0; stc->count < NB_PACKET; ++stc->count)
+	for (stc->count = 0; stc->count < NUMBER_PACKET; ++stc->count)
 	{
 		int len = sizeof(r_addr);
 		struct timespec tstart={0,0}, tend={0,0};
@@ -151,7 +152,7 @@ void					ping(void)
 	//	bzero(&packet, sizeof(packet));
 		packet.hdr.type = ICMP_ECHO;
 		packet.hdr.un.echo.id = pid;
-		packet.hdr.un.echo.sequence = iter + 1;
+		packet.hdr.un.echo.sequence = stc->count + 1;
 		packet.hdr.checksum = checksum(&packet, sizeof(packet));
 		if (sendto(sd, &packet, sizeof(packet), 0, addr_info->ai_addr, sizeof(*addr_info->ai_addr)) <= 0)
 			perror("sendto");
@@ -159,12 +160,12 @@ void					ping(void)
 
 
 		struct timeval tv;
-		tv.tv_sec = WAIT_TO_RECEIVE;
+		tv.tv_sec = WAIT;
 		tv.tv_usec = 0;
 		setsockopt(sd, SOL_SOCKET, SO_RCVTIMEO, (char *)&tv,sizeof(struct timeval));
 
 
-		if (recvfrom(sd, &packet, sizeof(packet), 0, (s_sockaddr*)&r_addr, (socklen_t *)&len) > 0 )
+		if (recvfrom(sd, &packet, sizeof(packet), 0, (t_sockaddr*)&r_addr, (socklen_t *)&len) > 0 )
 		{
 			clock_gettime(CLOCK_MONOTONIC, &tend);
 			stc->ms = ((double)tend.tv_sec + 1.0e-9 * tend.tv_nsec) -
