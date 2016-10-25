@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/05 10:11:34 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/18 14:50:58 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/24 10:04:33 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,8 @@ static int	weekTime(void)
 		day = 6;
 	tmp = stc->lst;
 	count = 0;
+	if (stc->day == 1)
+		return (0);
 	while (tmp)
 	{
 		if (day == 1)
