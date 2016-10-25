@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/25 08:44:05 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/25 08:44:43 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,7 +154,7 @@ void					ping(void)
 		packet.hdr.un.echo.id = pid;
 		packet.hdr.un.echo.sequence = stc->count + 1;
 		packet.hdr.checksum = checksum(&packet, sizeof(packet));
-		if (sendto(sd, &packet, sizeof(packet), 0, stc->addr->ai_addr, sizeof(*stc->addr_info->ai_addr)) <= 0)
+		if (sendto(sd, &packet, sizeof(packet), 0, stc->addr->ai_addr, sizeof(*stc->addr->ai_addr)) <= 0)
 			perror("sendto");
 		clock_gettime(CLOCK_MONOTONIC, &tstart);
 
