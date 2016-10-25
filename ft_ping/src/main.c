@@ -6,11 +6,20 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/25 12:23:14 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/25 12:25:15 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <main.h>
+
+static t_stc			*singleton(t_stc *stc)
+{
+	static t_stc	*singleton;
+
+	if (stc != NULL)
+		singleton = stc;
+	return (singleton);
+}
 
 static void				socketError(void)
 {
@@ -24,15 +33,6 @@ static void				setSockOptError(void)
 	printf("setsockopt error\n");
 	free(singleton(NULL));
 	exit(-1);
-}
-
-static t_stc			*singleton(t_stc *stc)
-{
-	static t_stc	*singleton;
-
-	if (stc != NULL)
-		singleton = stc;
-	return (singleton);
 }
 
 static void				showHelp(char *str)
