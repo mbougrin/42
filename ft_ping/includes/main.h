@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:55 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/25 09:19:22 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/25 12:27:11 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@
 # define NUMBER_PACKET 20
 # define WAIT 2
 
-typedef struct sockaddr_in 	t_sockaddr_in;
-typedef struct sockaddr 	t_sockaddr;
+typedef struct sockaddr_in	t_sockaddr_in;
+typedef struct sockaddr		t_sockaddr;
 typedef struct icmphdr		t_icmphdr;
-typedef struct addrinfo 	t_addrinfo;
+typedef struct addrinfo		t_addrinfo;
 
 typedef struct				s_packet
 {

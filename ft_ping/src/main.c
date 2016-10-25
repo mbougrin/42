@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/25 12:25:15 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/25 12:29:02 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,7 +172,7 @@ void					ping(t_addrinfo *addr_info)
 		struct timeval tv;
 		tv.tv_sec = WAIT;
 		tv.tv_usec = 0;
-		setsockopt(sd, SOL_SOCKET, SO_RCVTIMEO, (char *)&tv,sizeof(struct timeval));
+		setsockopt(sd, SOL_SOCKET, SO_RCVTIMEO, &tv,sizeof(struct timeval));
 
 
 		if (recvfrom(sd, &packet, sizeof(packet), 0, (t_sockaddr*)&r_addr, (socklen_t *)&len) > 0 )
