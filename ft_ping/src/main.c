@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/25 09:14:37 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/25 09:14:57 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,7 +183,7 @@ void					ping(t_addrinfo *addr_info)
 //			struct icmp *pkt;
 	//		struct iphdr *iphdr = (struct iphdr *) &packet;
 	//		pkt = (struct icmp *) (&packet + (iphdr->ihl << 2));
-			if (packet->icmp_type == ICMP_ECHOREPLY)
+			if (packet.icmp_type == ICMP_ECHOREPLY)
 			{
 				stc->success = 1;
 				print();
