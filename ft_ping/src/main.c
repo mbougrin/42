@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/25 15:36:53 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/25 15:44:43 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,11 +190,11 @@ void					ping(t_addrinfo *addr_info)
 				stc->success = 1;
 				print();
 			}
-			else 
-			{
-				stc->success = 0;
-				print();
-			}
+	//		else 
+	//		{
+	//			stc->success = 0;
+	//			print();
+	//		}
 		}
 		else
 		{
