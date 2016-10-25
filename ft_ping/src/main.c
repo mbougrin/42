@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/25 08:49:26 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/25 08:50:54 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,12 +127,12 @@ static void				print(void)
 
 void					ping(t_addrinfo *addr_info)
 {
-	t_stc *stc = singleton(NULL);
-	const int val=255;
-	int sd = 0;
+	t_stc 			*stc = singleton(NULL);
+	const int 		val = 255;
+	int 			sd = 0;
 	t_sockaddr_in 	r_addr;
 	t_packet		packet;
-	int pid = getpid();
+	int 			pid = getpid();
 
 	sd = socket(PF_INET, SOCK_RAW, IPPROTO_ICMP);
 	if (sd < 0) 

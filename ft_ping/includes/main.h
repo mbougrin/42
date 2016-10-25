@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:55 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/25 08:30:13 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/25 08:52:49 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <sys/socket.h>
 # include <sys/wait.h>
 
-# include <fcntl.h>
+//# include <fcntl.h>
 # include <resolv.h>
 # include <netdb.h>
 # include <netinet/in.h>
@@ -50,7 +50,6 @@ typedef struct				s_stc
 	double					ms;
 	char					*name;
 	char					*ip;
-	t_packet				packet;
 	t_addrinfo				hints;
 	t_addrinfo				*addr;
 }							t_stc;
