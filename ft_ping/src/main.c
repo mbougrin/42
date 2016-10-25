@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/25 08:50:54 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/25 08:54:05 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ void					ping(t_addrinfo *addr_info)
 		int len = sizeof(r_addr);
 		struct timespec tstart={0,0}, tend={0,0};
 
-		bzero(&packet, sizeof(packet));
+	//	bzero(&packet, sizeof(packet));
 		packet.hdr.type = ICMP_ECHO;
 		packet.hdr.un.echo.id = pid;
 		packet.hdr.un.echo.sequence = stc->count + 1;
@@ -170,6 +170,7 @@ void					ping(t_addrinfo *addr_info)
 			clock_gettime(CLOCK_MONOTONIC, &tend);
 			stc->ms = ((double)tend.tv_sec + 1.0e-9 * tend.tv_nsec) -
 				((double)tstart.tv_sec + 1.0e-9 * tstart.tv_nsec);
+			stc->ms = clock();
 			struct icmp *pkt;
 			struct iphdr *iphdr = (struct iphdr *) &packet;
 			pkt = (struct icmp *) (&packet + (iphdr->ihl << 2));
