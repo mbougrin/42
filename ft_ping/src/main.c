@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/25 12:36:45 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/25 12:37:05 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,9 +169,9 @@ void					ping(t_addrinfo *addr_info)
 		clock_gettime(CLOCK_MONOTONIC, &tstart);
 
 
-		struct timeval tv;
-		tv.tv_sec = WAIT;
-		tv.tv_usec = 0;
+//		struct timeval tv;
+//		tv.tv_sec = WAIT;
+//		tv.tv_usec = 0;
 		setsockopt(sd, SOL_SOCKET, SO_RCVTIMEO, (void *)1,sizeof(int));
 
 
