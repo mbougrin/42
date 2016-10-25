@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/25 09:04:15 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/25 09:13:49 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,20 @@ static void				print(void)
 		printf("Request timeout from icmp_seq %d\n", stc->count);
 }
 
+static void				socketError(void)
+{
+	printf("socket error\n");
+	free(singleton(NULL));
+	exit(-1);
+}
+
+static void				setSockOptError(void)
+{
+	printf("setsockopt error\n");
+	free(singleton(NULL));
+	exit(-1);
+}
+
 void					ping(t_addrinfo *addr_info)
 {
 	t_stc 			*stc = singleton(NULL);
@@ -136,20 +150,16 @@ void					ping(t_addrinfo *addr_info)
 
 	sd = socket(PF_INET, SOCK_RAW, IPPROTO_ICMP);
 	if (sd < 0) 
-	{
-		//printf error exit()
-//		perror("socket");
-		return;
-	}
+		socketError();
 	if (setsockopt(sd, SOL_IP, IP_TTL, &val, sizeof(val)) != 0)
-		perror("Set TTL option");
+		setSockOptError();
 
 	for (stc->count = 0; stc->count < NUMBER_PACKET; ++stc->count)
 	{
 		int len = sizeof(r_addr);
 		struct timespec tstart={0,0}, tend={0,0};
 
-//		ft_bzero(&packet, sizeof(packet));
+		ft_bzero(&packet, sizeof(packet));
 		packet.hdr.type = ICMP_ECHO;
 		packet.hdr.un.echo.id = pid;
 		packet.hdr.un.echo.sequence = stc->count + 1;
@@ -170,10 +180,9 @@ void					ping(t_addrinfo *addr_info)
 			clock_gettime(CLOCK_MONOTONIC, &tend);
 			stc->ms = ((double)tend.tv_sec + 1.0e-9 * tend.tv_nsec) -
 				((double)tstart.tv_sec + 1.0e-9 * tstart.tv_nsec);
-//			stc->ms (tend.tv_sec - start.tv_sec) * 1000.0f + (tend.tv_usec - start.tv_usec) / 1000.0f;
 			struct icmp *pkt;
-			struct iphdr *iphdr = (struct iphdr *) &packet;
-			pkt = (struct icmp *) (&packet + (iphdr->ihl << 2));
+	//		struct iphdr *iphdr = (struct iphdr *) &packet;
+	//		pkt = (struct icmp *) (&packet + (iphdr->ihl << 2));
 			if (pkt->icmp_type == ICMP_ECHOREPLY)
 			{
 				stc->success = 1;
