@@ -6,26 +6,24 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/25 09:14:57 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/25 12:23:14 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <main.h>
 
-static unsigned short	checksum(void *b, int len)
+static void				socketError(void)
 {
-	unsigned short 	*buf = b;
-	unsigned int 	sum = 0;
-	unsigned short 	result = 0;
+	printf("socket error\n");
+	free(singleton(NULL));
+	exit(-1);
+}
 
-	for (sum = 0; len > 1; len -= 2)
-		sum += *buf++;
-	if (len == 1)
-		sum += *(unsigned char*)buf;
-	sum = (sum >> 16) + (sum & 0xFFFF);
-	sum += (sum >> 16);
-	result = ~sum;
-	return (result);
+static void				setSockOptError(void)
+{
+	printf("setsockopt error\n");
+	free(singleton(NULL));
+	exit(-1);
 }
 
 static t_stc			*singleton(t_stc *stc)
@@ -59,6 +57,32 @@ static void				connectError(void)
 	exit(-1);
 }
 
+static void				initAddr(void)
+{
+	t_stc		*stc = singleton(NULL);
+
+	stc->hints.ai_family = AF_UNSPEC;
+	stc->hints.ai_socktype = SOCK_DGRAM;
+	stc->hints.ai_flags = 0;
+	stc->hints.ai_protocol = 0;
+}
+
+static unsigned short	checksum(void *b, int len)
+{
+	unsigned short 	*buf = b;
+	unsigned int 	sum = 0;
+	unsigned short 	result = 0;
+
+	for (sum = 0; len > 1; len -= 2)
+		sum += *buf++;
+	if (len == 1)
+		sum += *(unsigned char*)buf;
+	sum = (sum >> 16) + (sum & 0xFFFF);
+	sum += (sum >> 16);
+	result = ~sum;
+	return (result);
+}
+
 void					ipConnect(void)
 {
 	t_stc		*stc = singleton(NULL);
@@ -85,16 +109,6 @@ void					ipConnect(void)
 	if (tmp == NULL)
 		connectError();
 	stc->addr = tmp;
-}
-
-static void				initAddr(void)
-{
-	t_stc		*stc = singleton(NULL);
-
-	stc->hints.ai_family = AF_UNSPEC;
-	stc->hints.ai_socktype = SOCK_DGRAM;
-	stc->hints.ai_flags = 0;
-	stc->hints.ai_protocol = 0;
 }
 
 char					*arg(char **av)
@@ -125,20 +139,6 @@ static void				print(void)
 		printf("Request timeout from icmp_seq %d\n", stc->count);
 }
 
-static void				socketError(void)
-{
-	printf("socket error\n");
-	free(singleton(NULL));
-	exit(-1);
-}
-
-static void				setSockOptError(void)
-{
-	printf("setsockopt error\n");
-	free(singleton(NULL));
-	exit(-1);
-}
-
 void					ping(t_addrinfo *addr_info)
 {
 	t_stc 			*stc = singleton(NULL);
@@ -153,8 +153,8 @@ void					ping(t_addrinfo *addr_info)
 		socketError();
 	if (setsockopt(sd, SOL_IP, IP_TTL, &val, sizeof(val)) != 0)
 		setSockOptError();
-
-	for (stc->count = 0; stc->count < NUMBER_PACKET; ++stc->count)
+	stc->count = 0;
+	while (stc->count < NUMBER_PACKET)
 	{
 		int len = sizeof(r_addr);
 		struct timespec tstart={0,0}, tend={0,0};
@@ -180,10 +180,10 @@ void					ping(t_addrinfo *addr_info)
 			clock_gettime(CLOCK_MONOTONIC, &tend);
 			stc->ms = ((double)tend.tv_sec + 1.0e-9 * tend.tv_nsec) -
 				((double)tstart.tv_sec + 1.0e-9 * tstart.tv_nsec);
-//			struct icmp *pkt;
-	//		struct iphdr *iphdr = (struct iphdr *) &packet;
-	//		pkt = (struct icmp *) (&packet + (iphdr->ihl << 2));
-			if (packet.icmp_type == ICMP_ECHOREPLY)
+			struct icmp *pkt;
+			struct iphdr *iphdr = (struct iphdr *) &packet;
+			pkt = (struct icmp *) (&packet + (iphdr->ihl << 2));
+			if (pkt->icmp_type == ICMP_ECHOREPLY)
 			{
 				stc->success = 1;
 				print();
@@ -201,6 +201,7 @@ void					ping(t_addrinfo *addr_info)
 			print();
 		}
 		sleep(1);
+		stc->count++;
 	}
 
 }
@@ -215,7 +216,6 @@ int						main(int ac, char **av)
 	stc->name = av[0];
 	stc->ip = arg(av);
 	singleton(stc);
-	printf("%s\n", stc->ip);
 	initAddr();
 	ipConnect();
 	ping(stc->addr);
