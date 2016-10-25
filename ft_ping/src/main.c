@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/25 09:13:49 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/25 09:14:37 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,10 +180,10 @@ void					ping(t_addrinfo *addr_info)
 			clock_gettime(CLOCK_MONOTONIC, &tend);
 			stc->ms = ((double)tend.tv_sec + 1.0e-9 * tend.tv_nsec) -
 				((double)tstart.tv_sec + 1.0e-9 * tstart.tv_nsec);
-			struct icmp *pkt;
+//			struct icmp *pkt;
 	//		struct iphdr *iphdr = (struct iphdr *) &packet;
 	//		pkt = (struct icmp *) (&packet + (iphdr->ihl << 2));
-			if (pkt->icmp_type == ICMP_ECHOREPLY)
+			if (packet->icmp_type == ICMP_ECHOREPLY)
 			{
 				stc->success = 1;
 				print();
