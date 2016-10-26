@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/26 14:22:58 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/26 14:29:33 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,6 @@ t_stc					*singleton(t_stc *stc)
 	if (stc != NULL)
 		singleton = stc;
 	return (singleton);
-}
-
-void					firstprint(t_addrinfo *tmp)
-{
-	t_stc		*stc = singleton(NULL);
-	struct sockaddr_in *test = (struct sockaddr_in*)tmp->ai_addr;
-
-	printf("%s %s (%s) 56(84) bytes of data\n", \
-			stc->name, stc->ip, inet_ntoa(test->sin_addr));
 }
 
 char					*arg(char **av)
@@ -46,21 +37,6 @@ char					*arg(char **av)
 	free(singleton(NULL));
 	exit(-1);
 }
-
-static void				print(void)
-{
-	t_stc	*stc = singleton(NULL);
-
-	if (stc->success)
-	{
-		printf("%d bytes from %s: icmp_seq=%d ttl=%d time=%f ms\n",\
-				PACKET_SIZE, stc->ip, stc->count, stc->ttl, stc->ms);
-		stc->packetreceiv++;
-	}
-	else
-		printf("Request timeout from icmp_seq %d\n", stc->count);
-}
-
 t_packet				sendPacket(t_addrinfo *addr_info)
 {
 	t_stc 			*stc = singleton(NULL);
@@ -107,26 +83,10 @@ void					timeout(void)
 	setsockopt(stc->sd, SOL_SOCKET, SO_RCVTIMEO, (char *)&timeout, sizeof(struct timeval));
 }
 
-int						percentage(int nombre, int nombre2)
-{
-	  return (((nombre2 - nombre)* 100 / nombre) * -1);
-}
-
-void					printSigint(void)
-{
-	t_stc 			*stc = singleton(NULL);
-
-	printf("\n--- %s %s statistics ---\n", stc->ip, stc->name);
-	printf("%d packets transmitted, %d received, %d%c packet loss, time %fms\n", \
-			stc->count, stc->packetreceiv, percentage(stc->count, stc->packetreceiv), '%', stc->allms);
-	free(stc);
-	exit(0);
-}
-
 void					sig_handler(int sig)
 {
 	if (sig == SIGINT)
-		printSigint();
+		printsigint();
 }
 
 void					ping(t_addrinfo *addr_info)

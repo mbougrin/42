@@ -20,7 +20,8 @@ DIRSRC = src/
 OBJ = 	$(SRC:.c=.o)
 SRC = 	$(DIRSRC)main.c \
 		$(DIRSRC)error.c \
-		$(DIRSRC)ft_ping.c
+		$(DIRSRC)ft_ping.c \
+		$(DIRSRC)print.c
 
 all: $(NAME)
 

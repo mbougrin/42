@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:55 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/26 14:22:36 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/26 14:29:17 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,16 @@ void						addrerror(void);
 void						connecterror(void);
 void						sendtoerror(void);
 
-
 typedef struct sockaddr_in	t_sockaddr_in;
 typedef struct sockaddr		t_sockaddr;
 typedef struct icmphdr		t_icmphdr;
 typedef struct addrinfo		t_addrinfo;
 
 void						firstprint(t_addrinfo *tmp);
+
+void						print(void);
+void						firstprint(t_addrinfo *tmp);
+void						printsigint(void);
 
 typedef struct				s_packet
 {
