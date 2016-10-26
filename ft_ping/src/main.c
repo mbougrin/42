@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/26 13:56:41 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/26 13:57:07 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -241,7 +241,7 @@ int						main(int ac, char **av)
 
 	stc = (t_stc*)malloc(sizeof(t_stc));
 	if (ac == 1)
-		showHelp(av[0]);
+		showhelp(av[0]);
 	stc->name = av[0];
 	stc->ip = arg(av);
 	stc->pid = getpid();
