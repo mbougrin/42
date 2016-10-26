@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/26 15:05:23 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/26 15:09:40 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,24 +25,27 @@ static void				initprintfirst(void)
 
 void					ping(t_addrinfo *addr_info)
 {
-	t_stc 			*stc;
+	t_stc				*stc;
 	t_sockaddr_in 	r_addr;
 	t_packet		packet;
-
+	struct timespec tstart;
+	struct timespec tend;
+	
 	stc = singleton(NULL);
 	socketconfig();
 	initprintfirst();
 	while (stc->count < NUMBER_PACKET)
 	{
-		int len = sizeof(r_addr);
-		struct timespec tstart={0,0}, tend={0,0};
-
+		stc->len = sizeof(r_addr);
+		tstart = {0,0};
+		tend = {0,0};
 		packet = sendpacket(addr_info);
 		clock_gettime(CLOCK_MONOTONIC, &tstart);
 		timeout();
 		stc->ms = 0.0;
 		stc->success = 0;
-		if (recvfrom(stc->sd, &packet, sizeof(packet), 0, (t_sockaddr*)&r_addr, (socklen_t *)&len) > 0 )
+		if (recvfrom(stc->sd, &packet, sizeof(packet), 0, \
+					(t_sockaddr*)&r_addr, (socklen_t *)&stc->len) > 0)
 			recvpacket(tend, tstart, packet);
 		else
 			print();

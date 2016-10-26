@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:55 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/26 15:03:56 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/26 15:09:25 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ typedef struct				s_stc
 	int						sd;
 	int						packetreceiv;
 	int						fd;
+	int						len;
 	double					allms;
 	double					ms;
 	char					*name;
