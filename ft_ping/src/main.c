@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/26 12:45:46 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/26 12:49:56 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void					ipConnect(void)
 			continue ;
 		if (connect(fd, tmp->ai_addr, tmp->ai_addrlen) != -1)
 		{
-			printf("%s IP", inet_ntoa(tmp->ai_addr->sin_addr));
+			printf("%d IP", tmp->ai_addr.ai_family);
 			close(fd);
 			break ;
 		}
