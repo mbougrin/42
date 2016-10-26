@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/26 10:48:33 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/26 10:49:19 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,12 +176,10 @@ void					ping(t_addrinfo *addr_info)
 			perror("sendto");
 		clock_gettime(CLOCK_MONOTONIC, &tstart);
 
-
 		struct timeval timeout;
 		timeout.tv_sec = WAIT;
 		timeout.tv_usec = 0;
 		setsockopt(stc->sd, SOL_SOCKET, SO_RCVTIMEO, (char *)&timeout, sizeof(struct timeval));
-
 
 		if (recvfrom(stc->sd, &packet, sizeof(packet), 0, (t_sockaddr*)&r_addr, (socklen_t *)&len) > 0 )
 		{
@@ -209,7 +207,7 @@ void					ping(t_addrinfo *addr_info)
 			stc->success = 0;
 			print();
 		}
-		sleep(1);
+	//	sleep(1);
 		stc->count++;
 	}
 
