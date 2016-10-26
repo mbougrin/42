@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/26 10:49:19 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/26 10:52:13 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,18 +153,25 @@ t_packet				createPacket(void)
 	return (packet);
 }
 
-void					ping(t_addrinfo *addr_info)
+void					socketConfig(void)
 {
 	t_stc 			*stc = singleton(NULL);
 	const int 		val = 255;
-	t_sockaddr_in 	r_addr;
-	t_packet		packet;
 
 	stc->sd = socket(PF_INET, SOCK_RAW, IPPROTO_ICMP);
 	if (stc->sd < 0) 
 		socketError();
 	if (setsockopt(stc->sd, SOL_IP, IP_TTL, &val, sizeof(val)) != 0)
 		setSockOptError();
+}
+
+void					ping(t_addrinfo *addr_info)
+{
+	t_stc 			*stc = singleton(NULL);
+	t_sockaddr_in 	r_addr;
+	t_packet		packet;
+
+	socketConfig();
 	stc->count = 0;
 	while (stc->count < NUMBER_PACKET)
 	{
@@ -207,7 +214,7 @@ void					ping(t_addrinfo *addr_info)
 			stc->success = 0;
 			print();
 		}
-	//	sleep(1);
+		sleep(SLEEP);
 		stc->count++;
 	}
 
