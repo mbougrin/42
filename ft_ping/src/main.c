@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/26 10:52:13 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/26 10:55:39 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,16 @@ static void				print(void)
 		printf("Request timeout from icmp_seq %d\n", stc->count);
 }
 
-t_packet				createPacket(void)
+void					sendToError(void)
+{
+	t_stc 			*stc = singleton(NULL);
+
+	printf("sendto error\n");
+	free(stc);
+	exit(-1);
+}
+
+t_packet				sendPacket(t_addrinfo *addr_info)
 {
 	t_stc 			*stc = singleton(NULL);
 	t_packet		packet;
@@ -150,6 +159,8 @@ t_packet				createPacket(void)
 	packet.hdr.un.echo.id = stc->pid;
 	packet.hdr.un.echo.sequence = stc->count + 1;
 	packet.hdr.checksum = checksum(&packet, sizeof(packet));
+	if (sendto(stc->sd, &packet, sizeof(packet), 0, addr_info->ai_addr, sizeof(*addr_info->ai_addr)) <= 0)
+		sendToError();
 	return (packet);
 }
 
@@ -178,9 +189,7 @@ void					ping(t_addrinfo *addr_info)
 		int len = sizeof(r_addr);
 		struct timespec tstart={0,0}, tend={0,0};
 
-		packet = createPacket();
-		if (sendto(stc->sd, &packet, sizeof(packet), 0, addr_info->ai_addr, sizeof(*addr_info->ai_addr)) <= 0)
-			perror("sendto");
+		packet = sendPacket(addr_info);
 		clock_gettime(CLOCK_MONOTONIC, &tstart);
 
 		struct timeval timeout;
