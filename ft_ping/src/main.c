@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/26 11:05:52 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/26 11:06:31 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,7 +176,7 @@ void					socketConfig(void)
 		setSockOptError();
 }
 
-void					recvPacket(struct timespec tend, struct timespec tstart)
+void					recvPacket(struct timespec tend, struct timespec tstart, t_packet packet)
 {
 	t_stc 			*stc = singleton(NULL);
 
@@ -220,7 +220,7 @@ void					ping(t_addrinfo *addr_info)
 		stc->ms = 0.0;
 		stc->success = 0;
 		if (recvfrom(stc->sd, &packet, sizeof(packet), 0, (t_sockaddr*)&r_addr, (socklen_t *)&len) > 0 )
-			recvPacket(tend, tstart);
+			recvPacket(tend, tstart, packet);
 		else
 			print();
 		sleep(SLEEP);
