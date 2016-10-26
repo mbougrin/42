@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 13:42:06 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/26 13:54:08 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/26 14:19:58 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,12 @@ void					connecterror(void)
 	exit(-1);
 }
 
-void					showhelp(char *str)
+void					sendtoerror(void)
 {
-	printf("Usage: %s [-hv] destination IP\n", str);
-	free(singleton(NULL));
+	t_stc		*stc;
+
+	stc = singleton(NULL);
+	printf("sendto error\n");
+	free(stc);
 	exit(-1);
 }

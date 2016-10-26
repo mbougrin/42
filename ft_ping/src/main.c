@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/26 14:11:13 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/26 14:19:23 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,10 @@ static void				print(void)
 		printf("Request timeout from icmp_seq %d\n", stc->count);
 }
 
-void					sendToError(void)
+void					showhelp(char *str)
 {
-	t_stc 			*stc = singleton(NULL);
-
-	printf("sendto error\n");
-	free(stc);
+	printf("Usage: %s [-hv] destination IP\n", str);
+	free(singleton(NULL));
 	exit(-1);
 }
 
@@ -81,7 +79,7 @@ t_packet				sendPacket(t_addrinfo *addr_info)
 	packet.hdr.un.echo.sequence = stc->count + 1;
 	packet.hdr.checksum = checksum(&packet, sizeof(packet));
 	if (sendto(stc->sd, &packet, sizeof(packet), 0, addr_info->ai_addr, sizeof(*addr_info->ai_addr)) <= 0)
-		sendToError();
+		sendtoerror();
 	return (packet);
 }
 
