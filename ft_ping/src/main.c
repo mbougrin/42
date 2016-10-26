@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/26 11:51:54 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/26 11:52:34 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,7 +227,7 @@ void					printSigint(void)
 		ret--;	
 	}
 	printf("\n--- %s %s statistics ---\n", stc->ip, stc->name);
-	printf("%d packets transmitted, %d received, %f\% packet loss, time %fms", \
+	printf("%d packets transmitted, %d received, %f\% packet loss, time %lfms", \
 			stc->count, stc->packetReceiv, ret, stc->allMs);
 	free(stc);
 	exit(0);
