@@ -19,7 +19,8 @@ CFLAGS = -Wall -Wextra -Werror
 DIRSRC = src/
 OBJ = 	$(SRC:.c=.o)
 SRC = 	$(DIRSRC)main.c \
-		$(DIRSRC)error.c
+		$(DIRSRC)error.c \
+		$(DIRSRC)ft_ping.c
 
 all: $(NAME)
 

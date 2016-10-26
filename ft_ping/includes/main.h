@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:55 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/26 13:52:32 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/26 14:09:56 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,10 @@
 # define WAIT 1
 # define SLEEP 1
 
+void						initaddr(void);
+unsigned short				checksum(void *b, int len);
+void						ipconnect(void);
+
 void						socketerror(void);
 void						setsockopterror(void);
 void						addrerror(void);
@@ -58,6 +62,7 @@ typedef struct				s_stc
 	int						pid;
 	int						sd;
 	int						packetreceiv;
+	int						fd;
 	double					allms;
 	double					ms;
 	char					*name;
