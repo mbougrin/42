@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/26 11:07:42 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/26 11:13:50 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ char					*arg(char **av)
 	{
 		if (ft_strcmp(av[i], "-h") == 0)
 			showHelp(av[0]);
-		else if (ft_strcmp(av[i], "-v") != 0)
+		else if (av[i][0] != '-')
 			return (av[i]);
 		i++;
 	}
@@ -222,7 +222,6 @@ void					ping(t_addrinfo *addr_info)
 		packet = sendPacket(addr_info);
 		clock_gettime(CLOCK_MONOTONIC, &tstart);
 		timeout();
-
 		stc->ms = 0.0;
 		stc->success = 0;
 		if (recvfrom(stc->sd, &packet, sizeof(packet), 0, (t_sockaddr*)&r_addr, (socklen_t *)&len) > 0 )
