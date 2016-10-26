@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 14:36:52 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/26 14:43:59 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/26 14:46:15 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_packet				sendpacket(t_addrinfo *addr_info)
 	t_stc			*stc;
 	t_packet		packet;
 
-	stc->singleton(NULL);
+	stc = singleton(NULL);
 	ft_bzero(&packet, sizeof(packet));
 	packet.hdr.type = ICMP_ECHO;
 	packet.hdr.un.echo.id = stc->pid;
