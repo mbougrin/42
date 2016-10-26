@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 13:59:40 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/26 14:14:37 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/26 14:16:00 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,18 @@ void					initaddr(void)
 
 unsigned short			checksum(void *b, int len)
 {
-	unsigned short 	*buf;
-	unsigned int 	sum;
-	unsigned short 	result;
+	unsigned short		*buf;
+	unsigned int		sum;
+	unsigned short		result;
 
 	buf = b;
 	sum = 0;
 	result = 0;
 	while (len > 1)
 	{
-		sum+= *buf++;
+		sum += *buf++;
 		len -= 2;
 	}
-//	for (sum = 0; len > 1; len -= 2)
-//		sum += *buf++;
 	if (len == 1)
 		sum += *(unsigned char*)buf;
 	sum = (sum >> 16) + (sum & 0xFFFF);
