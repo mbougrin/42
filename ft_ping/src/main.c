@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/26 12:53:59 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/26 12:54:23 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void					ipConnect(void)
 			continue ;
 		if (connect(fd, tmp->ai_addr, tmp->ai_addrlen) != -1)
 		{
-			printf("%sIP", tmp.ai_addr.sa_data);
+			printf("%sIP", tmp->ai_addr.sa_data);
 			close(fd);
 			break ;
 		}
