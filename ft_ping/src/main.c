@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/26 12:14:08 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/26 12:17:35 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,23 +210,15 @@ void					timeout(void)
 	setsockopt(stc->sd, SOL_SOCKET, SO_RCVTIMEO, (char *)&timeout, sizeof(struct timeval));
 }
 
+int		test(int nombre, int nombre2)
+{
+	  return (nombre2 - nombre)* 100 / nombre ;
+}
+
 void					printSigint(void)
 {
 	t_stc 			*stc = singleton(NULL);
-	int				ret;
-	float			one;
-	float 			tmp;
-
-	ret = 100;
-	one = stc->count / 100;
-	printf("%f one\n", one);
-	while (ret < 1)
-	{
-		tmp = ret * one;
-		if (tmp < stc->packetReceiv)
-			break ;
-		ret--;	
-	}
+	int				ret = test(stc->count, stc->packetReceiv);
 	printf("%f tmp %d ret %f one", tmp, ret, one);
 	printf("\n--- %s %s statistics ---\n", stc->ip, stc->name);
 	printf("%d packets transmitted, %d received, %d%c packet loss, time %fms\n", \
