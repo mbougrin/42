@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/26 13:52:33 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/26 13:56:41 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void					firstPrint(t_addrinfo *tmp)
 	t_stc		*stc = singleton(NULL);
 	struct sockaddr_in *test = (struct sockaddr_in*)tmp->ai_addr;
 
-	pMaMa;6rintf("%s %s (%s) 56(84) bytes of data\n", \
+	printf("%s %s (%s) 56(84) bytes of data\n", \
 			stc->name, stc->ip, inet_ntoa(test->sin_addr));
 }
 
@@ -81,7 +81,7 @@ void					ipConnect(void)
 		tmp = tmp->ai_next;
 	}
 	if (tmp == NULL)
-		connectError();
+		connecterror();
 	stc->addr = tmp;
 }
 
