@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/26 11:06:31 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/26 11:07:42 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,6 +196,16 @@ void					recvPacket(struct timespec tend, struct timespec tstart, t_packet packe
 		print();
 }
 
+void					timeout(void)
+{
+	t_stc 			*stc = singleton(NULL);
+
+	struct timeval timeout;
+	timeout.tv_sec = WAIT;
+	timeout.tv_usec = 0;
+	setsockopt(stc->sd, SOL_SOCKET, SO_RCVTIMEO, (char *)&timeout, sizeof(struct timeval));
+}
+
 void					ping(t_addrinfo *addr_info)
 {
 	t_stc 			*stc = singleton(NULL);
@@ -211,11 +221,7 @@ void					ping(t_addrinfo *addr_info)
 
 		packet = sendPacket(addr_info);
 		clock_gettime(CLOCK_MONOTONIC, &tstart);
-
-		struct timeval timeout;
-		timeout.tv_sec = WAIT;
-		timeout.tv_usec = 0;
-		setsockopt(stc->sd, SOL_SOCKET, SO_RCVTIMEO, (char *)&timeout, sizeof(struct timeval));
+		timeout();
 
 		stc->ms = 0.0;
 		stc->success = 0;
