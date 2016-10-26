@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/26 12:06:59 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/26 12:08:48 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -222,6 +222,7 @@ void					printSigint(void)
 	while (ret != 0)
 	{
 		tmp = ret * one;
+		printf("%f tmp %d ret %f one", tmp, ret, one);
 		if (tmp < stc->packetReceiv)
 			break ;
 		ret--;	
