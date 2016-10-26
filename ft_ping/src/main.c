@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/26 14:39:56 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/26 14:46:51 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,6 @@ char					*arg(char **av)
 	}
 	free(singleton(NULL));
 	exit(-1);
-}
-
-
-
-void					timeout(void)
-{
-	t_stc 			*stc = singleton(NULL);
-
-	struct timeval timeout;
-	timeout.tv_sec = WAIT;
-	timeout.tv_usec = 0;
-	setsockopt(stc->sd, SOL_SOCKET, SO_RCVTIMEO, (char *)&timeout, sizeof(struct timeval));
 }
 
 void					sig_handler(int sig)
