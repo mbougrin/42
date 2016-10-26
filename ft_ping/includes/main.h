@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:55 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/26 14:09:56 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/26 14:11:11 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@
 # define NUMBER_PACKET 20
 # define WAIT 1
 # define SLEEP 1
+
+void						firstprint(t_addrinfo *tmp);
 
 void						initaddr(void);
 unsigned short				checksum(void *b, int len);

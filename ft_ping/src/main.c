@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/26 14:09:46 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/26 14:11:13 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_stc					*singleton(t_stc *stc)
 	return (singleton);
 }
 
-void					firstPrint(t_addrinfo *tmp)
+void					firstprint(t_addrinfo *tmp)
 {
 	t_stc		*stc = singleton(NULL);
 	struct sockaddr_in *test = (struct sockaddr_in*)tmp->ai_addr;
