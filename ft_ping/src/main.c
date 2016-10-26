@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/26 10:44:34 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/26 10:45:14 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ char					*arg(char **av)
 		i++;
 	}
 	free(singleton(NULL));
-	eMaMaMaMaMaÃxit(-1);
+	exit(-1);
 }
 
 static void				print(void)
@@ -148,7 +148,7 @@ void					ping(t_addrinfo *addr_info)
 	t_packet		packet;
 
 	stc->sd = socket(PF_INET, SOCK_RAW, IPPROTO_ICMP);
-	if (sd < 0) 
+	if (stc->sd < 0) 
 		socketError();
 	if (setsockopt(stc->sd, SOL_IP, IP_TTL, &val, sizeof(val)) != 0)
 		setSockOptError();
