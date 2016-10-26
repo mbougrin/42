@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/26 13:44:34 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/26 13:48:18 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,24 +19,6 @@ t_stc					*singleton(t_stc *stc)
 	if (stc != NULL)
 		singleton = stc;
 	return (singleton);
-}
-
-
-
-static void				showHelp(char *str)
-{
-	printf("Usage: %s [-hv] destination IP\n", str);
-	free(singleton(NULL));
-	exit(-1);
-}
-
-
-
-static void				connectError(void)
-{
-	printf("connect error\n");
-	free(singleton(NULL));
-	exit(-1);
 }
 
 static void				initAddr(void)
@@ -70,7 +52,7 @@ void					firstPrint(t_addrinfo *tmp)
 	t_stc		*stc = singleton(NULL);
 	struct sockaddr_in *test = (struct sockaddr_in*)tmp->ai_addr;
 
-	printf("%s %s (%s) 56(84) bytes of data\n", \
+	pMaMa;6rintf("%s %s (%s) 56(84) bytes of data\n", \
 			stc->name, stc->ip, inet_ntoa(test->sin_addr));
 }
 
