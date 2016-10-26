@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/26 11:01:17 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/26 11:04:57 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,6 +176,26 @@ void					socketConfig(void)
 		setSockOptError();
 }
 
+void					recvPacket(struct timespect tend, struct timespect tstart)
+{
+	t_stc 			*stc = singleton(NULL);
+
+	clock_gettime(CLOCK_MONOTONIC, &tend);
+	stc->ms = ((double)tend.tv_sec + 1.0e-9 * tend.tv_nsec) - \
+			  ((double)tstart.tv_sec + 1.0e-9 * tstart.tv_nsec);
+	struct icmp *pkt;
+	struct iphdr *iphdr = (struct iphdr *) &packet;
+	pkt = (struct icmp *) (&packet + (iphdr->ihl << 2));
+	stc->ttl = iphdr->ttl;
+	if (pkt->icmp_type == ICMP_ECHOREPLY)
+	{
+		stc->success = 1;
+		print();
+	}
+	else 
+		print();
+}
+
 void					ping(t_addrinfo *addr_info)
 {
 	t_stc 			*stc = singleton(NULL);
@@ -200,28 +220,12 @@ void					ping(t_addrinfo *addr_info)
 		stc->ms = 0.0;
 		stc->success = 0;
 		if (recvfrom(stc->sd, &packet, sizeof(packet), 0, (t_sockaddr*)&r_addr, (socklen_t *)&len) > 0 )
-		{
-			clock_gettime(CLOCK_MONOTONIC, &tend);
-			stc->ms = ((double)tend.tv_sec + 1.0e-9 * tend.tv_nsec) -
-				((double)tstart.tv_sec + 1.0e-9 * tstart.tv_nsec);
-			struct icmp *pkt;
-			struct iphdr *iphdr = (struct iphdr *) &packet;
-			pkt = (struct icmp *) (&packet + (iphdr->ihl << 2));
-			stc->ttl = iphdr->ttl;
-			if (pkt->icmp_type == ICMP_ECHOREPLY)
-			{
-				stc->success = 1;
-				print();
-			}
-			else 
-				print();
-		}
+			recvPacket(tend, tstart);
 		else
 			print();
 		sleep(SLEEP);
 		stc->count++;
 	}
-
 }
 
 int						main(int ac, char **av)
