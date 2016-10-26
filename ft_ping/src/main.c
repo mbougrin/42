@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/26 10:40:54 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/26 10:44:34 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ char					*arg(char **av)
 		i++;
 	}
 	free(singleton(NULL));
-	exit(-1);
+	eMaMaMaMaMaÃxit(-1);
 }
 
 static void				print(void)
@@ -144,15 +144,13 @@ void					ping(t_addrinfo *addr_info)
 {
 	t_stc 			*stc = singleton(NULL);
 	const int 		val = 255;
-	int 			sd = 0;
 	t_sockaddr_in 	r_addr;
 	t_packet		packet;
-	int 			pid = getpid();
 
-	sd = socket(PF_INET, SOCK_RAW, IPPROTO_ICMP);
+	stc->sd = socket(PF_INET, SOCK_RAW, IPPROTO_ICMP);
 	if (sd < 0) 
 		socketError();
-	if (setsockopt(sd, SOL_IP, IP_TTL, &val, sizeof(val)) != 0)
+	if (setsockopt(stc->sd, SOL_IP, IP_TTL, &val, sizeof(val)) != 0)
 		setSockOptError();
 	stc->count = 0;
 	while (stc->count < NUMBER_PACKET)
@@ -162,10 +160,10 @@ void					ping(t_addrinfo *addr_info)
 
 		ft_bzero(&packet, sizeof(packet));
 		packet.hdr.type = ICMP_ECHO;
-		packet.hdr.un.echo.id = pid;
+		packet.hdr.un.echo.id = stc->pid;
 		packet.hdr.un.echo.sequence = stc->count + 1;
 		packet.hdr.checksum = checksum(&packet, sizeof(packet));
-		if (sendto(sd, &packet, sizeof(packet), 0, addr_info->ai_addr, sizeof(*addr_info->ai_addr)) <= 0)
+		if (sendto(stc->sd, &packet, sizeof(packet), 0, addr_info->ai_addr, sizeof(*addr_info->ai_addr)) <= 0)
 			perror("sendto");
 		clock_gettime(CLOCK_MONOTONIC, &tstart);
 
@@ -176,7 +174,7 @@ void					ping(t_addrinfo *addr_info)
 		setsockopt(sd, SOL_SOCKET, SO_RCVTIMEO, (char *)&timeout, sizeof(struct timeval));
 
 
-		if (recvfrom(sd, &packet, sizeof(packet), 0, (t_sockaddr*)&r_addr, (socklen_t *)&len) > 0 )
+		if (recvfrom(stc->sd, &packet, sizeof(packet), 0, (t_sockaddr*)&r_addr, (socklen_t *)&len) > 0 )
 		{
 			clock_gettime(CLOCK_MONOTONIC, &tend);
 			stc->ms = ((double)tend.tv_sec + 1.0e-9 * tend.tv_nsec) -
@@ -217,6 +215,8 @@ int						main(int ac, char **av)
 		showHelp(av[0]);
 	stc->name = av[0];
 	stc->ip = arg(av);
+	stc->pid = getpid();
+	stc->sd = 0;
 	singleton(stc);
 	initAddr();
 	ipConnect();
