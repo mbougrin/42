@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/26 15:10:08 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/26 15:13:34 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ static void				initprintfirst(void)
 void					ping(t_addrinfo *addr_info)
 {
 	t_stc				*stc;
-	t_sockaddr_in 	r_addr;
-	t_packet		packet;
-	struct timespec tstart = {0,0};
-	struct timespec tend = {0,0};
-	
+	t_sockaddr_in		r_addr;
+	t_packet			packet;
+	struct timespec		tstart;
+	struct timespec		tend;
+
 	stc = singleton(NULL);
 	socketconfig();
 	initprintfirst();
