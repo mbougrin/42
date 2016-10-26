@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/26 12:05:03 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/26 12:06:19 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,7 +217,7 @@ void					printSigint(void)
 	double			one;
 	double 			tmp;
 
-	ret = 0;
+	ret = 100;
 	one = stc->count / 100;
 	while (ret > 0)
 	{
