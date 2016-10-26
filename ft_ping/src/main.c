@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/26 12:10:42 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/26 12:13:18 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -219,6 +219,7 @@ void					printSigint(void)
 
 	ret = 100;
 	one = stc->count / 100;
+	printf("%f one\n", one);
 	while (ret < 1)
 	{
 		tmp = ret * one;
