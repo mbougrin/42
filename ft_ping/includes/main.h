@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:55 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/26 14:45:40 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/26 15:03:56 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ typedef struct				s_stc
 }							t_stc;
 
 t_stc						*singleton(t_stc *stc);
+char						*arg(char **av);
+void						sig_handler(int sig);
 
 t_packet					sendpacket(t_addrinfo *addr_info);
 void						recvpacket(struct timespec tend, \

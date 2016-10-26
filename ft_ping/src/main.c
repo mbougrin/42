@@ -6,55 +6,32 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/26 14:46:51 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/26 15:05:23 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <main.h>
 
-t_stc					*singleton(t_stc *stc)
+static void				initprintfirst(void)
 {
-	static t_stc	*singleton;
+	t_stc		*stc;
 
-	if (stc != NULL)
-		singleton = stc;
-	return (singleton);
-}
-
-char					*arg(char **av)
-{
-	int			i;
-   
-	i = 1;
-	while (av[i])
-	{
-		if (ft_strcmp(av[i], "-h") == 0)
-			showhelp(av[0]);
-		else if (av[i][0] != '-')
-			return (av[i]);
-		i++;
-	}
-	free(singleton(NULL));
-	exit(-1);
-}
-
-void					sig_handler(int sig)
-{
-	if (sig == SIGINT)
-		printsigint();
-}
-
-void					ping(t_addrinfo *addr_info)
-{
-	t_stc 			*stc = singleton(NULL);
-	t_sockaddr_in 	r_addr;
-	t_packet		packet;
-
-	socketconfig();
+	stc = singleton(NULL);
 	stc->count = 1;
 	stc->packetreceiv = 0;
 	stc->allms = 0.0;
 	signal(SIGINT, sig_handler);
+}
+
+void					ping(t_addrinfo *addr_info)
+{
+	t_stc 			*stc;
+	t_sockaddr_in 	r_addr;
+	t_packet		packet;
+
+	stc = singleton(NULL);
+	socketconfig();
+	initprintfirst();
 	while (stc->count < NUMBER_PACKET)
 	{
 		int len = sizeof(r_addr);
