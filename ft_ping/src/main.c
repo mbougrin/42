@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/26 12:22:12 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/26 12:23:11 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,7 +212,7 @@ void					timeout(void)
 
 int						percentage(int nombre, int nombre2)
 {
-	  return (((nombre2 - nombre)* 100 / nombre) * -1);
+	  return (((nombre2 - nombre)* 100 / nombre));
 }
 
 void					printSigint(void)
