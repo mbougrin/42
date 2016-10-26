@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/26 12:58:07 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/26 13:02:20 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,15 @@ static unsigned short	checksum(void *b, int len)
 	return (result);
 }
 
+void					firstPrint(t_addrinfo *tmp)
+{
+	t_stc		*stc = singleton(NULL);
+	struct sockaddr_in *test = (struct sockaddr_in*)tmp->ai_addr;
+
+	printf("%s %s (%s) bytes of data", \
+			stc->name, stc->ip, inet_ntoa(test->sin_addr));
+}
+
 void					ipConnect(void)
 {
 	t_stc		*stc = singleton(NULL);
@@ -101,8 +110,7 @@ void					ipConnect(void)
 			continue ;
 		if (connect(fd, tmp->ai_addr, tmp->ai_addrlen) != -1)
 		{
-			struct sockaddr_in *test = (struct sockaddr_in*)tmp->ai_addr;
-			printf("%sIP", inet_ntoa(test->sin_addr));
+			firstPrint(tmp);
 			close(fd);
 			break ;
 		}
