@@ -21,6 +21,7 @@ OBJ = 	$(SRC:.c=.o)
 SRC = 	$(DIRSRC)main.c \
 		$(DIRSRC)error.c \
 		$(DIRSRC)ft_ping.c \
+		$(DIRSRC)packet.c \
 		$(DIRSRC)print.c
 
 all: $(NAME)

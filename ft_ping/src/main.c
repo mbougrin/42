@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/26 14:29:33 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/26 14:39:56 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,41 +37,8 @@ char					*arg(char **av)
 	free(singleton(NULL));
 	exit(-1);
 }
-t_packet				sendPacket(t_addrinfo *addr_info)
-{
-	t_stc 			*stc = singleton(NULL);
-	t_packet		packet;
 
-	ft_bzero(&packet, sizeof(packet));
-	packet.hdr.type = ICMP_ECHO;
-	packet.hdr.un.echo.id = stc->pid;
-	packet.hdr.un.echo.sequence = stc->count + 1;
-	packet.hdr.checksum = checksum(&packet, sizeof(packet));
-	if (sendto(stc->sd, &packet, sizeof(packet), 0, addr_info->ai_addr, sizeof(*addr_info->ai_addr)) <= 0)
-		sendtoerror();
-	return (packet);
-}
 
-void					recvPacket(struct timespec tend, struct timespec tstart, t_packet packet)
-{
-	t_stc 			*stc = singleton(NULL);
-
-	clock_gettime(CLOCK_MONOTONIC, &tend);
-	stc->ms = ((double)tend.tv_sec + 1.0e-9 * tend.tv_nsec) - \
-			  ((double)tstart.tv_sec + 1.0e-9 * tstart.tv_nsec);
-	stc->allms += stc->ms;
-	struct icmp *pkt;
-	struct iphdr *iphdr = (struct iphdr *) &packet;
-	pkt = (struct icmp *) (&packet + (iphdr->ihl << 2));
-	stc->ttl = iphdr->ttl;
-	if (pkt->icmp_type == ICMP_ECHOREPLY)
-	{
-		stc->success = 1;
-		print();
-	}
-	else 
-		print();
-}
 
 void					timeout(void)
 {
@@ -105,13 +72,13 @@ void					ping(t_addrinfo *addr_info)
 		int len = sizeof(r_addr);
 		struct timespec tstart={0,0}, tend={0,0};
 
-		packet = sendPacket(addr_info);
+		packet = sendpacket(addr_info);
 		clock_gettime(CLOCK_MONOTONIC, &tstart);
 		timeout();
 		stc->ms = 0.0;
 		stc->success = 0;
 		if (recvfrom(stc->sd, &packet, sizeof(packet), 0, (t_sockaddr*)&r_addr, (socklen_t *)&len) > 0 )
-			recvPacket(tend, tstart, packet);
+			recvpacket(tend, tstart, packet);
 		else
 			print();
 		sleep(SLEEP);
