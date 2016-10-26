@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/26 12:19:31 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/26 12:20:30 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,7 +212,7 @@ void					timeout(void)
 
 int		test(int nombre, int nombre2)
 {
-	  return (nombre2 - nombre)* 100 / nombre ;
+	  return (((nombre2 - nombre)* 100 / nombre) * -1);
 }
 
 void					printSigint(void)
@@ -221,7 +221,7 @@ void					printSigint(void)
 	int				ret = test(stc->count, stc->packetReceiv);
 	printf("\n--- %s %s statistics ---\n", stc->ip, stc->name);
 	printf("%d packets transmitted, %d received, %d%c packet loss, time %fms\n", \
-			stc->count, stc->packetReceiv, ret * -1, '%', stc->allMs);
+			stc->count, stc->packetReceiv, ret, '%', stc->allMs);
 	free(stc);
 	exit(0);
 }
