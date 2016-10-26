@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:55 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/26 14:20:12 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/26 14:20:43 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void						socketerror(void);
 void						setsockopterror(void);
 void						addrerror(void);
 void						connecterror(void);
-void						sendtoerror(void)
+void						sendtoerror(void);
 
 void						showhelp(char *str);
 
