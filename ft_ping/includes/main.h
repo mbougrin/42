@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:55 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/26 13:48:23 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/26 13:52:32 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,11 @@
 # define WAIT 1
 # define SLEEP 1
 
-t_stc						*singleton(t_stc *stc);
-
-void						socketError(void);
-void						setSockOptError(void);
-void						addrError(void);
-void						connectError(void);
-void						showHelp(char *str);
-
+void						socketerror(void);
+void						setsockopterror(void);
+void						addrerror(void);
+void						connecterror(void);
+void						showhelp(char *str);
 
 typedef struct sockaddr_in	t_sockaddr_in;
 typedef struct sockaddr		t_sockaddr;
@@ -68,5 +65,7 @@ typedef struct				s_stc
 	t_addrinfo				hints;
 	t_addrinfo				*addr;
 }							t_stc;
+
+t_stc						*singleton(t_stc *stc);
 
 #endif

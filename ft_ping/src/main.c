@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/26 13:48:18 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/26 13:52:33 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void					ipConnect(void)
 	int			fd;
 
 	if ((getaddrinfo(stc->ip, NULL, &stc->hints, &result)) != 0)
-		addrError();
+		addrerror();
 	tmp = result;
 	while (tmp != NULL)
 	{
@@ -93,7 +93,7 @@ char					*arg(char **av)
 	while (av[i])
 	{
 		if (ft_strcmp(av[i], "-h") == 0)
-			showHelp(av[0]);
+			showhelp(av[0]);
 		else if (av[i][0] != '-')
 			return (av[i]);
 		i++;
@@ -147,9 +147,9 @@ void					socketConfig(void)
 
 	stc->sd = socket(PF_INET, SOCK_RAW, IPPROTO_ICMP);
 	if (stc->sd < 0) 
-		socketError();
+		socketerror();
 	if (setsockopt(stc->sd, SOL_IP, IP_TTL, &val, sizeof(val)) != 0)
-		setSockOptError();
+		setsockopterror();
 }
 
 void					recvPacket(struct timespec tend, struct timespec tstart, t_packet packet)
