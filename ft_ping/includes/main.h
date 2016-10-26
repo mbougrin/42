@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:55 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/26 11:53:56 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/26 12:57:08 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@
 # include <netdb.h>
 # include <netinet/in.h>
 # include <netinet/ip_icmp.h>
+
+#include <arpa/inet.h>
+
 
 # define PACKET_SIZE 64
 # define NUMBER_PACKET 20
