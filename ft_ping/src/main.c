@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/26 11:13:50 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/26 11:49:33 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,8 +134,11 @@ static void				print(void)
 	t_stc	*stc = singleton(NULL);
 
 	if (stc->success)
+	{
 		printf("%d bytes from %s: icmp_seq=%d ttl=%d time=%f ms\n",\
 				PACKET_SIZE, stc->ip, stc->count, stc->ttl, stc->ms);
+		stc->packetReceiv++;
+	}
 	else
 		printf("Request timeout from icmp_seq %d\n", stc->count);
 }
@@ -183,6 +186,7 @@ void					recvPacket(struct timespec tend, struct timespec tstart, t_packet packe
 	clock_gettime(CLOCK_MONOTONIC, &tend);
 	stc->ms = ((double)tend.tv_sec + 1.0e-9 * tend.tv_nsec) - \
 			  ((double)tstart.tv_sec + 1.0e-9 * tstart.tv_nsec);
+	stc->allMs += stc->ms;
 	struct icmp *pkt;
 	struct iphdr *iphdr = (struct iphdr *) &packet;
 	pkt = (struct icmp *) (&packet + (iphdr->ihl << 2));
@@ -206,6 +210,34 @@ void					timeout(void)
 	setsockopt(stc->sd, SOL_SOCKET, SO_RCVTIMEO, (char *)&timeout, sizeof(struct timeval));
 }
 
+void					printSigint(void)
+{
+	t_stc 			*stc = singleton(NULL);
+	double			ret;
+	double			one;
+
+	ret = 100;
+	one = stc->count / 100;
+	while (loss > 0)
+	{
+		tmp = ret * one;
+		if (tmp <= stc->packetReceiv)
+			break ;
+		ret--;	
+	}
+	printf("\n--- %s %s statistics ---\n", stc->ip, stc->name);
+	printf("%d packets transmitted, %d received, %d\% packet loss, time %dms", \
+			stc->count, stc->packetReceiv, ret, stc->allMs);
+	free(stc);
+	exit(0);
+}
+
+void					sig_handler(int sig)
+{
+	if (sig == SIGINT)
+		printSigint();
+}
+
 void					ping(t_addrinfo *addr_info)
 {
 	t_stc 			*stc = singleton(NULL);
@@ -213,7 +245,10 @@ void					ping(t_addrinfo *addr_info)
 	t_packet		packet;
 
 	socketConfig();
-	stc->count = 0;
+	stc->count = 1;
+	stc->packetReceiv = 0;
+	stc->allMs = 0.0;
+	signal(SIGINT, sig_handler);
 	while (stc->count < NUMBER_PACKET)
 	{
 		int len = sizeof(r_addr);
