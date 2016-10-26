@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/26 11:55:14 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/26 11:56:58 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,17 +217,18 @@ void					printSigint(void)
 	double			one;
 	double 			tmp;
 
-	ret = 100;
+	ret = 1;
 	one = stc->count / 100;
-	while (ret > 0)
+	while (ret < 100)
 	{
 		tmp = ret * one;
-		if (tmp <= stc->packetReceiv)
+		if (tmp >= stc->packetReceiv)
 			break ;
 		ret--;	
 	}
 	printf("\n--- %s %s statistics ---\n", stc->ip, stc->name);
-	printf("%d packets transmitted, %d received, %f%c packet loss, time %fms", stc->count, stc->packetReceiv, ret, '%', stc->allMs);
+	printf("%d packets transmitted, %d received, %f%c packet loss, time %fms\n", \
+			stc->count, stc->packetReceiv, ret, '%', stc->allMs);
 	free(stc);
 	exit(0);
 }
