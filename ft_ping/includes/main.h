@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:55 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/26 14:44:13 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/26 14:45:40 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,6 @@ void						print(void);
 void						firstprint(t_addrinfo *tmp);
 void						printsigint(void);
 
-t_packet					sendpacket(t_addrinfo *addr_info);
-void						recvpacket(struct timespec tend, struct timespec tstart, \
-							t_packet packet);
-void						timeout(void);
-
 typedef struct				s_packet
 {
 	t_icmphdr				hdr;
@@ -85,5 +80,10 @@ typedef struct				s_stc
 }							t_stc;
 
 t_stc						*singleton(t_stc *stc);
+
+t_packet					sendpacket(t_addrinfo *addr_info);
+void						recvpacket(struct timespec tend, \
+							struct timespec tstart, t_packet packet);
+void						timeout(void);
 
 #endif
