@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 13:59:40 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/26 14:14:19 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/26 14:14:37 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ unsigned short			checksum(void *b, int len)
 	result = 0;
 	while (len > 1)
 	{
-		sum+= *buff++;
+		sum+= *buf++;
 		len -= 2;
 	}
 //	for (sum = 0; len > 1; len -= 2)
