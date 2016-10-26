@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/26 11:04:57 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/26 11:05:52 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,7 +176,7 @@ void					socketConfig(void)
 		setSockOptError();
 }
 
-void					recvPacket(struct timespect tend, struct timespect tstart)
+void					recvPacket(struct timespec tend, struct timespec tstart)
 {
 	t_stc 			*stc = singleton(NULL);
 
