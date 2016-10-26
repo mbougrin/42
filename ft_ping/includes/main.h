@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:55 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/25 15:51:12 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/26 10:40:00 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct				s_stc
 {
 	int						success;
 	int						count;
+	int						ttl;
 	double					ms;
 	char					*name;
 	char					*ip;

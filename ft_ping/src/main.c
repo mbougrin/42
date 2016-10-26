@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/26 10:23:37 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/26 10:40:54 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,8 +134,8 @@ static void				print(void)
 	t_stc	*stc = singleton(NULL);
 
 	if (stc->success)
-		printf("%d bytes from %s: icmp_seq=%d ttl=254 time=%f ms\n",\
-				PACKET_SIZE, stc->ip, stc->count, stc->ms);
+		printf("%d bytes from %s: icmp_seq=%d ttl=%d time=%f ms\n",\
+				PACKET_SIZE, stc->ip, stc->count, stc->ttl, stc->ms);
 	else
 		printf("Request timeout from icmp_seq %d\n", stc->count);
 }
@@ -184,7 +184,7 @@ void					ping(t_addrinfo *addr_info)
 			struct icmp *pkt;
 			struct iphdr *iphdr = (struct iphdr *) &packet;
 			pkt = (struct icmp *) (&packet + (iphdr->ihl << 2));
-			printf("%dttl\n", iphdr->ttl);
+			stc->ttl = iphdr->ttl;
 			if (pkt->icmp_type == ICMP_ECHOREPLY)
 			{
 				stc->success = 1;
