@@ -6,13 +6,13 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/26 13:05:52 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/26 13:44:34 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <main.h>
 
-static t_stc			*singleton(t_stc *stc)
+t_stc					*singleton(t_stc *stc)
 {
 	static t_stc	*singleton;
 
@@ -21,19 +21,7 @@ static t_stc			*singleton(t_stc *stc)
 	return (singleton);
 }
 
-static void				socketError(void)
-{
-	printf("socket error\n");
-	free(singleton(NULL));
-	exit(-1);
-}
 
-static void				setSockOptError(void)
-{
-	printf("setsockopt error\n");
-	free(singleton(NULL));
-	exit(-1);
-}
 
 static void				showHelp(char *str)
 {
@@ -42,14 +30,7 @@ static void				showHelp(char *str)
 	exit(-1);
 }
 
-static void				addrError(void)
-{
-	t_stc		*stc = singleton(NULL);
 
-	printf("%s: unknown host %s\n", stc->name, stc->ip);
-	free(stc);
-	exit(-1);
-}
 
 static void				connectError(void)
 {
@@ -147,7 +128,7 @@ static void				print(void)
 	{
 		printf("%d bytes from %s: icmp_seq=%d ttl=%d time=%f ms\n",\
 				PACKET_SIZE, stc->ip, stc->count, stc->ttl, stc->ms);
-		stc->packetReceiv++;
+		stc->packetreceiv++;
 	}
 	else
 		printf("Request timeout from icmp_seq %d\n", stc->count);
@@ -196,7 +177,7 @@ void					recvPacket(struct timespec tend, struct timespec tstart, t_packet packe
 	clock_gettime(CLOCK_MONOTONIC, &tend);
 	stc->ms = ((double)tend.tv_sec + 1.0e-9 * tend.tv_nsec) - \
 			  ((double)tstart.tv_sec + 1.0e-9 * tstart.tv_nsec);
-	stc->allMs += stc->ms;
+	stc->allms += stc->ms;
 	struct icmp *pkt;
 	struct iphdr *iphdr = (struct iphdr *) &packet;
 	pkt = (struct icmp *) (&packet + (iphdr->ihl << 2));
@@ -231,7 +212,7 @@ void					printSigint(void)
 
 	printf("\n--- %s %s statistics ---\n", stc->ip, stc->name);
 	printf("%d packets transmitted, %d received, %d%c packet loss, time %fms\n", \
-			stc->count, stc->packetReceiv, percentage(stc->count, stc->packetReceiv), '%', stc->allMs);
+			stc->count, stc->packetreceiv, percentage(stc->count, stc->packetreceiv), '%', stc->allms);
 	free(stc);
 	exit(0);
 }
@@ -250,8 +231,8 @@ void					ping(t_addrinfo *addr_info)
 
 	socketConfig();
 	stc->count = 1;
-	stc->packetReceiv = 0;
-	stc->allMs = 0.0;
+	stc->packetreceiv = 0;
+	stc->allms = 0.0;
 	signal(SIGINT, sig_handler);
 	while (stc->count < NUMBER_PACKET)
 	{

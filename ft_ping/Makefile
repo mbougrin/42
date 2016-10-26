@@ -18,7 +18,8 @@ INC = -I includes -I libft/includes
 CFLAGS = -Wall -Wextra -Werror
 DIRSRC = src/
 OBJ = 	$(SRC:.c=.o)
-SRC = 	$(DIRSRC)main.c
+SRC = 	$(DIRSRC)main.c \
+		$(DIRSRC)error.c
 
 all: $(NAME)
 
