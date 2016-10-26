@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:55 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/26 14:20:43 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/26 14:22:36 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@
 void						initaddr(void);
 unsigned short				checksum(void *b, int len);
 void						ipconnect(void);
+void						showhelp(char *str);
+void						socketconfig(void);
 
 void						socketerror(void);
 void						setsockopterror(void);
@@ -43,7 +45,6 @@ void						addrerror(void);
 void						connecterror(void);
 void						sendtoerror(void);
 
-void						showhelp(char *str);
 
 typedef struct sockaddr_in	t_sockaddr_in;
 typedef struct sockaddr		t_sockaddr;

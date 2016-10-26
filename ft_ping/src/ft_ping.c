@@ -6,11 +6,31 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 13:59:40 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/26 14:16:00 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/26 14:23:40 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <main.h>
+
+void					socketconfig(void)
+{
+	t_stc			*stc;
+	const int		val = 255;
+
+	stc = singleton(NULL);
+	stc->sd = socket(PF_INET, SOCK_RAW, IPPROTO_ICMP);
+	if (stc->sd < 0)
+		socketerror();
+	if (setsockopt(stc->sd, SOL_IP, IP_TTL, &val, sizeof(val)) != 0)
+		setsockopterror();
+}
+
+void					showhelp(char *str)
+{
+	printf("Usage: %s [-hv] destination IP\n", str);
+	free(singleton(NULL));
+	exit(-1);
+}
 
 void					initaddr(void)
 {

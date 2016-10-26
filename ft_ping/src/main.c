@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/26 14:19:23 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/26 14:22:58 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,6 @@ static void				print(void)
 		printf("Request timeout from icmp_seq %d\n", stc->count);
 }
 
-void					showhelp(char *str)
-{
-	printf("Usage: %s [-hv] destination IP\n", str);
-	free(singleton(NULL));
-	exit(-1);
-}
-
 t_packet				sendPacket(t_addrinfo *addr_info)
 {
 	t_stc 			*stc = singleton(NULL);
@@ -81,18 +74,6 @@ t_packet				sendPacket(t_addrinfo *addr_info)
 	if (sendto(stc->sd, &packet, sizeof(packet), 0, addr_info->ai_addr, sizeof(*addr_info->ai_addr)) <= 0)
 		sendtoerror();
 	return (packet);
-}
-
-void					socketConfig(void)
-{
-	t_stc 			*stc = singleton(NULL);
-	const int 		val = 255;
-
-	stc->sd = socket(PF_INET, SOCK_RAW, IPPROTO_ICMP);
-	if (stc->sd < 0) 
-		socketerror();
-	if (setsockopt(stc->sd, SOL_IP, IP_TTL, &val, sizeof(val)) != 0)
-		setsockopterror();
 }
 
 void					recvPacket(struct timespec tend, struct timespec tstart, t_packet packet)
@@ -154,7 +135,7 @@ void					ping(t_addrinfo *addr_info)
 	t_sockaddr_in 	r_addr;
 	t_packet		packet;
 
-	socketConfig();
+	socketconfig();
 	stc->count = 1;
 	stc->packetreceiv = 0;
 	stc->allms = 0.0;
