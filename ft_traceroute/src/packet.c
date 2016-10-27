@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 14:36:52 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/27 12:05:04 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/27 12:05:34 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,7 @@ void					recvpacket(struct timeval tend, \
 	gettimeofday(&tend, NULL);
 	stc->ms = (double)((tend.tv_sec - tstart.tv_sec) * 1000.0f);
 	stc->ms += (double)((tend.tv_usec - tstart.tv_usec) / 1000.0f);
-//	stc->ms = ((double)tend.tv_sec + 1.0e-9 * tend.tv_nsec) - \
-					((double)tstart.tv_sec + 1.0e-9 * tstart.tv_nsec);
+//	stc->ms = ((double)tend.tv_sec + 1.0e-9 * tend.tv_nsec) - ((double)tstart.tv_sec + 1.0e-9 * tstart.tv_nsec);
 	stc->allms += stc->ms;
 	iphdr = (struct iphdr *)&packet;
 	pkt = (struct icmp *)(&packet + (iphdr->ihl << 2));
