@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 14:36:52 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/27 12:02:20 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/27 12:03:43 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ t_packet				sendpacket(t_addrinfo *addr_info)
 	return (packet);
 }
 
-void					recvpacket(struct timespec tend, \
-						struct timespec tstart, t_packet packet)
+void					recvpacket(struct timeval tend, \
+						struct timeval tstart, t_packet packet)
 {
 	t_stc				*stc;
 	struct icmp			*pkt;

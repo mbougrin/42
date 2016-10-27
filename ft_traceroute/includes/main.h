@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:55 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/27 12:02:52 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/27 12:03:52 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,8 @@ char						*arg(char **av);
 void						sig_handler(int sig);
 
 t_packet					sendpacket(t_addrinfo *addr_info);
-void						recvpacket(struct timespec tend, \
-							struct timespec tstart, t_packet packet);
+void						recvpacket(struct timeval tend, \
+							struct timeval tstart, t_packet packet);
 void						timeout(void);
 
 #endif
