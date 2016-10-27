@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:55 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/27 12:03:52 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/27 12:14:06 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@
 # define NUMBER_PACKET 20
 # define WAIT 1
 # define SLEEP 1
+# define BUFFSIZE IP_MAXPACKET
+# define DEFMAXTTL 64
 
 void						initaddr(void);
 unsigned short				checksum(void *b, int len);
@@ -50,6 +52,9 @@ typedef struct sockaddr_in	t_sockaddr_in;
 typedef struct sockaddr		t_sockaddr;
 typedef struct icmphdr		t_icmphdr;
 typedef struct addrinfo		t_addrinfo;
+typedef struct iphdr		t_iphdr;
+typedef struct icmp			t_icmp;
+typedef struct ip			t_ip;
 
 void						firstprint(t_addrinfo *tmp);
 
@@ -77,6 +82,7 @@ typedef struct				s_stc
 	double					ms;
 	char					*name;
 	char					*ip;
+	char					blop[1024];
 	t_addrinfo				hints;
 	t_addrinfo				*addr;
 }							t_stc;
