@@ -1,0 +1,9 @@
+gdb ./binary3
+dis main
+0x0804844b <+55>:	mov    ecx,0x8 ;; compare 8 byte on repz cmps
+0x08048454 <+64>:	repz cmps BYTE PTR ds:[esi],BYTE PTR es:[edi] ;; compare esi and edi
+set arg YOLOYOLO ;; add argv[1] random password 8 byte
+break *0x08048454 ;; break point on line repz cmps
+run
+x/s $esi ;; print register esi
+0x8048598:	 "L33TH4X" ;; print password

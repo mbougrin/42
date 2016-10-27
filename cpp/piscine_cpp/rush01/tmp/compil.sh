@@ -1,0 +1,1 @@
+g++ *SDL.cpp  -I ../include ../lib/libSDL2.dylib ../lib/libSDL2_ttf.dylib ../lib/libSDL2_image.dylib -o test_SDL
