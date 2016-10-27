@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/27 11:49:50 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/27 11:59:51 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ void					ping(t_addrinfo *addr_info)
 	{
 		stc->len = sizeof(r_addr);
 		packet = sendpacket(addr_info);
-		clock_gettime(CLOCK_MONOTONIC, &tstart);
+	//	clock_gettime(CLOCK_MONOTONIC, &tstart);
+		gettimeofday(&tstart, NULL);
 		timeout();
 		stc->ms = 0.0;
 		stc->success = 0;
