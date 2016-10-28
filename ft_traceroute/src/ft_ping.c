@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 13:59:40 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/28 11:25:11 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/28 11:52:28 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void					socketconfig(void)
 	if (stc->sd < 0)
 		socketerror();
 	timeout();
-	if (setsockopt(stc->sd, IPPROTO_ICMP, IP_TTL, &stc->ttl, sizeof(stc->ttl)) != 0)
+	if (setsockopt(stc->sd, IPPROTO_IP, IP_TTL, &stc->ttl, sizeof(stc->ttl)) != 0)
 		setsockopterror();
 }
 
