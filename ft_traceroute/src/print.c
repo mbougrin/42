@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 14:24:21 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/28 12:03:06 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/28 12:05:33 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void					printfirst(void)
 
 	stc = singleton(NULL);
 	printf("%s to %s (%s), %d hops max, %d byte packets\n", \
-			stc->name, stc->ip, stc->hostname, MAXTTL, PACKET_SIZE);
+			stc->name, stc->ip, stc->hostname, DEFMAXTTL, PACKET_SIZE);
 }
 
 void					print(void)
