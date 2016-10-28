@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 14:24:21 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/28 12:05:33 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/28 12:08:54 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void					print(void)
 			client_name = client->h_name;
 		printf("%4d %s (%s) %.3f ms\n",
 				stc->ttl, client_name, ip_buf, stc->ms);
+		stc->count++;
 	}
-	else
-		printf("%4d * * * *\n", stc->ttl);
 }

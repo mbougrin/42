@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/28 12:02:29 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/28 12:08:59 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void					ping(t_addrinfo *addr_info)
 			recvpacket(tend, tstart, packet);
 		else
 			print();
-		stc->count++;
 	}
 	close(stc->sd);
 }
