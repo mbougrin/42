@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/27 12:03:18 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/28 10:32:46 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,28 @@ void					ping(t_addrinfo *addr_info)
 		sleep(SLEEP);
 		stc->count++;
 	}
+}
+
+static void				initopt(void)
+{
+	char		clienthost[NI_MAXHOST];  //The clienthost will hold the IP address.
+	char		clientservice[NI_MAXSERV];
+	s_option	opt;
+	t_stc		*stc;
+
+	opt->ttl = 0;
+	opt->addr_info = get_addr(name);
+	opt->name = name;
+	int err = getnameinfo(opt->addr_info->ai_addr, sizeof(*opt->addr_info->ai_addr),
+			clienthost, sizeof(clienthost),
+			clientservice, sizeof(clientservice),
+			NI_NUMERICHOST|NI_NUMERICSERV);
+	printf("init_opt clienthost %s name %s\n", clienthost, name);
+	opt->ip = strdup(clienthost);
+	if(err != 0)
+		opt->ip = strdup(name);
+	printf("opt->ip %s\n", opt->ip);
+	stc->opt = opt;
 }
 
 int						main(int ac, char **av)
