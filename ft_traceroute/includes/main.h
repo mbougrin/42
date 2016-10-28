@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:55 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/27 12:14:06 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/28 10:28:03 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,9 @@ typedef struct ip			t_ip;
 void						firstprint(t_addrinfo *tmp);
 
 void						print(void);
-void						firstprint(t_addrinfo *tmp);
+//void						firstprint(t_addrinfo *tmp);
 void						printsigint(void);
+void						printFirst(void);
 
 typedef struct				s_packet
 {

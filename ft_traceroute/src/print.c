@@ -6,11 +6,20 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 14:24:21 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/27 11:48:27 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/28 10:27:37 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <main.h>
+
+void					printfirst(void)
+{
+	t_stc	*stc;
+
+	stc = singleton(NULL);
+	printf("%s to %s (%s), %d hops max, 52 byte packets\n", \
+			stc->name, stc->opt->name, stc->opt->ip, MAXTTL);
+}
 
 void					print(void)
 {
