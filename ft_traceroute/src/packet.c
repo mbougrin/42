@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 14:36:52 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/28 11:58:51 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/28 12:11:40 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_packet				sendpacket(t_addrinfo *addr_info)
 	return (packet);
 }
 
-int test_is_end(t_ip *ip)
+static int				test_is_end(t_ip *ip)
 {
 	char			ip_buf[512];
 	t_stc			*stc;

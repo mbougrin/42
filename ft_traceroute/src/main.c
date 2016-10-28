@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/28 12:08:59 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/28 12:14:17 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void				initopt(void)
 	err = getnameinfo(stc->addr->ai_addr, sizeof(*stc->addr->ai_addr), \
 			clienthost, sizeof(clienthost), \
 			clientservice, sizeof(clientservice), \
-			NI_NUMERICHOST|NI_NUMERICSERV);
+			NI_NUMERICHOST | NI_NUMERICSERV);
 	stc->hostname = ft_strdup(clienthost);
 	if (err != 0)
 		stc->hostname = strdup(stc->ip);

@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 14:24:21 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/28 12:08:54 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/28 12:11:14 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void					printfirst(void)
 
 void					print(void)
 {
-	t_stc	*stc;
+	t_stc			*stc;
 	struct hostent	*client;
 	char			ip_buf[512];
 	const char		*client_name;
@@ -31,7 +31,8 @@ void					print(void)
 	stc = singleton(NULL);
 	if (stc->success)
 	{
-		inet_ntop(AF_INET, (void*)&(stc->stcip->ip_src.s_addr), ip_buf, BUFFSIZE);
+		inet_ntop(AF_INET, (void*)&(stc->stcip->ip_src.s_addr), ip_buf, \
+				BUFFSIZE);
 		client = gethostbyaddr((void*)&(stc->stcip->ip_src.s_addr), \
 				sizeof(stc->stcip->ip_src.s_addr), AF_INET);
 		if (client == NULL)
