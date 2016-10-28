@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 13:59:40 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/28 11:52:28 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/28 11:58:33 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ void					ipconnect(void)
 			continue ;
 		if (connect(stc->fd, tmp->ai_addr, tmp->ai_addrlen) != -1)
 		{
-			//firstprint(tmp);
 			close(stc->fd);
 			break ;
 		}

@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 15:01:57 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/28 11:56:27 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/28 11:58:58 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,7 @@ t_stc					*singleton(t_stc *stc)
 		singleton = stc;
 	return (singleton);
 }
-/*
-void					sig_handler(int sig)
-{
-	if (sig == SIGINT)
-		printsigint();
-}
-*/
+
 char					*arg(char **av)
 {
 	int		i;

@@ -6,23 +6,11 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/28 11:45:54 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/28 11:57:46 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <main.h>
-/*
-static void				initprintfirst(void)
-{
-	t_stc		*stc;
-
-	stc = singleton(NULL);
-	stc->count = 1;
-	stc->packetreceiv = 0;
-	stc->allms = 0.0;
-	signal(SIGINT, sig_handler);
-}
-*/
 
 void					ping(t_addrinfo *addr_info)
 {
@@ -34,17 +22,12 @@ void					ping(t_addrinfo *addr_info)
 
 	stc = singleton(NULL);
 	stc->len = sizeof(r_addr);
-//	socketconfig();
-//	initprintfirst();
-//	while (stc->count < NUMBER_PACKET)
 	while (stc->ttl < DEFMAXTTL)
 	{
 		++stc->ttl;
 		socketconfig();
 		gettimeofday(&tstart, NULL);
 		packet = sendpacket(addr_info);
-	//	clock_gettime(CLOCK_MONOTONIC, &tstart);
-//		timeout();
 		stc->ms = 0.0;
 		stc->success = 0;
 		if (recvfrom(stc->sd, &packet, sizeof(packet), 0, \
@@ -52,7 +35,6 @@ void					ping(t_addrinfo *addr_info)
 			recvpacket(tend, tstart, packet);
 		else
 			print();
-	//	sleep(SLEEP);
 		stc->count++;
 	}
 	close(stc->sd);
@@ -60,7 +42,7 @@ void					ping(t_addrinfo *addr_info)
 
 static void				initopt(void)
 {
-	char		clienthost[NI_MAXHOST];  //The clienthost will hold the IP address.
+	char		clienthost[NI_MAXHOST];
 	char		clientservice[NI_MAXSERV];
 	t_stc		*stc;
 

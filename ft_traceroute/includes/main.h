@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:55 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/28 11:42:29 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/28 11:59:25 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,7 @@
 # include <arpa/inet.h>
 
 # define PACKET_SIZE 64
-//# define NUMBER_PACKET 20
 # define WAIT 1
-//# define SLEEP 1
 # define BUFFSIZE IP_MAXPACKET
 # define DEFMAXTTL 64
 
@@ -59,7 +57,6 @@ typedef struct ip			t_ip;
 void						firstprint(t_addrinfo *tmp);
 
 void						print(void);
-//void						firstprint(t_addrinfo *tmp);
 void						printsigint(void);
 void						printfirst(void);
 
@@ -79,12 +76,10 @@ typedef struct				s_stc
 	int						packetreceiv;
 	int						fd;
 	int						len;
-//	double					allms;
 	double					ms;
 	char					*name;
 	char					*hostname;
 	char					*ip;
-	char					blop[1024];
 	t_addrinfo				hints;
 	t_ip					*stcip;
 	t_addrinfo				*addr;
