@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 14:24:21 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/28 12:15:33 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/28 15:56:24 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,16 @@
 void					printfirst(void)
 {
 	t_stc	*stc;
+	char	ip[256];
 
 	stc = singleton(NULL);
-	printf("%s to %s (%s), %d hops max, %d byte packets\n", \
+	if (ft_strcmp(stc->ip, "127.0.0.1") == 0)
+	{
+		printf("%s to localhost (%s), %d hops max, %d byte packets\n", \
+			stc->name, stc->hostname, DEFMAXTTL, PACKET_SIZE);
+	}
+	else
+		printf("%s to %s (%s), %d hops max, %d byte packets\n", \
 			stc->name, stc->ip, stc->hostname, DEFMAXTTL, PACKET_SIZE);
 }
 
