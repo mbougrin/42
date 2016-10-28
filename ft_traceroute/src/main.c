@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/28 11:30:10 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/28 11:33:54 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ static void				initprintfirst(void)
 	signal(SIGINT, sig_handler);
 }
 */
-
-static void			
 
 void					ping(t_addrinfo *addr_info)
 {
