@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 15:01:57 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/27 11:48:39 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/28 11:56:27 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,11 @@ char					*arg(char **av)
 		if (ft_strcmp(av[i], "-h") == 0)
 			showhelp(av[0]);
 		else if (av[i][0] != '-')
+		{
+			if (ft_strcmp(av[i], "localhost") == 0)
+				return ("127.0.0.1");
 			return (av[i]);
+		}
 		i++;
 	}
 	free(singleton(NULL));
