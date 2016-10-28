@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/28 10:46:58 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/28 10:47:18 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void					ping(t_addrinfo *addr_info)
 
 static void				initopt(void)
 {
-	cMahar		clienthost[NI_MAXHOST];  //The clienthost will hold the IP address.
+	char		clienthost[NI_MAXHOST];  //The clienthost will hold the IP address.
 	char		clientservice[NI_MAXSERV];
 	t_stc		*stc;
 
