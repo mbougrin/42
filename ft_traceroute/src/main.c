@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/28 10:42:12 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/28 10:43:33 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,15 @@ static void				initopt(void)
 	t_stc		*stc;
 
 	stc->ttl = 0;
-	stc->addr_info = get_addr(stc->ip);
-	int err = getnameinfo(stc->addr_info->ai_addr, sizeof(*stc->addr_info->ai_addr),
+	stc->addr = get_addr(stc->ip);
+	int err = getnameinfo(stc->addr->ai_addr, sizeof(*stc->addr->ai_addr),
 			clienthost, sizeof(clienthost),
 			clientservice, sizeof(clientservice),
 			NI_NUMERICHOST|NI_NUMERICSERV);
 	printf("init_opt clienthost %s name %s\n", clienthost, stc->ip);
 	stc->hostname = strdup(clienthost);
 	if (err != 0)
-		stc->hostname = strdup(name);
+		stc->hostname = strdup(stc->ip);
 	printf("opt->ip %s\n", stc->hostname);
 }
 
