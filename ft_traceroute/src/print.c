@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 14:24:21 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/28 11:42:05 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/28 11:42:44 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void					print(void)
 				stc->ttl, client_name, ip_buf, stc->ms);
 	}
 	else
-		printf("%4d * * * *\n", opt->ttl);
+		printf("%4d * * * *\n", stc->ttl);
 
 
 //	if (stc->success)
