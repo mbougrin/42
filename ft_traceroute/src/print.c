@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 14:24:21 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/28 11:42:44 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/28 11:43:12 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,7 @@ void					print(void)
 
 //	if (stc->success)
 //	{
-//		printf("%d bytes from %s: icmp_seq=%d ttl=%d time=%f ms\n",\
-//				PACKET_SIZE, stc->ip, stc->count, stc->ttl, stc->ms);
+//		printf("%d bytes from %s: icmp_seq=%d ttl=%d time=%f ms\n", PACKET_SIZE, stc->ip, stc->count, stc->ttl, stc->ms);
 //		stc->packetreceiv++;
 //	}
 //	else
