@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 14:24:21 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/28 15:56:24 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/28 15:56:44 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void					printfirst(void)
 {
 	t_stc	*stc;
-	char	ip[256];
 
 	stc = singleton(NULL);
 	if (ft_strcmp(stc->ip, "127.0.0.1") == 0)
