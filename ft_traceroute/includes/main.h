@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:55 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/28 10:35:07 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/28 10:41:02 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ typedef struct				s_stc
 	double					allms;
 	double					ms;
 	char					*name;
+	char					*hostname;
 	char					*ip;
 	char					blop[1024];
 	t_addrinfo				hints;
