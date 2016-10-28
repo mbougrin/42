@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/28 10:43:33 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/28 10:46:58 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,12 @@ void					ping(t_addrinfo *addr_info)
 
 static void				initopt(void)
 {
-	char		clienthost[NI_MAXHOST];  //The clienthost will hold the IP address.
+	cMahar		clienthost[NI_MAXHOST];  //The clienthost will hold the IP address.
 	char		clientservice[NI_MAXSERV];
 	t_stc		*stc;
 
+	stc = singleton(NULL);
 	stc->ttl = 0;
-	stc->addr = get_addr(stc->ip);
 	int err = getnameinfo(stc->addr->ai_addr, sizeof(*stc->addr->ai_addr),
 			clienthost, sizeof(clienthost),
 			clientservice, sizeof(clientservice),
@@ -84,10 +84,10 @@ int						main(int ac, char **av)
 	stc->pid = getpid();
 	stc->sd = 0;
 	singleton(stc);
-	initopt();
-	printfirst();
 	initaddr();
 	ipconnect();
+	initopt();
+	printfirst();
 	ping(stc->addr);
 	free(stc);
 	return (0);
