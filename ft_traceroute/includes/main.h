@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:55 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/28 11:33:26 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/28 11:34:48 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@
 # include <arpa/inet.h>
 
 # define PACKET_SIZE 64
-# define NUMBER_PACKET 20
+//# define NUMBER_PACKET 20
 # define WAIT 1
-# define SLEEP 1
+//# define SLEEP 1
 # define BUFFSIZE IP_MAXPACKET
 # define DEFMAXTTL 64
 

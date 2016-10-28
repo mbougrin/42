@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 14:36:52 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/28 11:32:34 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/28 11:35:22 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ t_packet				sendpacket(t_addrinfo *addr_info)
 int test_is_end(t_ip *ip)
 {
 	char			ip_buf[512];
-	t_stc				*stc;
+	t_stc			*stc;
 
 	stc = singleton(NULL);
-	inet_ntop(AF_INET, (void*)&(ip->ip_src.s_addr), ip_buf, BUFSIZE);
-	return (strcmp(opt->ip, ip_buf) == 0);
+	inet_ntop(AF_INET, (void*)&(ip->ip_src.s_addr), ip_buf, BUFFSIZE);
+	return (strcmp(stc->hostname, ip_buf) == 0);
 }
 
 void					recvpacket(struct timeval tend, \
