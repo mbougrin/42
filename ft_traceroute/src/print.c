@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 14:24:21 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/28 10:43:30 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/28 11:42:05 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,35 @@ void					printfirst(void)
 void					print(void)
 {
 	t_stc	*stc;
+	struct hostent	*client;
+	char			ip_buf[512];
+	const char		*client_name;
 
 	stc = singleton(NULL);
 	if (stc->success)
 	{
-		printf("%d bytes from %s: icmp_seq=%d ttl=%d time=%f ms\n",\
-				PACKET_SIZE, stc->ip, stc->count, stc->ttl, stc->ms);
-		stc->packetreceiv++;
+		inet_ntop(AF_INET, (void*)&(stc->stcip->ip_src.s_addr), ip_buf, BUFFSIZE);
+		client = gethostbyaddr((void*)&(stc->stcip->ip_src.s_addr), \
+				sizeof(stc->stcip->ip_src.s_addr), AF_INET);
+		if (client == NULL)
+			client_name = ip_buf;
+		else
+			client_name = client->h_name;
+		printf("%4d %s (%s) %.3f ms\n",
+				stc->ttl, client_name, ip_buf, stc->ms);
 	}
 	else
-		printf("Request timeout from icmp_seq %d\n", stc->count);
+		printf("%4d * * * *\n", opt->ttl);
+
+
+//	if (stc->success)
+//	{
+//		printf("%d bytes from %s: icmp_seq=%d ttl=%d time=%f ms\n",\
+//				PACKET_SIZE, stc->ip, stc->count, stc->ttl, stc->ms);
+//		stc->packetreceiv++;
+//	}
+//	else
+//		printf("Request timeout from icmp_seq %d\n", stc->count);
 }
 /*
 void					firstprint(t_addrinfo *tmp)

@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 14:36:52 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/28 11:36:15 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/28 11:40:54 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void					recvpacket(struct timeval tend, \
 //	if (pkt->icmp_type == ICMP_ECHOREPLY)
 //	{
 		stc->success = 1;
+		stc->stcip = (t_ip*)&packet;
 		print();
 		if (test_is_end((t_ip*)&packet))
 			exit(-1);
