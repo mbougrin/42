@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 14:36:52 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/28 11:40:54 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/28 11:49:59 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,6 @@ void					timeout(void)
 	stc = singleton(NULL);
 	timeout.tv_sec = WAIT;
 	timeout.tv_usec = 0;
-	setsockopt(stc->sd, SOL_SOCKET, SO_RCVTIMEO, (char *)&timeout, \
+	setsockopt(stc->sd, IPPROTO_ICMP, SO_RCVTIMEO, (char *)&timeout, \
 			sizeof(struct timeval));
 }

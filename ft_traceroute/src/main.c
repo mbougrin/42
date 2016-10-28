@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/28 11:44:43 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/28 11:45:54 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ int						main(int ac, char **av)
 	stc->ip = arg(av);
 	stc->pid = getpid();
 	stc->sd = 0;
-	stc->ttl = 0;
 	singleton(stc);
 	initaddr();
 	ipconnect();
