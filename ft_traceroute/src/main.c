@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/28 12:14:17 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/28 15:53:18 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void					ping(t_addrinfo *addr_info)
 
 	stc = singleton(NULL);
 	stc->len = sizeof(r_addr);
+	stc->count = 1;
 	while (stc->ttl < DEFMAXTTL)
 	{
 		++stc->ttl;
