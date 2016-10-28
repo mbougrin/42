@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 13:59:40 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/27 11:55:59 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/28 11:25:11 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 void					socketconfig(void)
 {
 	t_stc			*stc;
-	const int		val = 255;
 
 	stc = singleton(NULL);
-	stc->sd = socket(PF_INET, SOCK_RAW, IPPROTO_ICMP);
+	stc->sd = socket(AF_INET, SOCK_RAW, IPPROTO_ICMP);
 	if (stc->sd < 0)
 		socketerror();
-	if (setsockopt(stc->sd, SOL_IP, IP_TTL, &val, sizeof(val)) != 0)
+	timeout();
+	if (setsockopt(stc->sd, IPPROTO_ICMP, IP_TTL, &stc->ttl, sizeof(stc->ttl)) != 0)
 		setsockopterror();
 }
 

@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/28 10:47:18 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/28 11:30:10 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ static void				initprintfirst(void)
 	signal(SIGINT, sig_handler);
 }
 */
+
+static void			
+
 void					ping(t_addrinfo *addr_info)
 {
 	t_stc				*stc;
@@ -32,15 +35,18 @@ void					ping(t_addrinfo *addr_info)
 	struct timeval		tend;
 
 	stc = singleton(NULL);
-	socketconfig();
+	stc->len = sizeof(r_addr);
+//	socketconfig();
 //	initprintfirst();
-	while (stc->count < NUMBER_PACKET)
+//	while (stc->count < NUMBER_PACKET)
+	while (stc->ttl < DEFMAXTTL)
 	{
-		stc->len = sizeof(r_addr);
+		++stc->ttl;
+		socketconfig();
+		gettimeofday(&tstart, NULL);
 		packet = sendpacket(addr_info);
 	//	clock_gettime(CLOCK_MONOTONIC, &tstart);
-		gettimeofday(&tstart, NULL);
-		timeout();
+//		timeout();
 		stc->ms = 0.0;
 		stc->success = 0;
 		if (recvfrom(stc->sd, &packet, sizeof(packet), 0, \
@@ -51,6 +57,7 @@ void					ping(t_addrinfo *addr_info)
 		sleep(SLEEP);
 		stc->count++;
 	}
+	close(stc->sd);
 }
 
 static void				initopt(void)
