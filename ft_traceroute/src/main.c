@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/28 11:57:46 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/28 12:02:29 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,18 +45,17 @@ static void				initopt(void)
 	char		clienthost[NI_MAXHOST];
 	char		clientservice[NI_MAXSERV];
 	t_stc		*stc;
+	int			err;
 
 	stc = singleton(NULL);
 	stc->ttl = 0;
-	int err = getnameinfo(stc->addr->ai_addr, sizeof(*stc->addr->ai_addr),
-			clienthost, sizeof(clienthost),
-			clientservice, sizeof(clientservice),
+	err = getnameinfo(stc->addr->ai_addr, sizeof(*stc->addr->ai_addr), \
+			clienthost, sizeof(clienthost), \
+			clientservice, sizeof(clientservice), \
 			NI_NUMERICHOST|NI_NUMERICSERV);
-	printf("init_opt clienthost %s name %s\n", clienthost, stc->ip);
-	stc->hostname = strdup(clienthost);
+	stc->hostname = ft_strdup(clienthost);
 	if (err != 0)
 		stc->hostname = strdup(stc->ip);
-	printf("opt->ip %s\n", stc->hostname);
 }
 
 int						main(int ac, char **av)

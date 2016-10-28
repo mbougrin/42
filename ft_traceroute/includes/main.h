@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:55 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/28 11:59:25 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/28 12:04:21 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 # define PACKET_SIZE 64
 # define WAIT 1
 # define BUFFSIZE IP_MAXPACKET
-# define DEFMAXTTL 64
+# define DEFMAXTTL 30
 
 void						initaddr(void);
 unsigned short				checksum(void *b, int len);
