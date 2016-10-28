@@ -20,7 +20,7 @@ DIRSRC = src/
 OBJ = 	$(SRC:.c=.o)
 SRC = 	$(DIRSRC)main.c \
 		$(DIRSRC)error.c \
-		$(DIRSRC)ft_ping.c \
+		$(DIRSRC)ft_traceroute.c \
 		$(DIRSRC)packet.c \
 		$(DIRSRC)parse.c \
 		$(DIRSRC)print.c
