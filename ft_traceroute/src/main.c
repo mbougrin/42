@@ -6,13 +6,13 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/28 15:53:18 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/28 16:03:20 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <main.h>
 
-void					ping(t_addrinfo *addr_info)
+void					traceroute(t_addrinfo *addr_info)
 {
 	t_stc				*stc;
 	t_sockaddr_in		r_addr;
@@ -74,7 +74,7 @@ int						main(int ac, char **av)
 	ipconnect();
 	initopt();
 	printfirst();
-	ping(stc->addr);
+	traceroute(stc->addr);
 	free(stc);
 	return (0);
 }
