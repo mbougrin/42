@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 11:02:44 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/10/28 10:32:46 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/10/28 10:35:20 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ static void				initopt(void)
 	t_stc		*stc;
 
 	opt->ttl = 0;
-	opt->addr_info = get_addr(name);
+	printf("%s ip name av", stc->ip);
+	opt->addr_info = get_addr(stc->ip);
 	opt->name = name;
 	int err = getnameinfo(opt->addr_info->ai_addr, sizeof(*opt->addr_info->ai_addr),
 			clienthost, sizeof(clienthost),
@@ -69,7 +70,7 @@ static void				initopt(void)
 			NI_NUMERICHOST|NI_NUMERICSERV);
 	printf("init_opt clienthost %s name %s\n", clienthost, name);
 	opt->ip = strdup(clienthost);
-	if(err != 0)
+	if (err != 0)
 		opt->ip = strdup(name);
 	printf("opt->ip %s\n", opt->ip);
 	stc->opt = opt;
@@ -87,6 +88,8 @@ int						main(int ac, char **av)
 	stc->pid = getpid();
 	stc->sd = 0;
 	singleton(stc);
+	initopt();
+	printfirst();
 	initaddr();
 	ipconnect();
 	ping(stc->addr);
