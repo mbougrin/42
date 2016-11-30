@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 08:33:07 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/11/30 17:38:03 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/11/30 17:39:48 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int						main(int ac, char **av)
 	{
 int						fd;
 struct flock 			lock;
-	if ((fd = open("/var/lock/matt_daemon.lock", O_RDWR | O_CREAT, 0644)) < 0)
+	if ((fd = open("/var/lock/matt_daemon.lock", O_WRONLY | O_CREAT, 0644)) < 0)
 	{
 		std::cout << "file is locked" << std::endl;
 		exit(-1);
