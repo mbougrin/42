@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 09:10:15 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/11/30 13:27:11 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/11/30 13:35:34 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ Tintin_reporter::~Tintin_reporter(void)
 {
 	char			str[128];
 
+	bzero(str, 128);
 	strcat(str, LOCKPATH);
 	strcat(str, LOCKNAME);
 	if (remove(str) != 0)
@@ -50,7 +51,6 @@ Tintin_reporter::~Tintin_reporter(void)
 		std::cout << "remove error" << std::endl;
 		exit(-1);
 	}
-	bzero(str, 128);
 	return ;
 }
 
@@ -70,8 +70,10 @@ void				Tintin_reporter::writelog(string filename, string info, string str)
 	tm 			*ltm = localtime(&now);
 	char		ptr[128];
 
+	bzero(ptr, 128);
 	strcat(ptr, LOGPATH);
 	strcat(ptr, filename.c_str());
+	std::cout << ptr << std::endl;
 	fs.open(ptr, fstream::out | fstream::app);
 	if (!fs.is_open())
 	{
@@ -91,5 +93,4 @@ void				Tintin_reporter::writelog(string filename, string info, string str)
 			<< "] [ " << info << " ] - " << NAME << ": " << str;
 	}
 	fs.close();
-	bzero(ptr, 128);
 }
