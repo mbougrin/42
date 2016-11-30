@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 09:10:13 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/11/30 13:22:50 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/11/30 13:24:33 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <string.h>
+# include <stdlib.h>
 # include <stdio.h>
 
 //# define LOGPATH  "/var/log/matt_daemon/"
