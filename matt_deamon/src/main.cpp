@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 08:33:07 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/11/30 16:59:06 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/11/30 17:29:55 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,40 @@ static void				background(void)
 	kill(parent, SIGUSR1);
 }
 
+int						fd;
+
+static void				runlock(void)
+{
+	if ((fd = open("/var/lock/matt_daemon.lock", O_RDWR | O_CREAT, 0644)) < 0)
+	{
+		std::cout << "file is locked" << std::endl;
+		exit(-1);
+	}
+	if (flock(fd, LOCK_EX) == -1)
+	{
+		std::cout << "file is locked" << std::endl;
+		exit(-1);
+	}
+}
+static void				exitlock(void)
+{
+	if (flock(fd, LOCK_UN) == -1)
+	{
+		std::cout << "flock error" << std::endl;
+		exit(-1);
+	}
+	close(fd);
+}
+
 int						main(int ac, char **av)
 {
 	if (ac == 1)
 	{
+		runlock();
 		background();
 		ClassSocket		socket = ClassSocket(4242);
 		socket.mainloop();
+		exitlock();
 	}
 	else if (ac != 3)
 		std::cout << av[0] << " -p port" << std::endl;
