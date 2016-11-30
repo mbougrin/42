@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 09:10:15 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/11/30 13:35:34 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/11/30 13:41:11 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ Tintin_reporter::Tintin_reporter(void)
 	fstream			fs;
 	char			str[128];
 
+	bzero(str, 128);
 	if (stat(LOGPATH, &st) == -1)
 	   	mkdir(LOGPATH, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
 	if (stat(LOCKPATH, &st) == -1)
@@ -25,7 +26,6 @@ Tintin_reporter::Tintin_reporter(void)
 	strcat(str, LOCKPATH);
 	strcat(str, LOCKNAME);
 	fs.open(str, fstream::out);
-	bzero(str, 128);
 	fs.close();
 	return ;
 }
