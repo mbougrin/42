@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 09:10:15 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/11/30 13:25:51 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/11/30 13:27:11 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void				Tintin_reporter::writelog(string filename, string info, string str)
 	char		ptr[128];
 
 	strcat(ptr, LOGPATH);
-	strcat(ptr, filename);
+	strcat(ptr, filename.c_str());
 	fs.open(ptr, fstream::out | fstream::app);
 	if (!fs.is_open())
 	{
