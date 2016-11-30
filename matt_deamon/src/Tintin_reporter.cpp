@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 09:10:15 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/11/30 16:31:10 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/11/30 16:32:40 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,17 @@ Tintin_reporter::Tintin_reporter(void)
 	strcat(str, LOCKPATH);
 	strcat(str, LOCKNAME);
 	fs.open(str, fstream::out);
+	fs.close();
 	if (open(str, O_RDWR | O_CREAT, 0640) < 0)
 	{
 		std::cout << "file is locked" << std::endl;
 		exit(-1);
 	}
-	if (!fs.is_open()) 
-	{
-		std::cout << "open error" <<std::endl;
-		exit(-1);
-	}
-	fs.close();
+//	if (!fs.is_open()) 
+//	{
+//		std::cout << "open error" <<std::endl;
+//		exit(-1);
+//	}
 	return ;
 }
 
