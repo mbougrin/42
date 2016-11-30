@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 09:10:13 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/11/30 16:37:45 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/11/30 16:44:41 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <sys/stat.h>
 # include <string.h>
 # include <stdlib.h>
+# include <unistd.h>
 # include <stdio.h>
 # include <fcntl.h>
 # include <sys/file.h>
@@ -43,6 +44,8 @@ class				Tintin_reporter
 		~Tintin_reporter();
 
 		void		writelog(string filename, string info, string str);
+	private:
+		int			_fd;
 };
 
 #endif
