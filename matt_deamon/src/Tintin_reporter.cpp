@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 09:10:15 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/11/30 16:50:59 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/11/30 17:22:53 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,14 @@ Tintin_reporter::Tintin_reporter(void)
 		std::cout << "file is locked" << std::endl;
 		exit(-1);
 	}
-	memset (&_lock, 0, sizeof(_lock));
-	_lock.l_type = F_WRLCK;
-	fcntl (_fd, F_SETLKW, &_lock);
+	if (flock(_fd, LOCK_EX) == -1)
+	{
+		std::cout << "file is locked" << std::endl;
+		exit(-1);
+	}
+//	memset (&_lock, 0, sizeof(_lock));
+//	_lock.l_type = F_WRLCK;
+//	fcntl (_fd, F_SETLKW, &_lock);
 //	if (flock(_fd, 2) == -1)
 //	{
 //		std::cout << "flock error" << std::endl;
@@ -61,8 +66,13 @@ Tintin_reporter::~Tintin_reporter(void)
 {
 	char			str[128];
 
-	_lock.l_type = F_UNLCK;
-	fcntl (_fd, F_SETLKW, &_lock);
+//	_lock.l_type = F_UNLCK;
+//	fcntl (_fd, F_SETLKW, &_lock);
+	 if (flock(_fd, LOCK_UN) == -1)
+	 {
+		std::cout << "flock error" << std::endl;
+		exit(-1);
+	 }
 	close(_fd);
 	bzero(str, 128);
 	strcat(str, LOCKPATH);

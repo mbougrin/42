@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 08:33:07 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/11/30 16:24:20 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/11/30 16:59:06 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ static void				background(void)
 
 	pid_t	parent;
 
-	signal (SIGCHLD, exit);
-	signal (SIGCHLD, exit);
-	signal (SIGCHLD, exit);
+	signal(SIGCHLD, exit);
+	signal(SIGUSR1, exit);
+	signal(SIGALRM, exit);
 	if (getppid() == 1)
 		return ;
 	child = fork();
