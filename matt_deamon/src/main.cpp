@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 08:33:07 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/11/30 16:15:56 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/11/30 16:24:20 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,7 @@ static void				background(void)
 	signal (SIGCHLD, exit);
 	signal (SIGCHLD, exit);
 	if (getppid() == 1)
-	{
 		return ;
-	}
 	child = fork();
 	if (child < 0)
 		exit(1);
@@ -47,7 +45,6 @@ static void				background(void)
 	freopen( "/dev/null", "r", stdin);
 	freopen( "/dev/null", "w", stdout);
 	freopen( "/dev/null", "w", stderr);
-
 	kill(parent, SIGUSR1);
 }
 
@@ -67,6 +64,7 @@ int						main(int ac, char **av)
 		{
 			if (strcmp(av[i], "-p") == 0 && av[i + 1] != NULL)
 			{
+				background();
 				ClassSocket		socket = ClassSocket(atoi(av[i + 1]));
 				socket.mainloop();
 				break ;

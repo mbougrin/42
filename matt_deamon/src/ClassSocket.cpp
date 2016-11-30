@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 10:34:47 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/11/30 13:33:58 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/11/30 16:24:47 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,103 +183,6 @@ void				ClassSocket::createsocket(void)
 {
 	struct rlimit		rlp;
 	struct sockaddr_in	sin;
-//	pid_t 				child;
-	//int					status;	
-
-/*	if (setpgid(getpid(), getpid() < 0))
-	{
-		std::cout << "setpgid error" << std::endl;
-		exit(-1);
-	}
-	if (tcsetpgrp(STDIN_FILENO, getpgrp()) < 0)
-	{
-		std::cout << "tcsetpgrp error" << std::endl;
-		exit(-1);
-	}
-	if ((child = fork()) < 0)
-	{
-		std::cout << "fork error" << std::endl;
-		exit(-1);
-	}
-	if (child == 0)
-	{
-		signal(SIGQUIT, SIG_DFL);
-		signal(SIGTSTP, SIG_DFL);
-		signal(SIGTTIN, SIG_DFL);
-		signal(SIGTTOU, SIG_DFL);
-		signal(SIGCHLD, SIG_DFL);
-		signal(SIGINT, SIG_DFL);
-		if (setpgid(0, 0) < 0)
-		{
-			std::cout << "setpgid error" << std::endl;
-			exit(-1);
-		}
-		if (tcsetpgrp(STDIN_FILENO, getpgrp()) < 0)
-		{
-			std::cout << "tcsetpgrp error" << std::endl;
-			exit(-1);
-		}
-		exit(2);
-	}
-	else
-	{
-		if (setpgid(child, child) < 0)
-		{
-			std::cout << "setpgid error" << std::endl;
-			exit(-1);
-		}
-	}
-	if (tcsetpgrp(STDIN_FILENO, getpgid(child)) < 0)
-	{
-		std::cout << "tcsetpgrp error" << std::endl;
-		exit(-1);
-	}
-	if (kill(child, SIGCONT) < 0)
-	{
-		std::cout << "kill error" << std::endl;
-		exit(-1);
-	}
-	wait(&status);
-	if (tcsetpgrp(STDIN_FILENO, getpgrp()) < 0)
-	{
-		std::cout << "tcsetpgrp error" << std::endl;
-		exit(-1);
-	}*/
-/*	pid_t	parent;
-
-	signal (SIGCHLD, exit);
-	signal (SIGCHLD, exit);
-	signal (SIGCHLD, exit);
-	if (getppid() == 1)
-	{
-		return ;
-	}
-	child = fork();
-	if (child < 0)
-		exit(1);
-	if (child > 0)
-		exit(0);
-	parent = getppid();
-	signal(SIGCHLD, SIG_DFL);
-	signal(SIGTSTP, SIG_IGN);
-	signal(SIGTTOU, SIG_IGN);
-	signal(SIGTTIN, SIG_IGN);
-	signal(SIGHUP, SIG_IGN);
-	signal(SIGTERM, SIG_DFL);
-	umask(0);
-	pid_t sid = setsid();
-	if (sid < 0)
-		exit(1);
-	if (chdir("/") < 0)
-		exit(1);
-	freopen( "/dev/null", "r", stdin);
-	freopen( "/dev/null", "w", stdout);
-	freopen( "/dev/null", "w", stderr);
-
-	kill(parent, SIGUSR1);*/
-//	if (WIFSTOPPED(status))
-
-
 
 	_log.writelog(FILENAME, "INFO", "Started.");
 	if (getrlimit(RLIMIT_NOFILE, &rlp) == -1)
