@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 08:33:07 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/11/30 17:48:00 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/11/30 17:53:37 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void				background(void)
 int						fd;
 static void				runlock(void)
 {
-	if ((fd = open("/var/lock/matt_daemon.lock", O_WRONLY | O_CREAT, 0644)) < 0)
+	if ((fd = open("matt_daemon.lock", O_WRONLY | O_CREAT, 0644)) < 0)
 	{
 		std::cout << "file is locked" << std::endl;
 		exit(-1);
