@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 08:33:07 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/11/30 17:53:37 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/11/30 17:56:25 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static void				runlock(void)
 //	memset (&lock, 0, sizeof(lock));
 //	lock.l_type = F_WRLCK;
 //	fcntl (fd, F_SETLKW, &lock);
-	if (flock(fd, LOCK_SH) == -1)
+	if (flock(fd, LOCK_EX) == -1)
 	{
 		std::cout << "file is locked" << std::endl;
 		exit(-1);
