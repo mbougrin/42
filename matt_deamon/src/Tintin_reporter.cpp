@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 09:10:15 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/11/30 16:32:40 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/11/30 16:39:50 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 Tintin_reporter::Tintin_reporter(void)
 {
 	struct stat		st;
-	fstream			fs;
+//	fstream			fs;
 	char			str[128];
+	int				fd;
 
 	bzero(str, 128);
 	if (stat(LOGPATH, &st) == -1)
@@ -25,11 +26,16 @@ Tintin_reporter::Tintin_reporter(void)
 	   	mkdir(LOCKPATH, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
 	strcat(str, LOCKPATH);
 	strcat(str, LOCKNAME);
-	fs.open(str, fstream::out);
-	fs.close();
-	if (open(str, O_RDWR | O_CREAT, 0640) < 0)
+//	fs.open(str, fstream::out);
+//	fs.close();
+	if ((fd = open(str, O_RDWR | O_CREAT, 0644)) < 0)
 	{
 		std::cout << "file is locked" << std::endl;
+		exit(-1);
+	}
+	if (flock(fd, LOCK_SH) == -1)
+	{
+		std::cout << "flock error" << std::endl;
 		exit(-1);
 	}
 //	if (!fs.is_open()) 
