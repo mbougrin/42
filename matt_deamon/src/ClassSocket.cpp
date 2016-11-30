@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 10:34:47 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/11/30 13:15:50 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/11/30 13:29:53 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,7 +183,7 @@ void				ClassSocket::createsocket(void)
 {
 	struct rlimit		rlp;
 	struct sockaddr_in	sin;
-	pid_t 				child;
+//	pid_t 				child;
 	//int					status;	
 
 /*	if (setpgid(getpid(), getpid() < 0))
@@ -245,7 +245,7 @@ void				ClassSocket::createsocket(void)
 		std::cout << "tcsetpgrp error" << std::endl;
 		exit(-1);
 	}*/
-	pid_t	parent;
+/*	pid_t	parent;
 
 	signal (SIGCHLD, exit);
 	signal (SIGCHLD, exit);
@@ -276,7 +276,7 @@ void				ClassSocket::createsocket(void)
 	freopen( "/dev/null", "w", stdout);
 	freopen( "/dev/null", "w", stderr);
 
-	kill(parent, SIGUSR1);
+	kill(parent, SIGUSR1);*/
 //	if (WIFSTOPPED(status))
 
 
