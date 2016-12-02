@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 08:33:07 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/02 14:47:22 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/02 14:48:57 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void				background(void)
 {
 	pid_t 				child;
 
-	pid_t	parent;
+//	pid_t	parent;
 
 //	signal(SIGCHLD, exit);
 //	signal(SIGUSR1, exit);
@@ -29,23 +29,23 @@ static void				background(void)
 		exit(1);
 	if (child > 0)
 		exit(0);
-	parent = getppid();
+//	parent = getppid();
 //	signal(SIGCHLD, SIG_DFL);
 //	signal(SIGTSTP, SIG_IGN);
 //	signal(SIGTTOU, SIG_IGN);
 //	signal(SIGTTIN, SIG_IGN);
 //	signal(SIGHUP, SIG_IGN);
 //	signal(SIGTERM, SIG_DFL);
-	umask(0);
-	pid_t sid = setsid();
-	if (sid < 0)
-		exit(1);
-	if (chdir("/") < 0)
-		exit(1);
+//	umask(0);
+//	pid_t sid = setsid();
+//	if (sid < 0)
+//		exit(1);
+//	if (chdir("/") < 0)
+//		exit(1);
 	freopen( "/dev/null", "r", stdin);
 	freopen( "/dev/null", "w", stdout);
 	freopen( "/dev/null", "w", stderr);
-	kill(parent, SIGUSR1);
+//	kill(parent, SIGUSR1);
 }
 
 void					my_signal(void)
