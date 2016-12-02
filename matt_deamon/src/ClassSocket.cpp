@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 10:34:47 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/02 14:26:41 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/02 17:01:12 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,6 @@ void				ClassSocket::clientread(int cs)
 		ClassSocket::cleanclient(&_fds[cs]);
 		close(cs);
 		_client--;
-		std::cout << "leave client " << _client << "/" << MAX_USER << std::endl;
 	}
 	else
 	{
@@ -159,7 +158,6 @@ void				ClassSocket::clientread(int cs)
 			exit(-1);
 		}
 		_log.writelog("LOG", _fds[cs].buf_read);
-		std::cout << _fds[cs].buf_read;
 		bzero(_fds[cs].buf_read, 1024);
 	}
 }
@@ -179,20 +177,23 @@ void				ClassSocket::acceptclient(int i)
 	csin_len = sizeof(csin);
 	if ((cs = accept(_sd, (struct sockaddr *)&csin, &csin_len)) == -1)
 	{
-		std::cout << "accept error" << std::endl;
+		_log.writelog("LOG", "accept error.");
 		exit(-1);
 	}
 	ClassSocket::cleanclient(&_fds[cs]);
 	if (_client >= MAX_USER)
 	{
 		close(cs);
-		std::cout << "full client " << _client << "/" << MAX_USER << std::endl;
+		string str = "full client ";
+		str += _client;
+   		str += "/";
+		str += MAX_USER;
+		_log.writelog("LOG", str);
 		return ;
 	}
 	_fds[cs].type = FD_CLIENT;
 	_fds[cs].fct_read = &ClassSocket::clientread;
 	_fds[cs].fct_write = &ClassSocket::clientwrite;
-	std::cout << "new client" << std::endl;
 	_client++;
 }
 
@@ -204,14 +205,14 @@ void				ClassSocket::createsocket(void)
 	_log.writelog("INFO", "Creating server.");
 	if (getrlimit(RLIMIT_NOFILE, &rlp) == -1)
 	{
-		std::cout << "getrlimit error" << std::endl;
+		_log.writelog("LOG", "getrlimit error.");
 		exit(-1);
 	}
 	_maxsd = rlp.rlim_cur;
 	_fds = (struct s_fds *)malloc(sizeof(struct s_fds) * _maxsd);
 	if ((_sd = socket(AF_INET, SOCK_STREAM, 0)) == -1)
 	{
-		std::cout << "socket error" << std::endl;
+		_log.writelog("LOG", "socket error.");
 		exit(-1);
 	}
 	sin.sin_port = htons(_port);

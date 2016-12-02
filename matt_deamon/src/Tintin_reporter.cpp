@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 09:10:15 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/02 14:57:20 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/02 16:58:45 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,25 @@ Tintin_reporter::Tintin_reporter(void)
 	writelog("INFO", "Started.");
 	if ((_fd = open(str, O_RDONLY | O_CREAT)) < 0)
 	{
-		std::cout << "open error" << std::endl;
+		writelog("LOG", "open error");
 		exit(-1);
 	}	
 	if (flock(_fd, LOCK_EX | LOCK_NB))
 	{
-		std::cout << "file is locked" << std::endl;
+		writelog("LOG", "file is locked");
 		exit(-1);
 	}
-			pid_t 				child;
 
-								child = fork();
-									if (child < 0)
-											exit(1);
-												if (child > 0)
-														exit(0);
+	pid_t 				child;
+
+	child = fork();
+	if (child < 0)
+		exit(1);
+	if (child > 0)
+		exit(0);
+	freopen( "/dev/null", "r", stdin);
+	freopen( "/dev/null", "w", stdout);
+	freopen( "/dev/null", "w", stderr);
 	return ;
 }
 
@@ -66,7 +70,7 @@ Tintin_reporter::~Tintin_reporter(void)
 	writelog("INFO", "Quitting.");
 	if (remove(str) != 0)
 	{
-		std::cout << "remove error" << std::endl;
+		writelog("LOG", "remove error");
 		exit(-1);
 	}
 	return ;
