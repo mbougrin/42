@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 09:10:15 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/02 13:05:34 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/02 13:08:47 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,18 @@ Tintin_reporter::Tintin_reporter(void)
 //		exit(-1);
 //	}
 
-	if (is_locked_socket(_fd) != 0)
+	if (is_locked_socket(_fd) == 0)
+	{
+
+	memset (&_lock, 0, sizeof(_lock));
+	_lock.l_type = F_RDLCK;
+	_lock.l_start = 0;
+	_lock.l_whence = SEEK_SET;
+	_lock.l_len = 0;
+//	_lock.l_pid = getpid();
+	fcntl (_fd, F_GETLK, &_lock);
+	}
+	else
 	{
 		std::cout << "file is locked" << std::endl;
 		exit(-1);
@@ -67,13 +78,13 @@ Tintin_reporter::Tintin_reporter(void)
 //		close(_fd);
 //		exit(-1);
 //	}
-	memset (&_lock, 0, sizeof(_lock));
-	_lock.l_type = F_RDLCK;
-	_lock.l_start = 0;
-	_lock.l_whence = SEEK_SET;
-	_lock.l_len = 0;
+//	memset (&_lock, 0, sizeof(_lock));
+//	_lock.l_type = F_RDLCK;
+//	_lock.l_start = 0;
+//	_lock.l_whence = SEEK_SET;
+//	_lock.l_len = 0;
 //	_lock.l_pid = getpid();
-	fcntl (_fd, F_GETLK, &_lock);
+//	fcntl (_fd, F_GETLK, &_lock);
 	return ;
 }
 
