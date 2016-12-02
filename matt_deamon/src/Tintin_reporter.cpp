@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 09:10:15 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/02 16:58:45 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/02 17:10:58 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ Tintin_reporter::Tintin_reporter(void)
 	writelog("INFO", "Started.");
 	if ((_fd = open(str, O_RDONLY | O_CREAT)) < 0)
 	{
-		writelog("LOG", "open error");
+		writelog("ERROR", "Error open fail.");
 		exit(-1);
 	}	
 	if (flock(_fd, LOCK_EX | LOCK_NB))
 	{
-		writelog("LOG", "file is locked");
+		writelog("ERROR", "Error file is locked.");
 		exit(-1);
 	}
 
@@ -67,12 +67,12 @@ Tintin_reporter::~Tintin_reporter(void)
 	bzero(str, 128);
 	strcat(str, LOCKPATH);
 	strcat(str, LOCKNAME);
-	writelog("INFO", "Quitting.");
 	if (remove(str) != 0)
 	{
-		writelog("LOG", "remove error");
+		writelog("ERROR", "Error remove fail.");
 		exit(-1);
 	}
+	writelog("INFO", "Quitting.");
 	return ;
 }
 
@@ -138,7 +138,7 @@ void 					Tintin_reporter::sighandler(int nb)
 	fs.open(ptr, fstream::out | fstream::app);
 	if (!fs.is_open())
 	{
-		std::cout << "open error" <<std::endl;
+		writelog("ERROR", "Error open fail.")
 		exit(-1);
 	}
 	fs << "[" << ltm->tm_mday << "/" << ltm->tm_mon << "/" << 1900 + ltm->tm_year
@@ -161,7 +161,7 @@ void				Tintin_reporter::writelog(string info, string str)
 	fs.open(ptr, fstream::out | fstream::app);
 	if (!fs.is_open())
 	{
-		std::cout << "open error" <<std::endl;
+		writelog("ERROR", "Error open fail.")
 		exit(-1);
 	}
 	if (info == "INFO")

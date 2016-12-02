@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 10:34:47 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/02 17:01:12 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/02 17:12:34 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,18 +177,18 @@ void				ClassSocket::acceptclient(int i)
 	csin_len = sizeof(csin);
 	if ((cs = accept(_sd, (struct sockaddr *)&csin, &csin_len)) == -1)
 	{
-		_log.writelog("LOG", "accept error.");
+		_log.writelog("ERROR", "Error accept fail.");
 		exit(-1);
 	}
 	ClassSocket::cleanclient(&_fds[cs]);
 	if (_client >= MAX_USER)
 	{
 		close(cs);
-		string str = "full client ";
+		string str = "Error full client ";
 		str += _client;
    		str += "/";
 		str += MAX_USER;
-		_log.writelog("LOG", str);
+		_log.writelog("ERROR", str);
 		return ;
 	}
 	_fds[cs].type = FD_CLIENT;
@@ -205,14 +205,14 @@ void				ClassSocket::createsocket(void)
 	_log.writelog("INFO", "Creating server.");
 	if (getrlimit(RLIMIT_NOFILE, &rlp) == -1)
 	{
-		_log.writelog("LOG", "getrlimit error.");
+		_log.writelog("ERROR", "Error getrlimit fail.");
 		exit(-1);
 	}
 	_maxsd = rlp.rlim_cur;
 	_fds = (struct s_fds *)malloc(sizeof(struct s_fds) * _maxsd);
 	if ((_sd = socket(AF_INET, SOCK_STREAM, 0)) == -1)
 	{
-		_log.writelog("LOG", "socket error.");
+		_log.writelog("ERROR", "Error socket fail.");
 		exit(-1);
 	}
 	sin.sin_port = htons(_port);
