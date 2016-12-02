@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 09:10:15 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/02 11:08:48 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/02 11:12:10 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,30 +28,24 @@ Tintin_reporter::Tintin_reporter(void)
 	writelog("INFO", "Started.");
 //	fs.open(str, fstream::out);
 //	fs.close();
-	if ((_fd = open(str, O_RDWR | O_CREAT, 0666)) == -1)
+	if ((_fd = open(str, O_WRONLY | O_CREAT, 0666)) == -1)
 	{
 		std::cout << "file is locked" << std::endl;
 		exit(-1);
 	}
-	if (flock(_fd, LOCK_SH | LOCK_NB) < 0)
-	{
-		std::cout << "file is locked" << std::endl;
-		close(_fd);
-		exit(-1);
-	}
-//	memset (&_lock, 0, sizeof(_lock));
-//	_lock.l_type = F_WRLCK;
-//	fcntl (_fd, F_SETLKW, &_lock);
-//	if (flock(_fd, 2) == -1)
+//	if (flock(_fd, LOCK_SH | LOCK_NB) < 0)
 //	{
-//		std::cout << "flock error" << std::endl;
+//		std::cout << "file is locked" << std::endl;
+//		close(_fd);
 //		exit(-1);
 //	}
-//	if (!fs.is_open()) 
-//	{
-//		std::cout << "open error" <<std::endl;
-//		exit(-1);
-//	}
+	memset (&_lock, 0, sizeof(_lock));
+	_lock.l_type = F_WRLCK;
+	_lock.l_start = 0;
+	_lock.l_whence = SEEK_SET;
+	_lock.l_len = 0;
+	_lock.l_pid = getpid();
+	fcntl (_fd, F_SETLKW, &_lock);
 	return ;
 }
 
@@ -68,13 +62,13 @@ Tintin_reporter::~Tintin_reporter(void)
 {
 	char			str[128];
 
-//	_lock.l_type = F_UNLCK;
-//	fcntl (_fd, F_SETLKW, &_lock);
-	 if (flock(_fd, LOCK_UN) == -1)
-	 {
-		std::cout << "flock error" << std::endl;
-		exit(-1);
-	 }
+	_lock.l_type = F_UNLCK;
+	fcntl (_fd, F_SETLKW, &_lock);
+//	 if (flock(_fd, LOCK_UN) == -1)
+//	 {
+//		std::cout << "flock error" << std::endl;
+//		exit(-1);
+//	 }
 	close(_fd);
 	bzero(str, 128);
 	strcat(str, LOCKPATH);
