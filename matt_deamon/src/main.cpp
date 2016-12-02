@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 08:33:07 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/11/30 17:56:25 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/02 10:28:57 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ static void				background(void)
 
 
 int						fd;
+
 static void				runlock(void)
 {
 	if ((fd = open("matt_daemon.lock", O_WRONLY | O_CREAT, 0644)) < 0)
@@ -82,11 +83,11 @@ int						main(int ac, char **av)
 {
 	if (ac == 1)
 	{
-		runlock();
+//		runlock();
 		background();
 		ClassSocket		socket = ClassSocket(4242);
 		socket.mainloop();
-		exitlock();
+//		exitlock();
 	}
 	else if (ac != 3)
 		std::cout << av[0] << " -p port" << std::endl;
