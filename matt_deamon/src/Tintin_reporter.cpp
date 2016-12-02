@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 09:10:15 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/02 11:14:55 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/02 11:18:26 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,8 @@ Tintin_reporter::Tintin_reporter(void)
 	writelog("INFO", "Started.");
 //	fs.open(str, fstream::out);
 //	fs.close();
-	if ((_fd = open(str, O_WRONLY | O_CREAT, 0666)) == -1)
-	{
-		std::cout << "file is locked" << std::endl;
-		exit(-1);
-	}
 	close(_fd);
-	if ((_fd = open(str, O_WRONLY)) == -1)
+	if ((_fd = open(str, O_RDONLY | O_CREAT, 0666)) == -1)
 	{
 		std::cout << "file is locked" << std::endl;
 		exit(-1);
@@ -46,12 +41,12 @@ Tintin_reporter::Tintin_reporter(void)
 //		exit(-1);
 //	}
 	memset (&_lock, 0, sizeof(_lock));
-	_lock.l_type = F_WRLCK;
+	_lock.l_type = F_RDLCK;
 	_lock.l_start = 0;
 	_lock.l_whence = SEEK_SET;
 	_lock.l_len = 0;
 	_lock.l_pid = getpid();
-	fcntl (_fd, F_SETLKW, &_lock);
+	fcntl (_fd, F_GETLK, &_lock);
 	return ;
 }
 
