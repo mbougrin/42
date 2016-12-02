@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 09:10:13 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/02 09:57:42 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/02 10:19:24 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,12 @@
 # include <sys/file.h>
  
 # define LOGPATH  "/var/log/matt_daemon/"
-# define LOCKPATH "/var/lock/"
+//# define LOCKPATH "/var/lock/"
+# define LOCKPATH "./"
 # define NAME "Matt_deamon"
 # define LOCKNAME "matt_daemon.lock"
 
-# define FILENAME "matt_deamon.log"
+# define FILENAME "matt_daemon.log"
 
 using namespace std; 
 
