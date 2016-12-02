@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 09:10:15 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/02 12:02:28 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/02 12:04:26 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ Tintin_reporter::Tintin_reporter(void)
 	writelog("INFO", "Started.");
 //	fs.open(str, fstream::out);
 //	fs.close();
-	close(_fd);
+//	close(_fd);
 	if ((_fd = open(str, O_RDONLY | O_CREAT, 0666)) == -1)
 	{
 		std::cout << "open error" << std::endl;
