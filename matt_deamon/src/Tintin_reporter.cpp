@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 09:10:15 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/02 17:10:58 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/02 17:14:20 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,10 @@ void 					Tintin_reporter::sighandler(int nb)
 	fs.open(ptr, fstream::out | fstream::app);
 	if (!fs.is_open())
 	{
-		writelog("ERROR", "Error open fail.")
+		fs << "[" << ltm->tm_mday << "/" << ltm->tm_mon << "/" << 1900 + ltm->tm_year
+			<< "-" << ltm->tm_hour << ":" << ltm->tm_min << ":" << ltm->tm_sec
+			<< "] [ " << "ERROR" << " ] - " << NAME << ": " << "Error open fail." << "\n";
+		fs.close();
 		exit(-1);
 	}
 	fs << "[" << ltm->tm_mday << "/" << ltm->tm_mon << "/" << 1900 + ltm->tm_year
@@ -161,7 +164,7 @@ void				Tintin_reporter::writelog(string info, string str)
 	fs.open(ptr, fstream::out | fstream::app);
 	if (!fs.is_open())
 	{
-		writelog("ERROR", "Error open fail.")
+		writelog("ERROR", "Error open fail.");
 		exit(-1);
 	}
 	if (info == "INFO")
