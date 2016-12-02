@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 08:33:07 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/02 10:30:27 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/02 10:30:47 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,6 @@ int						main(int ac, char **av)
 				ClassSocket		socket = ClassSocket(atoi(av[i + 1]));
 				socket.mainloop();
 				exitlock();
-	}
 				break ;
 			}
 		}
