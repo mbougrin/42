@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 09:10:15 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/11/30 17:50:46 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/02 09:58:55 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ Tintin_reporter::Tintin_reporter(void)
 	   	mkdir(LOCKPATH, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
 	strcat(str, LOCKPATH);
 	strcat(str, LOCKNAME);
+	writelog("INFO", "Started.");
 //	fs.open(str, fstream::out);
 //	fs.close();
 //	if ((_fd = open(str, O_RDWR | O_CREAT, 0644)) < 0)
@@ -77,6 +78,7 @@ Tintin_reporter::~Tintin_reporter(void)
 	bzero(str, 128);
 	strcat(str, LOCKPATH);
 	strcat(str, LOCKNAME);
+	writelog("INFO", "Quitting.");
 	if (remove(str) != 0)
 	{
 		std::cout << "remove error" << std::endl;
@@ -94,7 +96,7 @@ Tintin_reporter			&Tintin_reporter::operator=(Tintin_reporter const &src)
 	return (*this);
 }
 
-void				Tintin_reporter::writelog(string filename, string info, string str)
+void				Tintin_reporter::writelog(string info, string str)
 {
 	fstream		fs;
 	time_t 		now = time(0);
@@ -103,7 +105,7 @@ void				Tintin_reporter::writelog(string filename, string info, string str)
 
 	bzero(ptr, 128);
 	strcat(ptr, LOGPATH);
-	strcat(ptr, filename.c_str());
+	strcat(ptr, FILENAME);
 	fs.open(ptr, fstream::out | fstream::app);
 	if (!fs.is_open())
 	{

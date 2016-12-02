@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 10:34:47 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/11/30 16:24:47 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/02 10:12:18 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,26 @@ void				ClassSocket::check_fd(void)
 	}
 }
 
+void my_itoa(int value, std::string& buf, int base){
+
+	int i = 30;
+
+	buf = "";
+
+	for(; value && i ; --i, value /= base) buf = "0123456789abcdef"[value % base] + buf;
+
+}
+
 void				ClassSocket::mainloop(void)
 {
+	string		str;
+	string		ptr;
+	pid_t		pid = getpid();
+
+	my_itoa(pid, ptr, 10);
+	_log.writelog("INFO", "Entering Daemon mode.");
+	str = string("Started. PID: ");
+	_log.writelog("INFO", str + ptr);
 	while (1)
 	{
 		initfd();
@@ -138,10 +156,10 @@ void				ClassSocket::clientread(int cs)
 	{
 		if (strcmp(_fds[cs].buf_read, "quit\n") == 0)
 		{
-			_log.writelog(FILENAME, "INFO", "Quitting.");
+			_log.writelog("INFO", "Request quit.");
 			exit(-1);
 		}
-		_log.writelog(FILENAME, "LOG", _fds[cs].buf_read);
+		_log.writelog("LOG", _fds[cs].buf_read);
 		std::cout << _fds[cs].buf_read;
 		bzero(_fds[cs].buf_read, 1024);
 	}
@@ -184,7 +202,7 @@ void				ClassSocket::createsocket(void)
 	struct rlimit		rlp;
 	struct sockaddr_in	sin;
 
-	_log.writelog(FILENAME, "INFO", "Started.");
+	_log.writelog("INFO", "Creating server.");
 	if (getrlimit(RLIMIT_NOFILE, &rlp) == -1)
 	{
 		std::cout << "getrlimit error" << std::endl;
@@ -192,7 +210,6 @@ void				ClassSocket::createsocket(void)
 	}
 	_maxsd = rlp.rlim_cur;
 	_fds = (struct s_fds *)malloc(sizeof(struct s_fds) * _maxsd);
-	_log.writelog(FILENAME, "INFO", "Creating server.");
 	if ((_sd = socket(AF_INET, SOCK_STREAM, 0)) == -1)
 	{
 		std::cout << "socket error" << std::endl;
@@ -205,5 +222,5 @@ void				ClassSocket::createsocket(void)
 	listen(_sd, 42);
 	_fds[_sd].type = FD_SERV;
 	_fds[_sd].fct_read = &ClassSocket::acceptclient;
-	_log.writelog(FILENAME, "INFO", "Server created.");
+	_log.writelog("INFO", "Server created.");
 }

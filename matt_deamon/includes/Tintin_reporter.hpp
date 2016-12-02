@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 09:10:13 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/11/30 17:30:35 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/02 09:57:42 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@
 # define NAME "Matt_deamon"
 # define LOCKNAME "matt_daemon.lock"
 
+# define FILENAME "matt_deamon.log"
+
 using namespace std; 
 
 class				Tintin_reporter
@@ -41,7 +43,7 @@ class				Tintin_reporter
 		Tintin_reporter &operator=(Tintin_reporter const &src);
 		~Tintin_reporter();
 
-		void		writelog(string filename, string info, string str);
+		void		writelog(string info, string str);
 	private:
 //		int				_fd;
 //		struct flock 	_lock;

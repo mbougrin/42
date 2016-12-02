@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 10:38:22 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/11/30 13:21:14 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/02 10:09:30 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <netinet/in.h>
 
 # include <iostream>
+#include <stdlib.h>
 
 # include <sys/resource.h>
 # include <netdb.h>
@@ -42,8 +43,6 @@
 # define FD_FREE		0
 # define FD_SERV		1
 # define FD_CLIENT		2
-
-# define FILENAME		"matt_daemon.log"
 
 struct							s_fds
 {
