@@ -6,26 +6,11 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 09:10:15 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/02 14:34:25 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/02 14:42:48 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <Tintin_reporter.hpp>
-
-int is_locked_socket ( int fd )
-{
-	static struct flock lock;
-	lock.l_type = F_WRLCK;
-	lock.l_whence = SEEK_SET;
-	lock.l_start = 0;
-	lock.l_len = 0;
-	if ( fcntl ( fd , F_GETLK , &lock ) == -1 )
-		 return -1;
-	if ( lock.l_type == F_UNLCK )
-		 return 0;
-	else
-		 return lock.l_pid;
-}
 
 Tintin_reporter::Tintin_reporter(void)
 {
