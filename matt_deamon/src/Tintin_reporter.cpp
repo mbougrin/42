@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 09:10:15 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/02 13:19:32 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/02 13:27:02 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,55 +41,21 @@ Tintin_reporter::Tintin_reporter(void)
 	strcat(str, LOCKPATH);
 	strcat(str, LOCKNAME);
 	writelog("INFO", "Started.");
-//	fs.open(str, fstream::out);
-//	fs.close();
-//	close(_fd);
-	if (stat(str, &st) != -1)
-	{
-		std::cout << "fake lock" << std::endl;
-		exit(-1);
-	}
-	if ((_fd = open(str, O_RDONLY | O_CREAT, 0640)) < 0)
+//	if (stat(str, &st) != -1)
+//	{
+//		std::cout << "fake lock" << std::endl;
+//		exit(-1);
+//	}
+	if ((_fd = open(str, O_RDONLY | O_CREAT)) < 0)
 	{
 		std::cout << "open error" << std::endl;
 		exit(-1);
 	}	
-//	close(_fd);
-//	if ((_fd = open(str, O_RDONLY)) == -1)
-//	{
-//		std::cout << "open error" << std::endl;
-//		exit(-1);
-//	}
-
-	if (is_locked_socket(_fd) == 0)
+	if ( flock( _fd, LOCK_EX | LOCK_NB ) )
 	{
-
-	memset (&_lock, 0, sizeof(_lock));
-	_lock.l_type = F_RDLCK;
-	_lock.l_start = 0;
-	_lock.l_whence = SEEK_SET;
-	_lock.l_len = 0;
-//	_lock.l_pid = getpid();
-	fcntl (_fd, F_GETLK, &_lock);
-	}
-	else
-	{
-		std::cout << "file is locked" << std::endl;
+		std::cout << "lock" << std::endl;
 		exit(-1);
 	}
-//	if (flock(_fd, LOCK_SH | LOCK_NB) < 0)
-//	{
-//		std::cout << "file is locked" << std::endl;
-//		close(_fd);
-//		exit(-1);
-//	}
-//	memset (&_lock, 0, sizeof(_lock));
-//	_lock.l_type = F_RDLCK;
-//	_lock.l_start = 0;
-//	_lock.l_whence = SEEK_SET;
-//	_lock.l_len = 0;
-//	_lock.l_pid = getpid();
-//	fcntl (_fd, F_GETLK, &_lock);
 	return ;
 }
 
@@ -106,16 +72,7 @@ Tintin_reporter::~Tintin_reporter(void)
 {
 	char			str[128];
 
-	_lock.l_type = F_UNLCK;
-	_lock.l_whence = SEEK_SET;
-	_lock.l_start = 0;
-	_lock.l_len = 0;
-	fcntl (_fd, F_SETLKW, &_lock);
-//	 if (flock(_fd, LOCK_UN) == -1)
-//	 {
-//		std::cout << "flock error" << std::endl;
-//		exit(-1);
-//	 }
+	flock(_fd, LOCK_UN);
 	close(_fd);
 	bzero(str, 128);
 	strcat(str, LOCKPATH);
