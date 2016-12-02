@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 09:10:13 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/02 10:19:24 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/02 10:21:08 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
  
 # define LOGPATH  "/var/log/matt_daemon/"
 //# define LOCKPATH "/var/lock/"
-# define LOCKPATH "./"
+# define LOCKPATH "lock/"
 # define NAME "Matt_deamon"
 # define LOCKNAME "matt_daemon.lock"
 
