@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 09:10:15 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/02 14:42:48 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/02 14:57:20 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,13 @@ Tintin_reporter::Tintin_reporter(void)
 		std::cout << "file is locked" << std::endl;
 		exit(-1);
 	}
+			pid_t 				child;
+
+								child = fork();
+									if (child < 0)
+											exit(1);
+												if (child > 0)
+														exit(0);
 	return ;
 }
 
@@ -68,7 +75,7 @@ Tintin_reporter::~Tintin_reporter(void)
 Tintin_reporter			&Tintin_reporter::operator=(Tintin_reporter const &src)
 {
 	if (this != &src)
-	{
+	{	
 
 	}
 	return (*this);
@@ -132,7 +139,7 @@ void 					Tintin_reporter::sighandler(int nb)
 	}
 	fs << "[" << ltm->tm_mday << "/" << ltm->tm_mon << "/" << 1900 + ltm->tm_year
 		<< "-" << ltm->tm_hour << ":" << ltm->tm_min << ":" << ltm->tm_sec
-		<< "] [ " << "LOG" << " ] - " << NAME << ": " << str;
+		<< "] [ " << "LOG" << " ] - " << NAME << ": " << str << "\n";
 	fs.close();
 	exit(-1);
 }

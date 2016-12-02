@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 08:33:07 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/02 14:50:06 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/02 14:55:00 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int						main(int ac, char **av)
 	{
 		ClassSocket		socket = ClassSocket(4242);
 		my_signal();
-		background();
+	//	background();
 		socket.mainloop();
 	}
 	else if (ac != 3)
