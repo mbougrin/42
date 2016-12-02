@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 09:10:15 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/02 17:14:20 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/02 17:50:22 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,16 +137,12 @@ void 					Tintin_reporter::sighandler(int nb)
 	strcat(ptr, FILENAME);
 	fs.open(ptr, fstream::out | fstream::app);
 	if (!fs.is_open())
-	{
-		fs << "[" << ltm->tm_mday << "/" << ltm->tm_mon << "/" << 1900 + ltm->tm_year
-			<< "-" << ltm->tm_hour << ":" << ltm->tm_min << ":" << ltm->tm_sec
-			<< "] [ " << "ERROR" << " ] - " << NAME << ": " << "Error open fail." << "\n";
-		fs.close();
 		exit(-1);
-	}
 	fs << "[" << ltm->tm_mday << "/" << ltm->tm_mon << "/" << 1900 + ltm->tm_year
 		<< "-" << ltm->tm_hour << ":" << ltm->tm_min << ":" << ltm->tm_sec
-		<< "] [ " << "LOG" << " ] - " << NAME << ": " << str << "\n";
+		<< "] [ " << "LOG" << " ] - " << NAME << ": " << str;
+	if (strchr(str.c_str(), '\n') == NULL)
+		fs << "\n";
 	fs.close();
 	exit(-1);
 }
@@ -163,21 +159,11 @@ void				Tintin_reporter::writelog(string info, string str)
 	strcat(ptr, FILENAME);
 	fs.open(ptr, fstream::out | fstream::app);
 	if (!fs.is_open())
-	{
-		writelog("ERROR", "Error open fail.");
 		exit(-1);
-	}
-	if (info == "INFO")
-	{
-		fs << "[" << ltm->tm_mday << "/" << ltm->tm_mon << "/" << 1900 + ltm->tm_year
-			<< "-" << ltm->tm_hour << ":" << ltm->tm_min << ":" << ltm->tm_sec
-			<< "] [ " << info << " ] - " << NAME << ": " << str << "\n";
-	}
-	else if (info == "LOG")
-	{
-		fs << "[" << ltm->tm_mday << "/" << ltm->tm_mon << "/" << 1900 + ltm->tm_year
-			<< "-" << ltm->tm_hour << ":" << ltm->tm_min << ":" << ltm->tm_sec
-			<< "] [ " << info << " ] - " << NAME << ": " << str;
-	}
+	fs << "[" << ltm->tm_mday << "/" << ltm->tm_mon << "/" << 1900 + ltm->tm_year
+		<< "-" << ltm->tm_hour << ":" << ltm->tm_min << ":" << ltm->tm_sec
+		<< "] [ " << info << " ] - " << NAME << ": " << str;
+	if (strchr(str.c_str(), '\n') == NULL)
+		fs << "\n";
 	fs.close();
 }
