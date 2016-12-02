@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 09:10:15 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/02 13:27:02 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/02 14:34:25 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int is_locked_socket ( int fd )
 Tintin_reporter::Tintin_reporter(void)
 {
 	struct stat		st;
-//	fstream			fs;
 	char			str[128];
 
 	bzero(str, 128);
@@ -41,19 +40,14 @@ Tintin_reporter::Tintin_reporter(void)
 	strcat(str, LOCKPATH);
 	strcat(str, LOCKNAME);
 	writelog("INFO", "Started.");
-//	if (stat(str, &st) != -1)
-//	{
-//		std::cout << "fake lock" << std::endl;
-//		exit(-1);
-//	}
 	if ((_fd = open(str, O_RDONLY | O_CREAT)) < 0)
 	{
 		std::cout << "open error" << std::endl;
 		exit(-1);
 	}	
-	if ( flock( _fd, LOCK_EX | LOCK_NB ) )
+	if (flock(_fd, LOCK_EX | LOCK_NB))
 	{
-		std::cout << "lock" << std::endl;
+		std::cout << "file is locked" << std::endl;
 		exit(-1);
 	}
 	return ;
@@ -93,6 +87,69 @@ Tintin_reporter			&Tintin_reporter::operator=(Tintin_reporter const &src)
 
 	}
 	return (*this);
+}
+
+const char *sigs[32] =
+{
+	NULL,
+	"SIGHUP",
+	"SIGINT",
+	"SIGQUIT",
+	"SIGILL",
+	"SIGTRAP",
+	"SIGABRT",
+	"SIGBUS",
+	"SIGFPE",
+	"SIGKILL",
+	"SIGUSR1",
+	"SIGSEGV",
+	"SIGUSR2",
+	"SIGPIPE",
+	"SIGALRM",
+	"SIGTERM",
+	"SIGSTKFLT",
+	"SIGCHLD",
+	"SIGCONT",
+	"SIGSTOP",
+	"SIGTSTP",
+	"SIGTTIN",
+	"SIGTTOU",
+	"SIGURG",
+	"SIGXCPU",
+	"SIGXFSZ",
+	"SIGVTALRM",
+	"SIGPROF",
+	"SIGWINCH",
+	"SIGPWR",
+	"SIGSYS",
+};
+
+void 					Tintin_reporter::sighandler(int nb)
+{
+	string		str;
+
+	str = "Received a ";
+   	str	+= sigs[nb];
+
+	fstream		fs;
+	time_t 		now = time(0);
+	tm 			*ltm = localtime(&now);
+	char		ptr[128];
+
+	bzero(ptr, 128);
+	strcat(ptr, LOGPATH);
+	strcat(ptr, FILENAME);
+	fs.open(ptr, fstream::out | fstream::app);
+	if (!fs.is_open())
+	{
+		std::cout << "open error" <<std::endl;
+		exit(-1);
+	}
+	fs << "[" << ltm->tm_mday << "/" << ltm->tm_mon << "/" << 1900 + ltm->tm_year
+		<< "-" << ltm->tm_hour << ":" << ltm->tm_min << ":" << ltm->tm_sec
+		<< "] [ " << "LOG" << " ] - " << NAME << ": " << str;
+	fs.close();
+	exit(-1);
 }
 
 void				Tintin_reporter::writelog(string info, string str)
