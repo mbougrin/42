@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 09:10:15 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/02 11:59:15 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/02 12:02:28 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ Tintin_reporter::Tintin_reporter(void)
 		std::cout << "open error" << std::endl;
 		exit(-1);
 	}
-	if (is_locked_socket(_fd) <= 0)
+	if (is_locked_socket(_fd) != 0)
 	{
 		std::cout << "file is locked" << std::endl;
 		exit(-1);
