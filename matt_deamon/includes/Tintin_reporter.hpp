@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 09:10:13 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/02 10:21:08 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/02 10:49:12 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ class				Tintin_reporter
 
 		void		writelog(string info, string str);
 	private:
-//		int				_fd;
+		int				_fd;
 //		struct flock 	_lock;
 };
 

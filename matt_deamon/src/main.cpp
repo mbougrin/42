@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 08:33:07 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/02 10:30:47 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/02 10:33:59 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int						main(int ac, char **av)
 	if (ac == 1)
 	{
 //		runlock();
-		background();
+//		background();
 		ClassSocket		socket = ClassSocket(4242);
 		socket.mainloop();
 //		exitlock();

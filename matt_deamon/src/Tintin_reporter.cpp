@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 09:10:15 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/02 09:58:55 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/02 10:48:56 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,16 @@ Tintin_reporter::Tintin_reporter(void)
 	writelog("INFO", "Started.");
 //	fs.open(str, fstream::out);
 //	fs.close();
-//	if ((_fd = open(str, O_RDWR | O_CREAT, 0644)) < 0)
-//	{
-//		std::cout << "file is locked" << std::endl;
-//		exit(-1);
-//	}
-//	if (flock(_fd, LOCK_EX) == -1)
-//	{
-//		std::cout << "file is locked" << std::endl;
-//		exit(-1);
-//	}
+	if ((_fd = open(str, O_RDWR | O_CREAT, 0644)) < 0)
+	{
+		std::cout << "file is locked" << std::endl;
+		exit(-1);
+	}
+	if (flock(_fd, LOCK_EX) == -1)
+	{
+		std::cout << "file is locked" << std::endl;
+		exit(-1);
+	}
 //	memset (&_lock, 0, sizeof(_lock));
 //	_lock.l_type = F_WRLCK;
 //	fcntl (_fd, F_SETLKW, &_lock);
@@ -69,12 +69,12 @@ Tintin_reporter::~Tintin_reporter(void)
 
 //	_lock.l_type = F_UNLCK;
 //	fcntl (_fd, F_SETLKW, &_lock);
-//	 if (flock(_fd, LOCK_UN) == -1)
-//	 {
-//		std::cout << "flock error" << std::endl;
-//		exit(-1);
-//	 }
-//	close(_fd);
+	 if (flock(_fd, LOCK_UN) == -1)
+	 {
+		std::cout << "flock error" << std::endl;
+		exit(-1);
+	 }
+	close(_fd);
 	bzero(str, 128);
 	strcat(str, LOCKPATH);
 	strcat(str, LOCKNAME);
