@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 09:10:15 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/08 12:28:55 by mblet            ###   ########.fr       */
+/*   Updated: 2016/12/08 12:36:26 by mblet            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ void 					Tintin_reporter::sighandler(int nb)
 		exit(-1);
 	fs << "[" << ltm->tm_mday << "/" << ltm->tm_mon << "/" << 1900 + ltm->tm_year
 		<< "-" << ltm->tm_hour << ":" << ltm->tm_min << ":" << ltm->tm_sec
-		<< "] [ " << "LOG" << " ] - " << NAME << ": " << "Received a " << sig[nb] << "\n";
+		<< "] [ " << "LOG" << " ] - " << NAME << ": " << "Received a " << sigs[nb] << "\n";
 	fs.close();
 	exit(-1);
 }
