@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 09:10:15 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/08 13:02:43 by mblet            ###   ########.fr       */
+/*   Updated: 2016/12/08 15:38:27 by mblet            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ const char *sigs[32] =
 	"SIGVTALRM",
 	"SIGPROF",
 	"SIGWINCH",
+	"SIGIO",
 	"SIGPWR",
 	"SIGSYS",
 };
