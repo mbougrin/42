@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 10:34:47 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/02 17:12:34 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/08 12:33:06 by mblet            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,11 +184,9 @@ void				ClassSocket::acceptclient(int i)
 	if (_client >= MAX_USER)
 	{
 		close(cs);
-		string str = "Error full client ";
-		str += _client;
-   		str += "/";
-		str += MAX_USER;
-		_log.writelog("ERROR", str);
+		stringstream	ss;
+		ss << "Error full client " << _client << "/" << MAX_USER;
+		_log.writelog("ERROR", ss.str());
 		return ;
 	}
 	_fds[cs].type = FD_CLIENT;
@@ -218,8 +216,16 @@ void				ClassSocket::createsocket(void)
 	sin.sin_port = htons(_port);
 	sin.sin_addr.s_addr = htonl(INADDR_ANY);
 	sin.sin_family = AF_INET;
-	bind(_sd, (const struct sockaddr *)&sin, sizeof(sin));
-	listen(_sd, 42);
+	if (bind(_sd, (const struct sockaddr *)&sin, sizeof(sin)) == -1)
+	{
+		_log.writelog("ERROR", "Error bind fail.");
+		exit(-1);
+	}
+	if (listen(_sd, 42) == -1)
+	{
+		_log.writelog("ERROR", "Error listen fail.");
+		exit(-1);
+	}
 	_fds[_sd].type = FD_SERV;
 	_fds[_sd].fct_read = &ClassSocket::acceptclient;
 	_log.writelog("INFO", "Server created.");

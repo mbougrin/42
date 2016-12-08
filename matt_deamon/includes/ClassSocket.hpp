@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 10:38:22 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/02 10:09:30 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/08 12:06:32 by mblet            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # include <stdio.h>
 # include <string>
 # include <iostream>
+# include <sstream>
 
 # include <signal.h>
 # include <string.h>

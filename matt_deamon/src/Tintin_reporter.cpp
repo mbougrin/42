@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 09:10:15 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/02 17:50:22 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/08 12:28:55 by mblet            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,11 +122,6 @@ const char *sigs[32] =
 
 void 					Tintin_reporter::sighandler(int nb)
 {
-	string		str;
-
-	str = "Received a ";
-   	str	+= sigs[nb];
-
 	fstream		fs;
 	time_t 		now = time(0);
 	tm 			*ltm = localtime(&now);
@@ -140,9 +135,7 @@ void 					Tintin_reporter::sighandler(int nb)
 		exit(-1);
 	fs << "[" << ltm->tm_mday << "/" << ltm->tm_mon << "/" << 1900 + ltm->tm_year
 		<< "-" << ltm->tm_hour << ":" << ltm->tm_min << ":" << ltm->tm_sec
-		<< "] [ " << "LOG" << " ] - " << NAME << ": " << str;
-	if (strchr(str.c_str(), '\n') == NULL)
-		fs << "\n";
+		<< "] [ " << "LOG" << " ] - " << NAME << ": " << "Received a " << sig[nb] << "\n";
 	fs.close();
 	exit(-1);
 }

@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 08:33:07 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/02 16:55:07 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/08 12:22:47 by mblet            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int						main(int ac, char **av)
 				ClassSocket		socket = ClassSocket(atoi(av[i + 1]));
 				my_signal();
 				socket.mainloop();
-				break ;
+				exit(EXIT_SUCCESS);
 			}
 		}
 		std::cout << av[0] << " -p port" << std::endl;
