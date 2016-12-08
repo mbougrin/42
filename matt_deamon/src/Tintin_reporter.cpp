@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 09:10:15 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/08 12:36:26 by mblet            ###   ########.fr       */
+/*   Updated: 2016/12/08 13:02:43 by mblet            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ Tintin_reporter::Tintin_reporter(void)
 	}	
 	if (flock(_fd, LOCK_EX | LOCK_NB))
 	{
+		std::cout << "Daemon has already launch." << std::endl;
 		writelog("ERROR", "Error file is locked.");
 		exit(-1);
 	}

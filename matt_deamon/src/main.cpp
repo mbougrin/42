@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 08:33:07 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/08 12:22:47 by mblet            ###   ########.fr       */
+/*   Updated: 2016/12/08 13:01:46 by mblet            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,29 +15,34 @@
 
 void					my_signal(void)
 {
-	signal( SIGHUP, &Tintin_reporter::sighandler );
-	signal( SIGINT, &Tintin_reporter::sighandler );
-	signal( SIGQUIT, &Tintin_reporter::sighandler );
-	signal( SIGILL, &Tintin_reporter::sighandler );
-	signal( SIGTRAP, &Tintin_reporter::sighandler );
-	signal( SIGABRT, &Tintin_reporter::sighandler );
-	signal( SIGBUS, &Tintin_reporter::sighandler );
-	signal( SIGFPE, &Tintin_reporter::sighandler );
-	signal( SIGUSR1, &Tintin_reporter::sighandler );
-	signal( SIGSEGV, &Tintin_reporter::sighandler );
-	signal( SIGUSR2, &Tintin_reporter::sighandler );
-	signal( SIGPIPE, &Tintin_reporter::sighandler );
-	signal( SIGALRM, &Tintin_reporter::sighandler );
-	signal( SIGTERM, &Tintin_reporter::sighandler );
-	signal( SIGTSTP, &Tintin_reporter::sighandler );
-	signal( SIGTTIN, &Tintin_reporter::sighandler );
-	signal( SIGTTOU, &Tintin_reporter::sighandler );
-	signal( SIGURG, &Tintin_reporter::sighandler );
-	signal( SIGXCPU, &Tintin_reporter::sighandler );
-	signal( SIGXFSZ, &Tintin_reporter::sighandler );
-	signal( SIGVTALRM, &Tintin_reporter::sighandler );
-	signal( SIGPROF, &Tintin_reporter::sighandler );
-	signal( SIGSYS, &Tintin_reporter::sighandler );
+	int 		i;
+
+	i = 0;
+	while (i < 32)
+		signal( i++, &Tintin_reporter::sighandler );
+	//signal( SIGINT, &Tintin_reporter::sighandler );
+	//signal( SIGQUIT, &Tintin_reporter::sighandler );
+	//signal( SIGILL, &Tintin_reporter::sighandler );
+	//signal( SIGTRAP, &Tintin_reporter::sighandler );
+	//signal( SIGABRT, &Tintin_reporter::sighandler );
+	//signal( SIGBUS, &Tintin_reporter::sighandler );
+	//signal( SIGFPE, &Tintin_reporter::sighandler );
+	//signal( SIGKILL, &Tintin_reporter::sighandler );
+	//signal( SIGUSR1, &Tintin_reporter::sighandler );
+	//signal( SIGSEGV, &Tintin_reporter::sighandler );
+	//signal( SIGUSR2, &Tintin_reporter::sighandler );
+	//signal( SIGPIPE, &Tintin_reporter::sighandler );
+	//signal( SIGALRM, &Tintin_reporter::sighandler );
+	//signal( SIGTERM, &Tintin_reporter::sighandler );
+	//signal( SIGTSTP, &Tintin_reporter::sighandler );
+	//signal( SIGTTIN, &Tintin_reporter::sighandler );
+	//signal( SIGTTOU, &Tintin_reporter::sighandler );
+	//signal( SIGURG, &Tintin_reporter::sighandler );
+	//signal( SIGXCPU, &Tintin_reporter::sighandler );
+	//signal( SIGXFSZ, &Tintin_reporter::sighandler );
+	//signal( SIGVTALRM, &Tintin_reporter::sighandler );
+	//signal( SIGPROF, &Tintin_reporter::sighandler );
+	//signal( SIGSYS, &Tintin_reporter::sighandler );
 }
 
 int						main(int ac, char **av)
