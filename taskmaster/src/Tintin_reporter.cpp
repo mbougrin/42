@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 09:10:15 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/13 12:43:24 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/13 16:27:52 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,39 +14,6 @@
 
 Tintin_reporter::Tintin_reporter(void)
 {
-	struct stat		st;
-	char			str[128];
-
-	bzero(str, 128);
-	if (stat(LOGPATH, &st) == -1)
-	   	mkdir(LOGPATH, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
-	if (stat(LOCKPATH, &st) == -1)
-	   	mkdir(LOCKPATH, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
-	strcat(str, LOCKPATH);
-	strcat(str, LOCKNAME);
-	writelog("INFO", "Started.");
-	if ((_fd = open(str, O_RDONLY | O_CREAT)) < 0)
-	{
-		writelog("ERROR", "Error open fail.");
-		exit(-1);
-	}	
-	if (flock(_fd, LOCK_EX | LOCK_NB))
-	{
-		std::cout << NAME << " has already launch." << std::endl;
-		writelog("ERROR", "Error file is locked.");
-		exit(-1);
-	}
-
-	pid_t 				child;
-
-	child = fork();
-	if (child < 0)
-		exit(1);
-	if (child > 0)
-		exit(0);
-	freopen( "/dev/null", "r", stdin);
-	freopen( "/dev/null", "w", stdout);
-	freopen( "/dev/null", "w", stderr);
 	return ;
 }
 
@@ -121,6 +88,43 @@ const char *sigs[32] =
 	"SIGPWR",
 	"SIGSYS",
 };
+
+void					Tintin_reporter::init(void)
+{
+	struct stat		st;
+	char			str[128];
+
+	bzero(str, 128);
+	if (stat(LOGPATH, &st) == -1)
+	   	mkdir(LOGPATH, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+	if (stat(LOCKPATH, &st) == -1)
+	   	mkdir(LOCKPATH, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+	strcat(str, LOCKPATH);
+	strcat(str, LOCKNAME);
+	writelog("INFO", "Started.");
+	if ((_fd = open(str, O_RDONLY | O_CREAT)) < 0)
+	{
+		writelog("ERROR", "Error open fail.");
+		exit(-1);
+	}	
+	if (flock(_fd, LOCK_EX | LOCK_NB))
+	{
+		std::cout << NAME << " has already launch." << std::endl;
+		writelog("ERROR", "Error file is locked.");
+		exit(-1);
+	}
+
+	pid_t 				child;
+
+	child = fork();
+	if (child < 0)
+		exit(1);
+	if (child > 0)
+		exit(0);
+	freopen( "/dev/null", "r", stdin);
+	freopen( "/dev/null", "w", stdout);
+	freopen( "/dev/null", "w", stderr);
+}
 
 void 					Tintin_reporter::sighandler(int nb)
 {

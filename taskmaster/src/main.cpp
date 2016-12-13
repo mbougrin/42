@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 08:33:07 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/13 12:55:53 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/13 16:30:28 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int						main(int ac, char **av)
 	char	*port = NULL;
 	char	*conf = NULL;
 
-	printf("salut");
 	for (int i = 0 ; av[i] ; ++i)
 	{
 		if (strncmp(av[i], "-p", strlen(av[i])) == 0)
@@ -36,11 +35,10 @@ int						main(int ac, char **av)
 	}
 	if (conf == NULL || ac == 1)
 	{
-		write(1, av[0], strlen(av[0]));
-		write(1, "\t-c configurationFile\n\t\t-p port\n", 30);
+		std::cout << av[0] << "\t-c configurationFile\n\t\t-p port\n";
 		return (-1);
 	}
-/*	if (port == NULL)
+	if (port == NULL)
 	{
 		ClassSocket		socket = ClassSocket(4242);
 		my_signal();
@@ -53,5 +51,5 @@ int						main(int ac, char **av)
 		socket.mainloop();
 		exit(EXIT_SUCCESS);
 	}
-*/	return (0);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 10:34:47 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/13 12:06:35 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/13 16:29:00 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ ClassSocket::ClassSocket(void)
 	_sd = 0;
 	_port = 4242;
 	_client = 0;
+	_log.init();
 	createsocket();
 	return ;
 }
@@ -33,6 +34,7 @@ ClassSocket::ClassSocket(int port) : _port(port)
 	_fds = NULL;
 	_sd = 0;
 	_client = 0;
+	_log.init();
 	createsocket();
 	return ;
 }

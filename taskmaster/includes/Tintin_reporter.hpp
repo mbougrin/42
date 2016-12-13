@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 09:10:13 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/09 14:56:06 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/13 16:28:21 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ class				Tintin_reporter
 		Tintin_reporter &operator=(Tintin_reporter const &src);
 		~Tintin_reporter();
 
+		void			init(void);
 		void			writelog(string info, string str);
 		static void		sighandler(int nb);
 	private:
