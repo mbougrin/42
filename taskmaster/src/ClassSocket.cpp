@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 10:34:47 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/09 11:37:36 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/13 12:06:35 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,6 +157,14 @@ void				ClassSocket::clientread(int cs)
 			_log.writelog("INFO", "Request quit.");
 			exit(-1);
 		}
+		else if (strcmp(_fds[cs].buf_read, "status\n") == 0)
+			std::cout << "status" << std::endl;
+		else if (strcmp(_fds[cs].buf_read, "start\n") == 0)
+			std::cout << "start" << std::endl;
+		else if (strcmp(_fds[cs].buf_read, "stop\n") == 0)
+			std::cout << "stop" << std::endl;
+		else if (strcmp(_fds[cs].buf_read, "reload\n") == 0)
+			std::cout << "reload" << std::endl;
 		_log.writelog("LOG", _fds[cs].buf_read);
 		bzero(_fds[cs].buf_read, 1024);
 	}

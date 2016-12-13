@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 10:38:22 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/09 11:40:13 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/13 12:09:16 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@
 # include <string.h>
 
 # include <Tintin_reporter.hpp>
+# include <ClassConfig.hpp>
+# include <ClassProgram.hpp>
 
 # define BUF_SIZE		1024
 

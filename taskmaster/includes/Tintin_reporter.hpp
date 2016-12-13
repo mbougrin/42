@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 09:10:13 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/09 11:39:03 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/09 14:56:06 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 # define LOCKNAME "taskmaster.lock"
 # define FILENAME "taskmaster.log"
 
-using namespace std; 
+using 				namespace std; 
 
 class				Tintin_reporter
 {

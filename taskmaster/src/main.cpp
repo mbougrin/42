@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 08:33:07 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/09 11:38:01 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/13 12:22:59 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,36 +15,43 @@
 
 void					my_signal(void)
 {
-	int 		i;
+	int 	i;
 
 	i = 0;
 	while (i < 32)
-		signal( i++, &Tintin_reporter::sighandler );
+		signal(i++, &Tintin_reporter::sighandler);
 }
 
 int						main(int ac, char **av)
 {
-	if (ac == 1)
+	char	*port = NULL;
+	char	*conf = NULL;
+
+		std::cout << av[0] << "\t-c configurationFile\n\t\t-p port" << std::endl;
+	for (int i = 0 ; av[i] ; ++i)
+	{
+		if (strncmp(av[i], "-p", strlen(av[i])) == 0)
+			port = av[i + 1];
+		if (strncmp(av[i], "-c", strlen(av[i])) == 0)
+			conf = av[i + 1];
+	}
+	if (conf == NULL || ac == 1)
+	{
+		std::cout << av[0] << "\t-c configurationFile\n\t\t-p port" << std::endl;
+		return (-1);
+	}
+	if (port == NULL)
 	{
 		ClassSocket		socket = ClassSocket(4242);
 		my_signal();
 		socket.mainloop();
 	}
-	else if (ac != 3)
-		std::cout << av[0] << " -p port" << std::endl;
 	else
 	{
-		for (int i = 0 ; i < ac ; ++i)
-		{
-			if (strcmp(av[i], "-p") == 0 && av[i + 1] != NULL)
-			{
-				ClassSocket		socket = ClassSocket(atoi(av[i + 1]));
-				my_signal();
-				socket.mainloop();
-				exit(EXIT_SUCCESS);
-			}
-		}
-		std::cout << av[0] << " -p port" << std::endl;
+			ClassSocket		socket = ClassSocket(atoi(port));
+			my_signal();
+			socket.mainloop();
+			exit(EXIT_SUCCESS);
 	}
 	return (0);
 }
