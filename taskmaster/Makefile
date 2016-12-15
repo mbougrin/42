@@ -6,7 +6,7 @@
 #    By: mbougrin <mbougrin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/05 10:07:41 by mbougrin          #+#    #+#              #
-#    Updated: 2016/12/13 17:00:24 by mbougrin         ###   ########.fr        #
+#    Updated: 2016/12/15 15:32:24 by mbougrin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,10 +33,10 @@ $(NAME): $(OBJ)
 	@$(CC) -o $@ -c $< $(CFLAGS) -I $(INC)
 
 clean:
-	@echo "\033[31;31;1m=== O file $(NAME)\t\033[34;34;mREMOVED"
+	@echo "\033[31;31;1m=== O file $(NAME)\t\t\033[34;34;mREMOVED"
 	@$(RM) $(OBJ)
 
-fclean:
+fclean: clean
 	@echo "\033[31;31;1m=== $(NAME)\t\t\t\033[34;34;mREMOVED"
 	@$(RM) $(NAME)
 
