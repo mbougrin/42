@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:20 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/15 15:26:19 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/15 15:34:31 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 # define CLASSCONFIG_HPP
 
 # include <iostream>
-# include <ClassProgram.cpp>
+# include <ClassProgram.hpp>
+# include <list>
 
 class				ClassConfig
 {
