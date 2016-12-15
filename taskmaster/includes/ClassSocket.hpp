@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 10:38:22 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/13 12:09:16 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/13 17:30:28 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ class							ClassSocket
 	public:
 		ClassSocket();
 		ClassSocket(int port);
+		ClassSocket(int port, char *conf, bool verbose);
 		ClassSocket(ClassSocket const &src);
 		ClassSocket &operator=(ClassSocket const &src);
 		~ClassSocket();
@@ -82,8 +83,11 @@ class							ClassSocket
 		int						_port;
 		fd_set					_writefd;
 		fd_set					_readfd;
+		char					*_conf;
 
+		static bool				_v;
 		static Tintin_reporter	_log;
+		static ClassConfig		_configuration;
 		static int				_sd;
 		static struct s_fds 	*_fds;
 		static int				_client;

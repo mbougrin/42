@@ -6,7 +6,7 @@
 #    By: mbougrin <mbougrin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/05 10:07:41 by mbougrin          #+#    #+#              #
-#    Updated: 2016/12/13 16:12:05 by mbougrin         ###   ########.fr        #
+#    Updated: 2016/12/13 17:00:24 by mbougrin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ RM = rm -f
 INC = includes
 CFLAGS = -Wall -Wextra -Werror
 DIRSRC = src/
-OBJ = 	$(SRC:.c=.o)
+OBJ = 	$(SRC:.cpp=.o)
 SRC =   $(DIRSRC)main.cpp \
 	    $(DIRSRC)ClassSocket.cpp \
 	    $(DIRSRC)ClassConfig.cpp \
@@ -29,8 +29,8 @@ $(NAME): $(OBJ)
 	@$(CC) -o $(NAME) $(OBJ) -I $(INC) $(CFLAGS) 
 	@echo "\033[31;31;1m=== Compilation $(NAME)\t\033[32;32;mDONE\033[32;32;0m"
 
-%.o: %.c
-	@$(CC) -o $@ -c $< $(CFLAGS)
+%.o: %.cpp
+	@$(CC) -o $@ -c $< $(CFLAGS) -I $(INC)
 
 clean:
 	@echo "\033[31;31;1m=== O file $(NAME)\t\033[34;34;mREMOVED"

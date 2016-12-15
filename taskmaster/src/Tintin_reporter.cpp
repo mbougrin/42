@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 09:10:15 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/13 16:27:52 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/13 16:58:58 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,6 @@ Tintin_reporter::Tintin_reporter(Tintin_reporter const &src)
 
 Tintin_reporter::~Tintin_reporter(void)
 {
-	char			str[128];
-
-	flock(_fd, LOCK_UN);
-	close(_fd);
-	bzero(str, 128);
-	strcat(str, LOCKPATH);
-	strcat(str, LOCKNAME);
-	if (remove(str) != 0)
-	{
-		writelog("ERROR", "Error remove fail.");
-		exit(-1);
-	}
-	writelog("INFO", "Quitting.");
 	return ;
 }
 
@@ -88,6 +75,23 @@ const char *sigs[32] =
 	"SIGPWR",
 	"SIGSYS",
 };
+
+void					Tintin_reporter::clear(void)
+{
+	char			str[128];
+
+	flock(_fd, LOCK_UN);
+	close(_fd);
+	bzero(str, 128);
+	strcat(str, LOCKPATH);
+	strcat(str, LOCKNAME);
+	if (remove(str) != 0)
+	{
+		writelog("ERROR", "Error remove fail.");
+		exit(-1);
+	}
+	writelog("INFO", "Quitting.");
+}
 
 void					Tintin_reporter::init(void)
 {

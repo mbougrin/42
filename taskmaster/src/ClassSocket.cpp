@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 10:34:47 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/13 16:29:00 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/15 15:17:43 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int					ClassSocket::_sd;
 struct s_fds		*ClassSocket::_fds;
 int					ClassSocket::_client;
 Tintin_reporter		ClassSocket::_log;
+ClassConfig			ClassSocket::_configuration;
+bool				ClassSocket::_v;
 extern 				char **environ;
 
 ClassSocket::ClassSocket(void)
@@ -35,6 +37,19 @@ ClassSocket::ClassSocket(int port) : _port(port)
 	_sd = 0;
 	_client = 0;
 	_log.init();
+	createsocket();
+	return ;
+}
+
+ClassSocket::ClassSocket(int port, char *conf, bool verbose) 
+	: _port(port), _conf(conf)
+{
+	_v = verbose;
+	_fds = NULL;
+	_sd = 0;
+	_client = 0;
+	_log.init();
+	_configuration.parse(_conf);
 	createsocket();
 	return ;
 }
@@ -157,6 +172,7 @@ void				ClassSocket::clientread(int cs)
 		if (strcmp(_fds[cs].buf_read, "quit\n") == 0)
 		{
 			_log.writelog("INFO", "Request quit.");
+			_log.clear();
 			exit(-1);
 		}
 		else if (strcmp(_fds[cs].buf_read, "status\n") == 0)
