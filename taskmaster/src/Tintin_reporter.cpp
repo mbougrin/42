@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 09:10:15 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/13 16:58:58 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/19 10:43:30 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,11 @@ const char *sigs[32] =
 	"SIGSYS",
 };
 
+void					Tintin_reporter::setVerbose(bool v)
+{
+	_v = v;
+}
+
 void					Tintin_reporter::clear(void)
 {
 	char			str[128];
@@ -87,9 +92,13 @@ void					Tintin_reporter::clear(void)
 	strcat(str, LOCKNAME);
 	if (remove(str) != 0)
 	{
+		if (_v == true)
+			std::cout << "Error remove fail." << std::endl;
 		writelog("ERROR", "Error remove fail.");
 		exit(-1);
 	}
+	if (_v == true)
+		std::cout << "Quitting." << std::endl;
 	writelog("INFO", "Quitting.");
 }
 
@@ -106,8 +115,12 @@ void					Tintin_reporter::init(void)
 	strcat(str, LOCKPATH);
 	strcat(str, LOCKNAME);
 	writelog("INFO", "Started.");
+	if (_v == true)
+		std::cout << "Started." << std::endl;
 	if ((_fd = open(str, O_RDONLY | O_CREAT)) < 0)
 	{
+		if (_v == true)
+			std::cout << "Error open fail." << std::endl;
 		writelog("ERROR", "Error open fail.");
 		exit(-1);
 	}	
@@ -115,6 +128,8 @@ void					Tintin_reporter::init(void)
 	{
 		std::cout << NAME << " has already launch." << std::endl;
 		writelog("ERROR", "Error file is locked.");
+		if (_v == true)
+			std::cout << NAME << " has already launch." << std::endl;
 		exit(-1);
 	}
 
@@ -125,9 +140,12 @@ void					Tintin_reporter::init(void)
 		exit(1);
 	if (child > 0)
 		exit(0);
-	freopen( "/dev/null", "r", stdin);
-	freopen( "/dev/null", "w", stdout);
-	freopen( "/dev/null", "w", stderr);
+	if (_v == false)
+	{
+		freopen( "/dev/null", "r", stdin);
+		freopen( "/dev/null", "w", stdout);
+		freopen( "/dev/null", "w", stderr);
+	}
 }
 
 void 					Tintin_reporter::sighandler(int nb)

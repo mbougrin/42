@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 10:34:47 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/15 15:17:43 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/19 10:44:29 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ ClassSocket::ClassSocket(int port, char *conf, bool verbose)
 	_fds = NULL;
 	_sd = 0;
 	_client = 0;
+	_log.setVerbose(verbose);
 	_log.init();
 	_configuration.parse(_conf);
 	createsocket();
@@ -141,6 +142,11 @@ void				ClassSocket::mainloop(void)
 	_log.writelog("INFO", "Entering Daemon mode.");
 	str = string("Started. PID: ");
 	_log.writelog("INFO", str + ptr);
+	if (_v == true)
+	{
+		std::cout << "Entergin Daemon mode." << std::endl;
+		std::cout << str << ptr << std::endl;
+	}
 	while (1)
 	{
 		initfd();
@@ -171,6 +177,8 @@ void				ClassSocket::clientread(int cs)
 	{
 		if (strcmp(_fds[cs].buf_read, "quit\n") == 0)
 		{
+			if (_v == true)
+				std::cout << "Request quit." << std::endl;
 			_log.writelog("INFO", "Request quit.");
 			_log.clear();
 			exit(-1);
@@ -183,6 +191,10 @@ void				ClassSocket::clientread(int cs)
 			std::cout << "stop" << std::endl;
 		else if (strcmp(_fds[cs].buf_read, "reload\n") == 0)
 			std::cout << "reload" << std::endl;
+		if (_v == true && strchr(_fds[cs].buf_read, '\n') == NULL)
+			std::cout << _fds[cs].buf_read << std::endl;
+		else if (_v == true)
+			std::cout << _fds[cs].buf_read;
 		_log.writelog("LOG", _fds[cs].buf_read);
 		bzero(_fds[cs].buf_read, 1024);
 	}
@@ -203,6 +215,8 @@ void				ClassSocket::acceptclient(int i)
 	csin_len = sizeof(csin);
 	if ((cs = accept(_sd, (struct sockaddr *)&csin, &csin_len)) == -1)
 	{
+		if (_v == true)
+			std::cout << "Error accept fail." << std::endl;
 		_log.writelog("ERROR", "Error accept fail.");
 		exit(-1);
 	}
@@ -211,10 +225,16 @@ void				ClassSocket::acceptclient(int i)
 	{
 		close(cs);
 		stringstream	ss;
+		if (_v == true)
+			std::cout << "Error full client " << _client << "/" << \
+				MAX_USER << std::endl;
 		ss << "Error full client " << _client << "/" << MAX_USER;
 		_log.writelog("ERROR", ss.str());
 		return ;
 	}
+	if (_v == true)
+		std::cout << "Client connected." << std::endl;
+	_log.writelog("LOG", "Client connected.");
 	_fds[cs].type = FD_CLIENT;
 	_fds[cs].fct_read = &ClassSocket::clientread;
 	_fds[cs].fct_write = &ClassSocket::clientwrite;
@@ -226,9 +246,13 @@ void				ClassSocket::createsocket(void)
 	struct rlimit		rlp;
 	struct sockaddr_in	sin;
 
+	if (_v == true)
+		std::cout << "Creating server." << std::endl;
 	_log.writelog("INFO", "Creating server.");
 	if (getrlimit(RLIMIT_NOFILE, &rlp) == -1)
 	{
+		if (_v == true)
+			std::cout << "Error getrlimit fail." << std::endl;
 		_log.writelog("ERROR", "Error getrlimit fail.");
 		exit(-1);
 	}
@@ -236,6 +260,8 @@ void				ClassSocket::createsocket(void)
 	_fds = (struct s_fds *)malloc(sizeof(struct s_fds) * _maxsd);
 	if ((_sd = socket(AF_INET, SOCK_STREAM, 0)) == -1)
 	{
+		if (_v == true)
+			std::cout << "Error socket fail." << std::endl;
 		_log.writelog("ERROR", "Error socket fail.");
 		exit(-1);
 	}
@@ -244,15 +270,21 @@ void				ClassSocket::createsocket(void)
 	sin.sin_family = AF_INET;
 	if (bind(_sd, (const struct sockaddr *)&sin, sizeof(sin)) == -1)
 	{
+		if (_v == true)
+			std::cout << "Error bind fail." << std::endl;
 		_log.writelog("ERROR", "Error bind fail.");
 		exit(-1);
 	}
 	if (listen(_sd, 42) == -1)
 	{
+		if (_v == true)
+			std::cout << "Error listen fail." << std::endl;
 		_log.writelog("ERROR", "Error listen fail.");
 		exit(-1);
 	}
 	_fds[_sd].type = FD_SERV;
 	_fds[_sd].fct_read = &ClassSocket::acceptclient;
+	if (_v == true)
+		std::cout << "Server created." << std::endl;
 	_log.writelog("INFO", "Server created.");
 }
