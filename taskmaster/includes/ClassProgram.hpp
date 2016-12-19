@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:42:48 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/16 16:09:08 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/19 10:46:26 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <iostream>
 # include <list>
+# include <sys/stat.h>
 
 using namespace 			std;
 
