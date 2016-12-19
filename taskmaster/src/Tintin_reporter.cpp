@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 09:10:15 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/19 10:43:30 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/19 10:52:56 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,15 +133,15 @@ void					Tintin_reporter::init(void)
 		exit(-1);
 	}
 
-	pid_t 				child;
-
-	child = fork();
-	if (child < 0)
-		exit(1);
-	if (child > 0)
-		exit(0);
 	if (_v == false)
 	{
+		pid_t 				child;
+
+		child = fork();
+		if (child < 0)
+			exit(1);
+		if (child > 0)
+			exit(0);
 		freopen( "/dev/null", "r", stdin);
 		freopen( "/dev/null", "w", stdout);
 		freopen( "/dev/null", "w", stderr);
