@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 10:38:22 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/21 10:15:50 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/21 10:46:06 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <unistd.h>
 
 # include <thread>
+# include <pthread.h>
 
 # include <sys/socket.h>
 # include <stdlib.h>
