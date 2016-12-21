@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 10:34:47 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/21 11:52:19 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/21 11:53:08 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,9 +169,7 @@ void				ClassSocket::mainloop(void)
 	{
 		std::thread _thread(reading);
 		_thread.detach();
-		//_thread.join();
 	}
-	std::cout << "hello" << std::endl;
 	while (1)
 	{
 		initfd();
