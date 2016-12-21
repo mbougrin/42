@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 10:34:47 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/21 11:56:36 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/21 11:58:51 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ void 				my_itoa(int value, std::string& buf, int base)
 
 }
 
-void				reading(void)
+void				ClassSocket::reading(void)
 {
 	char		buffer[127];
 
@@ -167,7 +167,7 @@ void				ClassSocket::mainloop(void)
 	}
 	if (_v == true)
 	{
-		std::thread _thread(reading);
+		std::thread _thread(ClassSocket::reading);
 		_thread.detach();
 	}
 	while (1)
