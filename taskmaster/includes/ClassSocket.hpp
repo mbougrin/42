@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 10:38:22 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/19 10:37:40 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/21 10:15:50 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <sys/time.h>
 # include <sys/types.h>
 # include <unistd.h>
+
+# include <thread>
 
 # include <sys/socket.h>
 # include <stdlib.h>

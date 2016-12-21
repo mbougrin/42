@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 10:34:47 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/21 10:05:55 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/21 10:15:46 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,12 +132,29 @@ void 				my_itoa(int value, std::string& buf, int base)
 
 }
 
+void				reading(void)
+{
+	char		buffer[127];
+
+//	int flags = fcntl(0, F_GETFL, 0);
+//	fcntl(0, F_SETFL, flags | O_NONBLOCK);
+	while (1)
+	{
+		int	 ret;
+
+		ret = read(0, buffer, 127);
+		buffer[ret] = '\0';
+		std::cout << buffer << std::endl;
+		bzero(buffer, 127);
+	}
+
+}
+
 void				ClassSocket::mainloop(void)
 {
 	string		str;
 	string		ptr;
 	pid_t		pid = getpid();
-//	char		buffer[127];
 
 	my_itoa(pid, ptr, 10);
 	_log.writelog("INFO", "Entering Daemon mode.");
@@ -148,19 +165,14 @@ void				ClassSocket::mainloop(void)
 		std::cout << "Entergin Daemon mode." << std::endl;
 		std::cout << str << ptr << std::endl;
 	}
-//	int flags = fcntl(0, F_GETFL, 0);
-//	fcntl(0, F_SETFL, flags | O_NONBLOCK);
+	if (_v == true)
+	{
+		std::thread _thread(reading);
+		_thread.join();
+	}
 	while (1)
 	{
-/*		if (_v == true)
-		{
-			int	 ret;
-			ret = read(0, buffer, 127);
-			buffer[ret] = '\0';
-			std::cout << buffer << std::endl;
-			bzero(buffer, 127);
-		}
-*/		initfd();
+		initfd();
 		do_select();
 		check_fd();
 	}
