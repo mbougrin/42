@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 10:34:47 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/21 11:53:08 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/21 11:56:36 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,15 +136,15 @@ void				reading(void)
 {
 	char		buffer[127];
 
-//	int flags = fcntl(0, F_GETFL, 0);
-//	fcntl(0, F_SETFL, flags | O_NONBLOCK);
 	while (1)
 	{
 		int	 ret;
 
 		ret = read(0, buffer, 127);
 		buffer[ret] = '\0';
-		std::cout << buffer << std::endl;
+		std::cout << buffer;
+		if (strchr(buffer, '\n') == NULL)
+			std::cout << std::endl;
 		bzero(buffer, 127);
 	}
 
