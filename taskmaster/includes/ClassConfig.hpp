@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:20 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/19 14:21:33 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/21 12:28:06 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define CLASSCONFIG_HPP
 
 # include <iostream>
-# include <ClassProgram.hpp>
+# include <Tintin_reporter.hpp>
 # include <list>
 # include <string>
 # include <fstream>
@@ -27,9 +27,10 @@ class				ClassConfig
 		ClassConfig &operator=(ClassConfig const &src);
 		~ClassConfig();
 
-		void		parse(char *conf);
+		void		parse(char *conf, Tintin_reporter log);
 	private:
-		std::list<ClassProgram>		lst;
+	//	std::list<ClassProgram>		lst;
+		Tintin_reporter				_log;
 };
 
 #endif
