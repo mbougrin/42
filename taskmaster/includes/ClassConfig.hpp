@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:20 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/21 12:28:06 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/21 16:57:29 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <list>
 # include <string>
 # include <fstream>
+# include <sstream>
 
 class				ClassConfig
 {

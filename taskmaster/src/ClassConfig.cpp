@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/21 16:24:41 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/21 16:59:28 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,19 @@ ClassConfig::ClassConfig(ClassConfig const &src)
 void			ClassConfig::parse(char *conf, Tintin_reporter log)
 {
 	_log = log;
-	ifstream file(conf);
-	char	data[256];
+	ifstream 		file(conf);
+	stringstream 	ss;
+	char			data[256];
 
 	if (!file.is_open())
 		exit(-1);
 
 	while (file.getline(data, 256))
 	{
-		_log.writelog("LOG", data);
-		std::cout << data << std::endl;
-		break ;
+		ss << data;
+		bzero(data, 256);
 	}
+	_log.writelog("LOG", ss.str());
 	file.close();
 }
 
