@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/21 16:22:02 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/21 16:22:26 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void			ClassConfig::parse(char *conf, Tintin_reporter log)
 	_log = log;
 	ifstream file(conf);
 	char	data[256];
-	string	str = new string();
+	string	*str = new string();
 
 	if (!file.is_open())
 		exit(-1);
