@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/19 14:11:40 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/21 09:10:51 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,7 @@ ClassConfig::ClassConfig(ClassConfig const &src)
 
 void			ClassConfig::parse(char *conf)
 {
-	std::string name;
-
-	    std::getline (conf, name);
-		  std::cout << "Hello, " << name << "!\n";
-		  
+	std::cout << conf << std::endl; 
 }
 
 ClassConfig		&ClassConfig::operator=(ClassConfig const &src)

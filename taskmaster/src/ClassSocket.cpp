@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 10:34:47 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/19 10:44:29 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/21 09:55:24 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,7 @@ void				ClassSocket::mainloop(void)
 	string		str;
 	string		ptr;
 	pid_t		pid = getpid();
+	char		buffer[127];
 
 	my_itoa(pid, ptr, 10);
 	_log.writelog("INFO", "Entering Daemon mode.");
@@ -149,6 +150,14 @@ void				ClassSocket::mainloop(void)
 	}
 	while (1)
 	{
+		if (_v == true)
+		{
+			int	 ret;
+			ret = read(0, buffer, 127);
+			buffer[ret] = '\0';
+			std::cout << buffer << std::endl;
+			bzero(buffer, 127);
+		}
 		initfd();
 		do_select();
 		check_fd();
