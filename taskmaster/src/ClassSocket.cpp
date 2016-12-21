@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 10:34:47 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/21 09:55:24 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/21 10:01:50 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,8 @@ void				ClassSocket::mainloop(void)
 		std::cout << "Entergin Daemon mode." << std::endl;
 		std::cout << str << ptr << std::endl;
 	}
+	int flags = fcntl(0, F_GETFL, 0);
+	fcntl(0, F_SETFL, flags | O_NONBLOCK);
 	while (1)
 	{
 		if (_v == true)
@@ -180,6 +182,9 @@ void				ClassSocket::clientread(int cs)
 	{
 		ClassSocket::cleanclient(&_fds[cs]);
 		close(cs);
+		if (_v == true)
+			std::cout << "Client disconnected." << std::endl;
+		_log.writelog("LOG", "Client disconnected.");
 		_client--;
 	}
 	else
