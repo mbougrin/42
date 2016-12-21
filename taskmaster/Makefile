@@ -6,7 +6,7 @@
 #    By: mbougrin <mbougrin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/05 10:07:41 by mbougrin          #+#    #+#              #
-#    Updated: 2016/12/21 11:04:32 by mbougrin         ###   ########.fr        #
+#    Updated: 2016/12/21 11:07:13 by mbougrin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = taskmaster
 CC = clang++
 RM = rm -f
 INC = includes
-CFLAGS = -Wall -Wextra -Werror -std=c++11
+CFLAGS = -Wall -Wextra -Werror -pthread -std=c++11
 DIRSRC = src/
 OBJ = 	$(SRC:.cpp=.o)
 SRC =   $(DIRSRC)main.cpp \
