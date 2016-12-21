@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 10:38:22 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/21 12:00:17 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/21 12:01:35 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ class							ClassSocket
 		void					mainloop(void);
 
 		static	void			reading(void);
-	
 		static void				cleanclient(struct s_fds *fds);
 		static void				clientread(int cs);
 		static void				clientwrite(int cs);
