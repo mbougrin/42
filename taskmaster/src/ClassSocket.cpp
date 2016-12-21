@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 10:34:47 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/21 10:49:46 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/21 11:04:19 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -294,7 +294,7 @@ void				ClassSocket::createsocket(void)
 	sin.sin_port = htons(_port);
 	sin.sin_addr.s_addr = htonl(INADDR_ANY);
 	sin.sin_family = AF_INET;
-	if (bind(_sd, (const struct sockaddr *)&sin, sizeof(sin)) == -1)
+	if (::bind(_sd, (const struct sockaddr *)&sin, sizeof(sin)) == -1)
 	{
 		if (_v == true)
 			std::cout << "Error bind fail." << std::endl;
