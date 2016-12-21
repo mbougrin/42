@@ -6,12 +6,12 @@
 #    By: mbougrin <mbougrin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/05 10:07:41 by mbougrin          #+#    #+#              #
-#    Updated: 2016/12/15 15:32:24 by mbougrin         ###   ########.fr        #
+#    Updated: 2016/12/21 10:25:44 by mbougrin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = taskmaster
-CC = g++
+CC = clang++
 RM = rm -f
 INC = includes
 CFLAGS = -Wall -Wextra -Werror
