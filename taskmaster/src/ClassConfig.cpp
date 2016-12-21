@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/21 12:06:20 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/21 12:10:54 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,18 @@ ClassConfig::ClassConfig(ClassConfig const &src)
 
 void			ClassConfig::parse(char *conf)
 {
-	ofstream outfile;
+	ofstream file(conf);
+	std::string	line;
 	char	data[256];
 
-	outfile.open(conf);
+	if (!file.isopen())
+		exit(-1);
 
-	outfile >> data
-	std::cout << data << std::endl; 
-	outfile.close();
+	while (std::getline(file, line))
+	{
+		std::cout << line << std::endl;
+	}
+	file.close();
 }
 
 ClassConfig		&ClassConfig::operator=(ClassConfig const &src)
