@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/21 17:01:05 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/22 10:50:13 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void			ClassConfig::parse(char *conf, Tintin_reporter log)
 	}
 	_log.writelog("LOG", ss.str());
 	file.close();
+	std::cout << ss.str() << std::endl;
 }
 
 ClassConfig		&ClassConfig::operator=(ClassConfig const &src)
