@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 10:34:47 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/21 12:29:31 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/22 14:38:04 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ ClassSocket::ClassSocket(int port, char *conf, bool verbose)
 	_client = 0;
 	_log.setVerbose(verbose);
 	_log.init();
-	_configuration.parse(_conf, _log);
+	_configuration.init(_conf, _log);
 	createsocket();
 	return ;
 }

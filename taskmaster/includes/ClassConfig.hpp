@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:20 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/22 11:41:26 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/22 14:37:09 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,11 @@ class				ClassConfig
 		ClassConfig &operator=(ClassConfig const &src);
 		~ClassConfig();
 
-		void		parse(char *conf, Tintin_reporter log);
+		void		init(char *conf, Tintin_reporter log);
+		void		parse(void);
+		void		openfile(void);
 	private:
+		char						*_conf;
 		stringstream 				_ss;
 	//	std::list<ClassProgram>		lst;
 		Tintin_reporter				_log;

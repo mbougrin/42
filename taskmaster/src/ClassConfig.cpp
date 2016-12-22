@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/22 12:22:13 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/22 14:37:45 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,13 @@ ClassConfig::ClassConfig(ClassConfig const &src)
 	return ;
 }
 
-void			ClassConfig::parse(char *conf, Tintin_reporter log)
+void			ClassConfig::openfile(void)
 {
-	ifstream 		file(conf);
+	ifstream 		file(_conf);
 	char			data[256];
 
-	_log = log;
 	if (!file.is_open())
 		exit(-1);
-
 	while (file.getline(data, 256))
 	{
 		if (data[0] != ';' && data[0] != ' ' && data[0] != '\0')
@@ -43,6 +41,18 @@ void			ClassConfig::parse(char *conf, Tintin_reporter log)
 	}
 	file.close();
 	std::cout << _ss.str();
+}
+
+void			ClassConfig::init(char *conf, Tintin_reporter log)
+{
+	_conf = conf;
+	_log = log;
+	parse();
+}
+
+void			ClassConfig::parse(void)
+{
+	openfile();
 }
 
 ClassConfig		&ClassConfig::operator=(ClassConfig const &src)
