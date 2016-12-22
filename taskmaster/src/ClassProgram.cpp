@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:42:51 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/16 16:08:35 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/22 14:43:09 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,17 @@ bool				ClassProgram::getAutostart(void) const
 {
 	return (_autostart);
 }
+
+void				ClassProgram::setAutorestart(bool autorestart)
+{
+	_autorestart = autorestart;
+}
+
+bool				ClassProgram::getAutorestart(void) const
+{
+	return (_autorestart);
+}
+
 
 void				ClassProgram::setExitcode(int nb)
 {
