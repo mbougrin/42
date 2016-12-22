@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:20 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/21 16:57:29 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/22 11:41:26 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ class				ClassConfig
 
 		void		parse(char *conf, Tintin_reporter log);
 	private:
+		stringstream 				_ss;
 	//	std::list<ClassProgram>		lst;
 		Tintin_reporter				_log;
 };
