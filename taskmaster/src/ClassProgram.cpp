@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:42:51 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/22 14:43:09 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/23 09:03:12 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ ClassProgram::ClassProgram(void)
 	_umask = 0;
 	_workingdir = NULL;
 	_autostart = false;
+	_autorestart = false;
 	_startretry = 0;
 	_starttime = 0;
 	_stoptime = 0;
