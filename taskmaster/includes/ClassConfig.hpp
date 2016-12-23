@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:20 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/22 14:37:09 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/23 09:57:19 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ class				ClassConfig
 		void		openfile(void);
 	private:
 		char						*_conf;
-		stringstream 				_ss;
-	//	std::list<ClassProgram>		lst;
+		std::list<string>			_lstconf;
+	//	std::list<ClassProgram>		_lstprog;
 		Tintin_reporter				_log;
 };
 
