@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/23 17:03:52 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/23 17:05:33 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ void			ClassConfig::init(char *conf, Tintin_reporter log)
 					<< (*i)->getStarttime() << "*"
 					<< (*i)->getStoptime() << "*"
 					<< (*i)->getStopsignal() << "*"
-//					<< (*i)->getStdin() << "*"
-//					<< (*i)->getStderr() << "*"
+					<< (*i)->getStdin() << "*"
+					<< (*i)->getStderr() << "*"
 					<< std::endl;
 	}
 }
@@ -127,7 +127,7 @@ void			ClassConfig::parse(void)
 				else if (strncmp(name->c_str(), "stderr_logfile", \
 							name->length()) == 0)
 					_new->setStderr(*info);
-				else if (strncmp(name->c_str(), "stdin_logfile", \
+				else if (strncmp(name->c_str(), "stdout_logfile", \
 						name->length()) == 0)
 					_new->setStdin(*info);
 //				else if (strncmp(name->c_str(), "command", name->c_str()) == 0)
