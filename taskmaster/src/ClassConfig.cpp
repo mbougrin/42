@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/23 15:49:07 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/23 15:50:09 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void			ClassConfig::init(char *conf, Tintin_reporter log)
 	_log = log;
 	parse();
 
-	list<ClassProgram>::iterator i;
+/*	list<ClassProgram>::iterator i;
 	for (i = _lstprog.begin(); i != _lstprog.end(); ++i)
 	{
 		std::cout 	<< i->getName()
@@ -71,7 +71,7 @@ void			ClassConfig::init(char *conf, Tintin_reporter log)
 					<< i->getStdin()
 					<< i->getStderr()
 					<< std::endl;
-	}
+	}*/
 }
 
 void			ClassConfig::parse(void)
