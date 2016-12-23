@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:20 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/23 11:08:18 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/23 11:09:30 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <Tintin_reporter.hpp>
 # include <list>
 # include <string>
+# include <string.h>
 # include <fstream>
 # include <sstream>
 
