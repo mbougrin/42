@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/23 10:04:33 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/23 10:08:30 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void			ClassConfig::openfile(void)
 	{
 		if (data[0] != ';' && data[0] != ' ' && data[0] != '\0')
 		{
-			ss << data;
+			ss = data;
 			_lstconf.push_back(ss.str());
 			std::cout << ss.str() << std::endl;
 		}
