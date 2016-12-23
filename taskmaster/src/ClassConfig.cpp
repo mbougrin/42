@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/23 15:55:20 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/23 15:58:12 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void			ClassConfig::parse(void)
 {
 	openfile();
 	list<string>::iterator i;
-	for (i = _lstconf.begin(); i != _lstconf.end(); ++i)
+	for (i = _lstconf.begin(); i != _lstconf.end(); i++)
 	{
 		if (strchr(i->c_str(), '[') != NULL \
 				&& strchr(i->c_str(), ']') != NULL)
@@ -95,7 +95,6 @@ void			ClassConfig::parse(void)
 
 			ClassProgram _new = ClassProgram();
 			_new.setName(*name);
-			std::cout << _new.getName() << std::endl;
 			while (1)
 			{
 				i++;
@@ -132,7 +131,7 @@ void			ClassConfig::parse(void)
 			}
 			_lstprog.push_back(_new);
 			delete action;
-		//	delete name;
+			delete name;
 			if (i == _lstconf.end())
 				break ;
 		}
