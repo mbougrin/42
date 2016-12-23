@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/23 13:35:58 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/23 13:39:09 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,8 @@ void			ClassConfig::parse(void)
 			_lstprog.push_back(_new);
 			delete action;
 			delete name;
+			if (i == _lstconf.end())
+				break ;
 		}
 		std::cout << *i << std::endl;
 	}
