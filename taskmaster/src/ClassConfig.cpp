@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/23 16:54:40 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/23 16:58:48 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void			ClassConfig::parse(void)
 				string *name = new string(i->substr(0, find));
 				string *info = new string(i->substr(find + 1, len));
 
-			if (strncmp(name->c_str(), "command", name->length()) == 0)
+				if (strncmp(name->c_str(), "command", name->length()) == 0)
 					_new->setCmd(*info);
 				else if (strncmp(name->c_str(), "numprocs", name->length()) == 0)
 					_new->setProc(atoi(info->c_str()));
@@ -128,7 +128,7 @@ void			ClassConfig::parse(void)
 							name->length()) == 0)
 					_new->setStderr(*info);
 				else if (strncmp(name->c_str(), "stdin_logfile", \
-							name->length()) == 0)
+						name->length()) == 0)
 					_new->setStdin(*info);
 //				else if (strncmp(name->c_str(), "command", name->c_str()) == 0)
 //				else if (strncmp(name->c_str(), "command", name->c_str()) == 0)
