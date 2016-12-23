@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/23 13:21:25 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/23 13:31:49 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,11 @@ void			ClassConfig::init(char *conf, Tintin_reporter log)
 	_conf = conf;
 	_log = log;
 	parse();
+}
+
+void			ClassConfig::parse(void)
+{
+	openfile();
 	list<string>::iterator i;
 	for (i = _lstconf.begin(); i != _lstconf.end(); ++i)
 	{
@@ -67,19 +72,27 @@ void			ClassConfig::init(char *conf, Tintin_reporter log)
 			string *name = new string(line->substr(find + 1, len));
 			string *action = new string(line->substr(0, find));
 			std::cout << *name << " " << *action << std::endl;
-//			for (i = _lstconf.begin(); i != _lstconf.end(); ++i)
-//			{
-//				
-//			}
+
+			ClassProgram _new = ClassProgram();
+			for (; i != _lstconf.end(); ++i)
+			{
+				if (strchr(i->c_str(), '[') != NULL \
+					&& strchr(i->c_str(), ']') != NULL)
+					break ;
+				int len = i->length();
+				int find = i->find("=");
+				string *name = new string(i->substr(0, find));
+				string *info = new string(i->substr(find + 1, len));
+
+				std::cout << *name << " " << *info << std::endl;
+				delete name;
+				delete info;
+			}
+			delete action;
 			delete name;
 		}
 		std::cout << *i << std::endl;
 	}
-}
-
-void			ClassConfig::parse(void)
-{
-	openfile();
 }
 
 ClassConfig		&ClassConfig::operator=(ClassConfig const &src)
