@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:20 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/23 15:53:56 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/23 15:59:05 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ class				ClassConfig
 	private:
 		char						*_conf;
 		std::list<string>			_lstconf;
-		std::list<ClassProgram>		_lstprog;
+		std::list<ClassProgram*>	_lstprog;
 		Tintin_reporter				_log;
 };
 

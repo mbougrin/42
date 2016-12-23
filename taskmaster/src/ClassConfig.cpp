@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/23 15:58:12 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/23 15:59:18 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,8 @@ void			ClassConfig::parse(void)
 			std::cout << *name << " " << *action << std::endl;
 
 
-			ClassProgram _new = ClassProgram();
-			_new.setName(*name);
+			ClassProgram _new = new ClassProgram();
+			_new->setName(*name);
 			while (1)
 			{
 				i++;
