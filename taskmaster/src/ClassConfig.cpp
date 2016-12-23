@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/23 13:33:37 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/23 13:35:58 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,11 @@ void			ClassConfig::parse(void)
 			std::cout << *name << " " << *action << std::endl;
 
 			ClassProgram _new = ClassProgram();
-			i++;
-			for (; i != _lstconf.end(); ++i)
+			while (1)
 			{
+				i++;
+				if (i == _lstconf.end())
+					break ;
 				if (strchr(i->c_str(), '[') != NULL \
 					&& strchr(i->c_str(), ']') != NULL)
 					break ;
