@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/23 10:10:06 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/23 10:12:24 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void			ClassConfig::openfile(void)
 {
 	ifstream 		file(_conf);
 	char			data[256];
-	stringstream 	ss;
 
 	if (!file.is_open())
 	{
@@ -42,10 +41,8 @@ void			ClassConfig::openfile(void)
 	{
 		if (data[0] != ';' && data[0] != ' ' && data[0] != '\0')
 		{
-			ss <<data;
-			_lstconf.push_back(ss.str());
+			_lstconf.push_back(string(data));
 		}
-		ss.clear();
 		bzero(data, 256);
 	}
 	file.close();
