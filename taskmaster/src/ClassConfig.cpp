@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/23 11:17:38 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/23 11:18:36 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void			ClassConfig::init(char *conf, Tintin_reporter log)
 			string *name = new string(i->c_str());
 			name->erase(0, 1);
 			name->erase(name->length() - 1, 1);
-			std::cout << name->at(name->find(":")) << std::endl;
+			std::cout << name + name->find(":") << std::endl;
 //			for (i = _lstconf.begin(); i != _lstconf.end(); ++i)
 //			{
 //				
