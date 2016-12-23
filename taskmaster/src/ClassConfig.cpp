@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/23 16:38:27 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/23 16:54:40 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,12 @@ void			ClassConfig::init(char *conf, Tintin_reporter log)
 					<< (*i)->getWorkingdir() << "*"
 //					<< i->getAutostart()
 //					<< i->getAutorestart()
-//					<< i->getStartretry()
-//					<< i->getStarttime()
-//					<< i->getStoptime()
-//					<< i->getStopsignal()
-//					<< i->getStdin()
-//					<< i->getStderr()
+					<< (*i)->getStartretry() << "*"
+					<< (*i)->getStarttime() << "*"
+					<< (*i)->getStoptime() << "*"
+					<< (*i)->getStopsignal() << "*"
+					<< (*i)->getStdin() << "*"
+					<< (*i)->getStderr() << "*"
 					<< std::endl;
 	}
 }
@@ -114,12 +114,22 @@ void			ClassConfig::parse(void)
 					_new->setProc(atoi(info->c_str()));
 				else if (strncmp(name->c_str(), "directory", name->length()) == 0)
 					_new->setWorkingdir(*info);
-//				else if (strncmp(name->c_str(), "", name->c_str()) == 0)
-//				else if (strncmp(name->c_str(), "command", name->c_str()) == 0)
-//				else if (strncmp(name->c_str(), "command", name->c_str()) == 0)
-//				else if (strncmp(name->c_str(), "command", name->c_str()) == 0)
-//				else if (strncmp(name->c_str(), "command", name->c_str()) == 0)
-//				else if (strncmp(name->c_str(), "command", name->c_str()) == 0)
+				else if (strncmp(name->c_str(), "startretries", \
+							name->length()) == 0)
+					_new->setStartretry(atoi(info->c_str()));
+				else if (strncmp(name->c_str(), "startsec", name->length()) == 0)
+					_new->setStarttime(atoi(info->c_str()));
+				else if (strncmp(name->c_str(), "stopwaitsecs", \
+							name->length()) == 0)
+					_new->setStoptime(atoi(info->c_str()));
+				else if (strncmp(name->c_str(), "stopsignal", name->length()) == 0)
+					_new->setStopsignal(*info);
+				else if (strncmp(name->c_str(), "stderr_logfile", \
+							name->length()) == 0)
+					_new->setStderr(*info);
+				else if (strncmp(name->c_str(), "stdin_logfile", \
+							name->length()) == 0)
+					_new->setStdin(*info);
 //				else if (strncmp(name->c_str(), "command", name->c_str()) == 0)
 //				else if (strncmp(name->c_str(), "command", name->c_str()) == 0)
 //				else if (strncmp(name->c_str(), "command", name->c_str()) == 0)
