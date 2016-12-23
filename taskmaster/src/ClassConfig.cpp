@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/23 13:39:09 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/23 15:46:38 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,25 @@ void			ClassConfig::init(char *conf, Tintin_reporter log)
 	_conf = conf;
 	_log = log;
 	parse();
+
+	list<ClassProgram>::iterator i;
+	for (i = _lstprog.begin(); i != _lstprog.end(); ++i)
+	{
+		std::cout 	<< i->getName()
+					<< i->getCmd()
+					<< i->getProc()
+					<< i->getUmask()
+					<< i->getWorkingdir()
+					<< i->getAutostart()
+					<< i->getAutorestart()
+					<< i->getStartretry()
+					<< i->getStarttime()
+					<< i->getStoptime()
+					<< i->getStopsignal()
+					<< i->getStdin()
+					<< i->getStderr()
+					<< std::endl;
+	}
 }
 
 void			ClassConfig::parse(void)
@@ -73,7 +92,9 @@ void			ClassConfig::parse(void)
 			string *action = new string(line->substr(0, find));
 			std::cout << *name << " " << *action << std::endl;
 
+
 			ClassProgram _new = ClassProgram();
+			_new.setName(*name);
 			while (1)
 			{
 				i++;
@@ -87,7 +108,24 @@ void			ClassConfig::parse(void)
 				string *name = new string(i->substr(0, find));
 				string *info = new string(i->substr(find + 1, len));
 
-				std::cout << *name << " " << *info << std::endl;
+				if (strncmp(name->c_str(), "command", name->length()) == 0)
+					_new.setCmd(*info);
+				else if (strncmp(name->c_str(), "numprocs", name->length()) == 0)
+					_new.setProc(atoi(info->c_str()));
+				else if (strncmp(name->c_str(), "directory", name->length()) == 0)
+					_new.setWorkingdir(*info);
+//				else if (strncmp(name->c_str(), "", name->c_str()) == 0)
+//				else if (strncmp(name->c_str(), "command", name->c_str()) == 0)
+//				else if (strncmp(name->c_str(), "command", name->c_str()) == 0)
+//				else if (strncmp(name->c_str(), "command", name->c_str()) == 0)
+//				else if (strncmp(name->c_str(), "command", name->c_str()) == 0)
+//				else if (strncmp(name->c_str(), "command", name->c_str()) == 0)
+//				else if (strncmp(name->c_str(), "command", name->c_str()) == 0)
+//				else if (strncmp(name->c_str(), "command", name->c_str()) == 0)
+//				else if (strncmp(name->c_str(), "command", name->c_str()) == 0)
+		//		else if (strncmp(name->c_str(), "command", name->c_str()) == 0)
+		//		else if (strncmp(name->c_str(), "command", name->c_str()) == 0)
+
 				delete name;
 				delete info;
 			}
