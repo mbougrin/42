@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/23 17:03:23 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/23 17:03:52 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,9 @@ void			ClassConfig::init(char *conf, Tintin_reporter log)
 					<< (*i)->getStartretry() << "*"
 					<< (*i)->getStarttime() << "*"
 					<< (*i)->getStoptime() << "*"
-//					<< (*i)->getStopsignal() << "*"
-					<< (*i)->getStdin() << "*"
-					<< (*i)->getStderr() << "*"
+					<< (*i)->getStopsignal() << "*"
+//					<< (*i)->getStdin() << "*"
+//					<< (*i)->getStderr() << "*"
 					<< std::endl;
 	}
 }
