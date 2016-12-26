@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/26 11:43:18 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/26 11:44:59 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,19 +57,19 @@ void			ClassConfig::init(char *conf, Tintin_reporter log)
 	list<ClassProgram*>::iterator i;
 	for (i = _lstprog.begin(); i != _lstprog.end(); ++i)
 	{
-		std::cout 	<< (*i)->getName() << "name*"
-					<< (*i)->getCmd() << "cmd*"
-					<< (*i)->getProc() << "proc*"
-					<< (*i)->getUmask() << "umask*"
-					<< (*i)->getWorkingdir() << "workdir*"
+		std::cout 	<< (*i)->getName() << " name\n"
+					<< (*i)->getCmd() << " cmd\n"
+					<< (*i)->getProc() << " proc\n"
+					<< (*i)->getUmask() << " umask\n"
+					<< (*i)->getWorkingdir() << " workdir\n"
 //					<< i->getAutostart()
 //					<< i->getAutorestart()
-					<< (*i)->getStartretry() << "startrety*"
-					<< (*i)->getStarttime() << "starttime*"
-					<< (*i)->getStoptime() << "stoptime*"
-					<< (*i)->getStopsignal() << "stopsignal*"
-					<< (*i)->getStdin() << "stdin*"
-					<< (*i)->getStderr() << "stderr*"
+					<< (*i)->getStartretry() << " startrety\n"
+					<< (*i)->getStarttime() << " starttime\n"
+					<< (*i)->getStoptime() << " stoptime\n"
+					<< (*i)->getStopsignal() << " stopsignal\n"
+					<< (*i)->getStdin() << " stdin\n"
+					<< (*i)->getStderr() << " stderr\n"
 					<< std::endl;
 	}
 }
