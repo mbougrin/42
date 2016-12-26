@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:42:51 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/26 12:19:09 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/26 17:07:42 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ ClassProgram::ClassProgram(void)
 	_umask = 0;
 	_workingdir = NULL;
 	_autostart = false;
-	_autorestart = false;
 	_startretry = 0;
 	_starttime = 0;
 	_stoptime = 0;
@@ -110,12 +109,12 @@ bool				ClassProgram::getAutostart(void) const
 	return (_autostart);
 }
 
-void				ClassProgram::setAutorestart(bool autorestart)
+void				ClassProgram::setAutorestart(const string &str)
 {
-	_autorestart = autorestart;
+	_autorestart = str;
 }
 
-bool				ClassProgram::getAutorestart(void) const
+const string		&ClassProgram::getAutorestart(void) const
 {
 	return (_autorestart);
 }

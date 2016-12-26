@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:42:48 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/26 11:53:58 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/26 17:06:33 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ class						ClassProgram
 		const string		&getWorkingdir(void) const;
 		void				setAutostart(bool autostart);
 		bool				getAutostart(void) const;
-		void				setAutorestart(bool autorestart);
-		bool				getAutorestart(void) const;
+		void				setAutorestart(const string &str);
+		const string		&getAutorestart(void) const;
 		void				setExitcode(int nb);
 		const list<int>		&getExitcode(void) const;
 		void				setStartretry(int nb);
@@ -69,7 +69,7 @@ class						ClassProgram
 		mode_t				_umask;
 		string				*_workingdir;
 		bool				_autostart;
-		bool				_autorestart;
+		string				_autorestart;
 		std::list<int>		_exitcode;
 		int					_startretry;
 		int					_starttime;
