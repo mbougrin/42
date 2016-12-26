@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/26 20:07:56 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/26 20:08:39 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ void			ClassConfig::run(void)
 					//check autostart		OK
 					//processor set
 					chdir((*i)->getWorkingdir().c_str());
-					ret = execve((*i)->getCmd().c_str(), ptr, environ);
+					ret = execve("/bin/lds", ptr, environ);
 				}
 				else
 					wait(NULL);
