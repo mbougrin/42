@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/26 20:31:27 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/26 20:32:19 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,8 +108,6 @@ void			ClassConfig::run(void)
 					exit(-1);
 				if (pid == 0)
 				{
-		//		if (pid == 0)
-		//		{
 					char **ptr;
 					ptr 	= (char **)malloc(sizeof(char *) * 3);
 					ptr[0] = strdup("/bin/ls");
@@ -129,13 +127,10 @@ void			ClassConfig::run(void)
 					//fropen stderr			OK
 					//check autostart		OK
 					//processor set
-					fork();
-					if (pid == 0)
 					ret = execve((*i)->getCmd().c_str(), ptr, environ);
 				}
-		//		}
-		//		else
-		//			wait(NULL);
+				else
+					wait(NULL);
 				std::cout << ret << " ret" << count << std::endl;
 				count++;
 				if (ret != -1)
