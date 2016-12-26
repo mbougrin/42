@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/26 18:28:03 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/26 18:30:57 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ void			ClassConfig::printconfig(void)
 	}
 }
 
+extern char		**environ;
+
 void			ClassConfig::run(void)
 {
 	list<ClassProgram*>::iterator i;
@@ -97,7 +99,7 @@ void			ClassConfig::run(void)
 			exit(-1);
 		if (pid == 0)
 		{
-			execve((*i)->getCmd().c_str(), NULL, NULL);
+			execve((*i)->getCmd().c_str(), environ, NULL);
 			std::cout << "ok" << std::endl;
 		}
 		else
