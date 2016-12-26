@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/26 20:39:11 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/26 20:40:30 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,8 +115,8 @@ void			ClassConfig::run(void)
 					ptr[2] = NULL;
 					umask((*i)->getUmask());
 					chdir((*i)->getWorkingdir().c_str());
-				//	freopen((*i)->getStdin().c_str(), "w", stdout);
-				//	freopen((*i)->getStderr().c_str(), "w", stderr);
+					freopen((*i)->getStdin().c_str(), "w", stdout);
+					freopen((*i)->getStderr().c_str(), "w", stderr);
 					//TODO parseur arg
 					//umask 				OK
 					//starttime 			OK
@@ -130,29 +130,7 @@ void			ClassConfig::run(void)
 					ret = execve((*i)->getCmd().c_str(), ptr, environ);
 				}
 				else
-				{	char **ptr;
-					ptr 	= (char **)malloc(sizeof(char *) * 3);
-					ptr[0] = strdup("/bin/ls");
-					ptr[1] = strdup("-l");
-					ptr[2] = NULL;
-					umask((*i)->getUmask());
-					chdir((*i)->getWorkingdir().c_str());
-				//	freopen((*i)->getStdin().c_str(), "w", stdout);
-				//	freopen((*i)->getStderr().c_str(), "w", stderr);
-					//TODO parseur arg
-					//umask 				OK
-					//starttime 			OK
-					//runing or not			OK
-					//working dir 			OK
-					//start retry			OK
-					//fropen stdin			OK
-					//fropen stderr			OK
-					//check autostart		OK
-					//processor set
-					ret = execve((*i)->getCmd().c_str(), ptr, environ);
-
-				//	wait(NULL);
-				}
+					wait(NULL);
 				std::cout << ret << " ret" << count << std::endl;
 				count++;
 				if (ret != -1)
