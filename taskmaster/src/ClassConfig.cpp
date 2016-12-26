@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/26 12:07:35 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/26 12:15:48 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,14 @@ void			ClassConfig::init(char *conf, Tintin_reporter log)
 					<< (*i)->getStdin() << " stdin\n"
 					<< (*i)->getStderr() << " stderr\n"
 					<< std::endl;
+
+		const std::list<string>tmp = (*i)->getEnv();
+		list<string>::const_iterator	j;
+		std::cout << "env" << std::endl;
+		for (j = tmp.cbegin() ; j != tmp.cend() ; ++j)
+		{
+			std::cout << *j << std::endl;
+		}
 	}
 }
 
@@ -145,16 +153,12 @@ void			ClassConfig::parse(void)
 					std::list<string>tmp;
 					while (1)
 					{
-						std::cout << "start " << *info << std::endl;
 						int	len = info->find(",");
 						if (len == -1)
 							break ;
-						
 						tmp.push_back( string(i->substr(erase, find)));
-					
 						info->erase(erase, len + 1);
 						erase = len;
-						std::cout << "end " << *info << std::endl;
 					}
 					
 				}
