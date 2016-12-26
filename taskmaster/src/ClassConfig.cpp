@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/26 20:07:06 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/26 20:07:56 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void			ClassConfig::run(void)
 				{
 					char **ptr;
 					ptr 	= (char **)malloc(sizeof(char *) * 3);
-					ptr[0] = strdup("/bin/ls");
+					ptr[0] = strdup("/bin/lsd");
 					ptr[1] = strdup("-l");
 					ptr[2] = NULL;
 					umask((*i)->getUmask());
