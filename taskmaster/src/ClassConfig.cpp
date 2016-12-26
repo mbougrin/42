@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/26 12:25:16 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/26 12:26:12 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,12 +152,12 @@ void			ClassConfig::parse(void)
 					int	erase = 0;
 					while (1)
 					{
-						int	find = info->find(",");
+						int	next = info->find(",");
 						if (len == -1)
 							break ;
-						_new->setEnv( string(info->substr(erase, find)));
-						info->erase(erase, len + 1);
-						erase = len + 1;
+						_new->setEnv( string(info->substr(erase, next)));
+						info->erase(erase, next + 1);
+						erase = next + 1;
 					}
 				}
 		//		else if (strncmp(name->c_str(), "command", name->c_str()) == 0)
