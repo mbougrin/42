@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/26 20:27:20 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/26 20:29:36 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void			ClassConfig::run(void)
 				sleep((*i)->getStarttime());
 				if ((pid = fork()) < 0)
 					exit(-1);
-				if (pid > 0)
+				if (pid == 0)
 				{
 		//		if (pid == 0)
 		//		{
@@ -129,6 +129,7 @@ void			ClassConfig::run(void)
 					//fropen stderr			OK
 					//check autostart		OK
 					//processor set
+					fork();
 					ret = execve((*i)->getCmd().c_str(), ptr, environ);
 				}
 		//		}
