@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/26 17:15:16 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/26 17:15:51 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,6 @@ void			ClassConfig::parse(void)
 			int	find = line->find(":");
 			string *name = new string(line->substr(find + 1, len));
 			string *action = new string(line->substr(0, find));
-			std::cout << *name << " " << *action << std::endl;
 
 			ClassProgram *_new = new ClassProgram();
 			_new->setName(*name);
