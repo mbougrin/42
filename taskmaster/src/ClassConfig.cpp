@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/26 18:47:52 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/26 18:48:54 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,9 @@ extern char		**environ;
 void			ClassConfig::run(void)
 {
 	list<ClassProgram*>::iterator i;
-	for (i = _lstprog.begin(); i != _lstprog.end(); ++i)
-	{
+//	for (i = _lstprog.begin(); i != _lstprog.end(); ++i)
+//	{
+		i = _lstprog.begin();
 		pid_t	pid;
 
 		if ((pid = fork() < 0))
@@ -113,9 +114,8 @@ void			ClassConfig::run(void)
 			return ;
 		}
 		else
-			exit(-1);
-//			wait(NULL);
-	}
+			wait(NULL);
+//	}
 }
 
 void			ClassConfig::init(char *conf, Tintin_reporter log)
