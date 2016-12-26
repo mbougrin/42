@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/26 12:05:09 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/26 12:06:08 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,7 @@ void			ClassConfig::parse(void)
 						
 						tmp.push_back( string(i->substr(erase, find)));
 					
-						info->erase(erase, len);
+						info->erase(erase, len + 1);
 						erase = len;
 					std::cout << *info << std::endl;
 					}
