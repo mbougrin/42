@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/26 20:00:58 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/26 20:02:58 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ extern char		**environ;
 
 void			ClassConfig::run(void)
 {
+	int		ret = 0;
 	list<ClassProgram*>::iterator i;
 //	for (i = _lstprog.begin(); i != _lstprog.end(); ++i)
 //	{
@@ -123,9 +124,10 @@ void			ClassConfig::run(void)
 					//check autostart		OK
 					//processor set
 					chdir((*i)->getWorkingdir().c_str());
-					execve((*i)->getCmd().c_str(), ptr, environ);
-					std::cout << "ok" << std::endl;
-					return ;
+					ret = execve((*i)->getCmd().c_str(), ptr, environ);
+					if (ret != -1)
+						break ;
+					count++;
 				}
 				else
 					wait(NULL);
