@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/26 18:52:00 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/26 19:31:31 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ void			ClassConfig::run(void)
 		i = _lstprog.begin();
 		pid_t	pid;
 
+		int start = (*i)->getStarttime();
+		wait(&start);
 		if ((pid = fork()) < 0)
 			exit(-1);
 		if (pid == 0)
@@ -108,14 +110,23 @@ void			ClassConfig::run(void)
 			ptr[1] = strdup("-l");
 			
 			ptr[2] = NULL;
-
-			chdir("/root");
+			//TODO parseur arg
+			//umask
+			//starttime
+			//runing or not
+			//working dir
+			//start retry
+			//fropen stdin
+			//fropen stderr
+			//check autostart
+			//processor set
+			chdir((*i)->getWorkingdir().c_str());
 			execve((*i)->getCmd().c_str(), ptr, environ);
 			std::cout << "ok" << std::endl;
 			return ;
 		}
-		else
-			wait(NULL);
+//		else
+//			wait(NULL);
 //	}
 }
 
