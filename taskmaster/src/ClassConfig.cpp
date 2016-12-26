@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/26 12:32:14 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/26 12:33:02 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,7 +152,7 @@ void			ClassConfig::parse(void)
 					while (1)
 					{
 						int	next = info->find(",");
-						if (len == -1)
+						if (next == -1)
 							break ;
 						_new->setEnv( string(info->substr(0, next)));
 						info->erase(0, next + 1);
