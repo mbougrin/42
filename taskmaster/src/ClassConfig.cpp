@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/26 19:34:05 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/26 19:35:43 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,8 +124,8 @@ void			ClassConfig::run(void)
 			std::cout << "ok" << std::endl;
 			return ;
 		}
-//		else
-//			wait(NULL);
+		else
+			wait(NULL);
 //	}
 }
 
