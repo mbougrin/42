@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/26 11:12:56 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/26 11:34:29 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void			ClassConfig::init(char *conf, Tintin_reporter log)
 		std::cout 	<< (*i)->getName() << "*"
 					<< (*i)->getCmd() << "*"
 					<< (*i)->getProc() << "*"
-//					<< i->getUmask()
+					<< (*i)->getUmask()
 					<< (*i)->getWorkingdir() << "*"
 //					<< i->getAutostart()
 //					<< i->getAutorestart()
@@ -91,7 +91,6 @@ void			ClassConfig::parse(void)
 			string *name = new string(line->substr(find + 1, len));
 			string *action = new string(line->substr(0, find));
 			std::cout << *name << " " << *action << std::endl;
-
 
 			ClassProgram *_new = new ClassProgram();
 			_new->setName(*name);
@@ -133,7 +132,8 @@ void			ClassConfig::parse(void)
 				else if (strncmp(name->c_str(), "stdout_logfile", \
 						name->length()) == 0)
 					_new->setStdin(*info);
-//				else if (strncmp(name->c_str(), "command", name->c_str()) == 0)
+				else if (strncmp(name->c_str(), "umask", name->length()) == 0)
+					_new->setUmask((mode_t)atoi(info->c_str()));
 //				else if (strncmp(name->c_str(), "command", name->c_str()) == 0)
 //				else if (strncmp(name->c_str(), "command", name->c_str()) == 0)
 		//		else if (strncmp(name->c_str(), "command", name->c_str()) == 0)
