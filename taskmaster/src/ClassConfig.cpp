@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/26 19:54:12 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/26 20:00:58 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,36 +96,44 @@ void			ClassConfig::run(void)
 		i = _lstprog.begin();
 		if ((*i)->getAutostart() == true)
 		{
-			pid_t	pid;
-
-			sleep((*i)->getStarttime());
-			if ((pid = fork()) < 0)
-				exit(-1);
-			if (pid == 0)
+			int	count = 0;
+			while (count < (*i)->getStartretry())
 			{
-				char **ptr;
-				ptr 	= (char **)malloc(sizeof(char *) * 3);
-				ptr[0] = strdup("/bin/ls");
-				ptr[1] = strdup("-l");
-				ptr[2] = NULL;
-				umask((*i)->getUmask());
-				//TODO parseur arg
-				//umask 				OK
-				//starttime 			OK
-				//runing or not
-				//working dir 			OK
-				//start retry
-				//fropen stdin
-				//fropen stderr
-				//check autostart
-				//processor set
-				chdir((*i)->getWorkingdir().c_str());
-				execve((*i)->getCmd().c_str(), ptr, environ);
-				std::cout << "ok" << std::endl;
-				return ;
+				pid_t	pid;
+		
+				sleep((*i)->getStarttime());
+				if ((pid = fork()) < 0)
+					exit(-1);
+				if (pid == 0)
+				{
+					char **ptr;
+					ptr 	= (char **)malloc(sizeof(char *) * 3);
+					ptr[0] = strdup("/bin/ls");
+					ptr[1] = strdup("-l");
+					ptr[2] = NULL;
+					umask((*i)->getUmask());
+					//TODO parseur arg
+					//umask 				OK
+					//starttime 			OK
+					//runing or not			OK
+					//working dir 			OK
+					//start retry			OK
+					//fropen stdin
+					//fropen stderr
+					//check autostart		OK
+					//processor set
+					chdir((*i)->getWorkingdir().c_str());
+					execve((*i)->getCmd().c_str(), ptr, environ);
+					std::cout << "ok" << std::endl;
+					return ;
+				}
+				else
+					wait(NULL);
 			}
+			if (count == (*i)->getStartretry())
+				(*i)->setRun(false);
 			else
-				wait(NULL);
+				(*i)->setRun(true);
 		}
 //	}
 }
