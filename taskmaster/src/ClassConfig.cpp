@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/26 11:56:50 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/26 12:03:25 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,19 @@ void			ClassConfig::parse(void)
 				}
 				else if (strncmp(name->c_str(), "env", name->length()) == 0)
 				{
+					int	erase = 0;
+					std::list<string>tmp;
+					while (1)
+					{
+						int	len = info->find(",");
+						if (len == -1)
+							break ;
+						
+						tmp.push_back( string(i->substr(erase, find)));
+					
+						info->erase(erase, len);
+						erase = len;
+					}
 					std::cout << *info << std::endl;
 					
 				}
