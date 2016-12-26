@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/26 12:35:07 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/26 12:37:34 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,7 @@ void			ClassConfig::parse(void)
 						info->erase(0, next + 1);
 						std::cout << *info << std::endl;
 					}
-					_new->setEnv( string(info->substr(0, next)));
+					_new->setEnv( string(info->substr(0, info->length())));
 				}
 		//		else if (strncmp(name->c_str(), "command", name->c_str()) == 0)
 		//		else if (strncmp(name->c_str(), "command", name->c_str()) == 0)
