@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/26 18:38:58 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/26 18:39:28 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,6 @@ void			ClassConfig::run(void)
 
 			strcpy(str[0], "/bin/ls");
 			strcpy(str[1], "-l");
-			str[2] = NULL;
 
 			execve((*i)->getCmd().c_str(), str, NULL);
 			std::cout << "ok" << std::endl;
