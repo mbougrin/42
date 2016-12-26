@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/26 11:49:01 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/26 11:56:50 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,11 @@ void			ClassConfig::parse(void)
 					if (strncmp(info->c_str(), "true", info->length()) == 0)
 						_new->setAutostart(true);
 				}
-//				else if (strncmp(name->c_str(), "command", name->c_str()) == 0)
+				else if (strncmp(name->c_str(), "env", name->length()) == 0)
+				{
+					std::cout << *info << std::endl;
+					
+				}
 		//		else if (strncmp(name->c_str(), "command", name->c_str()) == 0)
 		//		else if (strncmp(name->c_str(), "command", name->c_str()) == 0)
 
@@ -152,7 +156,6 @@ void			ClassConfig::parse(void)
 			if (i == _lstconf.end())
 				break ;
 		}
-		std::cout << *i << std::endl;
 	}
 }
 
