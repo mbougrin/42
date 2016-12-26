@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/26 14:34:11 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/26 17:01:35 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,14 @@ void			ClassConfig::init(char *conf, Tintin_reporter log)
 					<< (*i)->getStdin() << " stdin\n"
 					<< (*i)->getStderr() << " stderr\n"
 					<< std::endl;
+
+		const std::list<int>tmpint = (*i)->getExitcode();
+		list<int>::const_iterator	k;
+		std::cout << "exitcode" << std::endl;
+		for (k = tmpint.begin() ; k != tmpint.end() ; ++k)
+		{
+			std::cout << *k << std::endl;
+		}
 
 		const std::list<string>tmp = (*i)->getEnv();
 		list<string>::const_iterator	j;
@@ -166,7 +174,19 @@ void			ClassConfig::parse(void)
 					}
 					_new->setEnv( string(info->substr(0, info->length())));
 				}
-		//		else if (strncmp(name->c_str(), "command", name->c_str()) == 0)
+				else if (strncmp(name->c_str(), "exitcodes", name->length()) == 0)
+				{
+					while (1)
+					{
+						int	next = info->find(",");
+						if (next == -1)
+							break ;
+						_new->setExitcode(atoi(info->c_str()));
+						info->erase(0, next + 1);
+						std::cout << *info << std::endl;
+					}
+					_new->setExitcode(atoi(info->c_str()));
+				}
 		//		else if (strncmp(name->c_str(), "command", name->c_str()) == 0)
 
 				delete name;
