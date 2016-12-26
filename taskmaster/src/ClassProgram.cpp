@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:42:51 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/26 11:08:30 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/26 12:19:09 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,7 +193,7 @@ const string		&ClassProgram::getStderr(void) const
 
 void				ClassProgram::setEnv(const string &str)
 {
-	_env.push_front(str);
+	_env.push_back(str);
 }
 
 const list<string>	&ClassProgram::getEnv(void) const

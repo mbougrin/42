@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/26 12:17:31 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/26 12:19:42 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,17 +150,15 @@ void			ClassConfig::parse(void)
 				else if (strncmp(name->c_str(), "env", name->length()) == 0)
 				{
 					int	erase = 0;
-					std::list<string>tmp;
 					while (1)
 					{
 						int	len = info->find(",");
 						if (len == -1)
 							break ;
-						tmp.push_back( string(i->substr(erase, find)));
+						_new->setEnv( string(i->substr(erase, find)));
 						info->erase(erase, len + 1);
 						erase = len;
 					}
-					
 				}
 		//		else if (strncmp(name->c_str(), "command", name->c_str()) == 0)
 		//		else if (strncmp(name->c_str(), "command", name->c_str()) == 0)
