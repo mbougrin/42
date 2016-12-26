@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:20 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/26 17:13:12 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/26 17:20:14 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ class				ClassConfig
 		void		parse(void);
 		void		openfile(void);
 		void		printconfig(void);
+		void		run(void);
 	private:
 		char						*_conf;
 		std::list<string>			_lstconf;
