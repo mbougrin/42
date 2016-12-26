@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/26 11:44:59 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/26 11:49:01 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void			ClassConfig::init(char *conf, Tintin_reporter log)
 					<< (*i)->getProc() << " proc\n"
 					<< (*i)->getUmask() << " umask\n"
 					<< (*i)->getWorkingdir() << " workdir\n"
-//					<< i->getAutostart()
+					<< (*i)->getAutostart() << " autostart\n"
 //					<< i->getAutorestart()
 					<< (*i)->getStartretry() << " startrety\n"
 					<< (*i)->getStarttime() << " starttime\n"
@@ -134,7 +134,11 @@ void			ClassConfig::parse(void)
 					_new->setStdin(*info);
 				else if (strncmp(name->c_str(), "umask", name->length()) == 0)
 					_new->setUmask((mode_t)atoi(info->c_str()));
-//				else if (strncmp(name->c_str(), "command", name->c_str()) == 0)
+				else if (strncmp(name->c_str(), "autostart", name->length()) == 0)
+				{
+					if (strncmp(info->c_str(), "true", info->length()) == 0)
+						_new->setAutostart(true);
+				}
 //				else if (strncmp(name->c_str(), "command", name->c_str()) == 0)
 		//		else if (strncmp(name->c_str(), "command", name->c_str()) == 0)
 		//		else if (strncmp(name->c_str(), "command", name->c_str()) == 0)
