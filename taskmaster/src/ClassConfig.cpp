@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/26 12:37:34 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/26 14:34:11 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,8 +113,14 @@ void			ClassConfig::parse(void)
 					i--;
 					break ;
 				}
+				int findcomment = i->find(";");
 				int len = i->length();
+				if (findcomment != -1)
+					i->erase(findcomment, len);
+				len = i->length();
 				int find = i->find("=");
+				if (find == -1)
+					break ;
 				string *name = new string(i->substr(0, find));
 				string *info = new string(i->substr(find + 1, len));
 
