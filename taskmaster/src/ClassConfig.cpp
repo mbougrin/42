@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/26 17:01:35 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/26 17:10:57 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void			ClassConfig::init(char *conf, Tintin_reporter log)
 					<< (*i)->getUmask() << " umask\n"
 					<< (*i)->getWorkingdir() << " workdir\n"
 					<< (*i)->getAutostart() << " autostart\n"
-//					<< i->getAutorestart()
+					<< (*i)->getAutorestart() << " autorestart\n"
 					<< (*i)->getStartretry() << " startrety\n"
 					<< (*i)->getStarttime() << " starttime\n"
 					<< (*i)->getStoptime() << " stoptime\n"
@@ -187,7 +187,8 @@ void			ClassConfig::parse(void)
 					}
 					_new->setExitcode(atoi(info->c_str()));
 				}
-		//		else if (strncmp(name->c_str(), "command", name->c_str()) == 0)
+				else if (strncmp(name->c_str(), "autorestart", name->length()) == 0)
+					_new->setAutorestart(*info);
 
 				delete name;
 				delete info;
