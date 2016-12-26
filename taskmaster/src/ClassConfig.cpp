@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/26 20:57:47 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/26 20:58:54 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void			ClassConfig::run(void)
 	list<ClassProgram*>::iterator i;
 	for (i = _lstprog.begin(); i != _lstprog.end(); ++i)
 	{
-		i = _lstprog.begin();
+	//	i = _lstprog.begin();
 		if ((*i)->getAutostart() == true)
 		{
 			int	count = 0;
