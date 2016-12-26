@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:42:48 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/22 14:43:45 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/26 11:09:03 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ class						ClassProgram
 		ClassProgram &operator=(ClassProgram const &src);
 		~ClassProgram(void);
 
+		void				setRun(bool run);
+		bool				getRun(void) const;
 		void				setName(const string &name);
 		const string		&getName(void) const;
 		void				setCmd(const string &cmd);
@@ -60,6 +62,7 @@ class						ClassProgram
 
 		void				noleaks(void);
 	private:
+		bool				_run;
 		string				*_name;
 		string				*_cmd;
 		int					_proc;

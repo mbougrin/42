@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:42:51 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/23 09:03:12 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/26 11:08:30 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 ClassProgram::ClassProgram(void)
 {
+	_run = false;
 	_name = NULL;
 	_cmd = NULL;
 	_proc = 0;
@@ -37,6 +38,16 @@ ClassProgram::ClassProgram(ClassProgram const &src)
 
 	}
 	return ;
+}
+
+void				ClassProgram::setRun(bool run)
+{
+	_run = run;
+}
+
+bool				ClassProgram::getRun(void) const
+{
+	return (_run);
 }
 
 void				ClassProgram::setName(const string &name)
