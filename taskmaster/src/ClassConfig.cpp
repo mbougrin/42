@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/26 18:30:57 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/26 18:32:09 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ void			ClassConfig::run(void)
 		{
 			execve((*i)->getCmd().c_str(), environ, NULL);
 			std::cout << "ok" << std::endl;
+			break ;
 		}
 		else
 			wait(NULL);
