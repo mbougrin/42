@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:20 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/26 17:20:14 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/26 20:15:27 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <string.h>
 # include <fstream>
 # include <sstream>
+# include <stdio.h>
 # include <ClassProgram.hpp>
 
 class				ClassConfig

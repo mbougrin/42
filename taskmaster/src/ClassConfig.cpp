@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/26 20:11:49 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/26 20:26:27 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,29 +106,34 @@ void			ClassConfig::run(void)
 				sleep((*i)->getStarttime());
 				if ((pid = fork()) < 0)
 					exit(-1);
-				if (pid == 0)
+				else
 				{
+		//		if (pid == 0)
+		//		{
 					char **ptr;
 					ptr 	= (char **)malloc(sizeof(char *) * 3);
-					ptr[0] = strdup("/bin/lsd");
+					ptr[0] = strdup("/bin/ls");
 					ptr[1] = strdup("-l");
 					ptr[2] = NULL;
 					umask((*i)->getUmask());
+					chdir((*i)->getWorkingdir().c_str());
+					freopen((*i)->getStdin().c_str(), "w", stdout);
+					freopen((*i)->getStderr().c_str(), "w", stderr);
 					//TODO parseur arg
 					//umask 				OK
 					//starttime 			OK
 					//runing or not			OK
 					//working dir 			OK
 					//start retry			OK
-					//fropen stdin
-					//fropen stderr
+					//fropen stdin			OK
+					//fropen stderr			OK
 					//check autostart		OK
 					//processor set
-					chdir((*i)->getWorkingdir().c_str());
 					ret = execve((*i)->getCmd().c_str(), ptr, environ);
 				}
-			//	else
-			//		wait(NULL);
+		//		}
+		//		else
+		//			wait(NULL);
 				std::cout << ret << " ret" << count << std::endl;
 				count++;
 				if (ret != -1)
