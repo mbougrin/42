@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/26 19:38:32 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/26 19:40:16 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void			ClassConfig::run(void)
 		sleep((*i)->getStarttime());
 		if ((pid = fork()) < 0)
 			exit(-1);
-		if (pid != 0)
+		if (pid == 0)
 		{
 			char **ptr;
 		   ptr 	= (char **)malloc(sizeof(char *) * 3);
@@ -124,7 +124,8 @@ void			ClassConfig::run(void)
 			std::cout << "ok" << std::endl;
 			return ;
 		}
-//			wait(NULL);
+		else
+			wait(NULL);
 //	}
 }
 
