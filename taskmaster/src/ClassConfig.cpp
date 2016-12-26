@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/26 20:40:30 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/26 20:57:47 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,8 @@ void			ClassConfig::run(void)
 {
 	int		ret = 0;
 	list<ClassProgram*>::iterator i;
-//	for (i = _lstprog.begin(); i != _lstprog.end(); ++i)
-//	{
+	for (i = _lstprog.begin(); i != _lstprog.end(); ++i)
+	{
 		i = _lstprog.begin();
 		if ((*i)->getAutostart() == true)
 		{
@@ -115,8 +115,8 @@ void			ClassConfig::run(void)
 					ptr[2] = NULL;
 					umask((*i)->getUmask());
 					chdir((*i)->getWorkingdir().c_str());
-					freopen((*i)->getStdin().c_str(), "w", stdout);
-					freopen((*i)->getStderr().c_str(), "w", stderr);
+				//	freopen((*i)->getStdin().c_str(), "w", stdout);
+				//	freopen((*i)->getStderr().c_str(), "w", stderr);
 					//TODO parseur arg
 					//umask 				OK
 					//starttime 			OK
@@ -141,7 +141,7 @@ void			ClassConfig::run(void)
 			else
 				(*i)->setRun(true);
 		}
-//	}
+	}
 }
 
 void			ClassConfig::init(char *conf, Tintin_reporter log)
