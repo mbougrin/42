@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/26 17:14:22 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/26 17:15:16 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,7 +174,6 @@ void			ClassConfig::parse(void)
 							break ;
 						_new->setEnv( string(info->substr(0, next)));
 						info->erase(0, next + 1);
-						std::cout << *info << std::endl;
 					}
 					_new->setEnv( string(info->substr(0, info->length())));
 				}
@@ -187,7 +186,6 @@ void			ClassConfig::parse(void)
 							break ;
 						_new->setExitcode(atoi(info->c_str()));
 						info->erase(0, next + 1);
-						std::cout << *info << std::endl;
 					}
 					_new->setExitcode(atoi(info->c_str()));
 				}
