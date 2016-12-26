@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/26 20:02:58 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/26 20:04:45 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ void			ClassConfig::run(void)
 			int	count = 0;
 			while (count < (*i)->getStartretry())
 			{
+				std::cout << (*i)->getStartretry() << std::endl;
 				pid_t	pid;
 		
 				sleep((*i)->getStarttime());
@@ -125,6 +126,7 @@ void			ClassConfig::run(void)
 					//processor set
 					chdir((*i)->getWorkingdir().c_str());
 					ret = execve((*i)->getCmd().c_str(), ptr, environ);
+					std::cout << ret << " ret" << std::endl;
 					if (ret != -1)
 						break ;
 					count++;
