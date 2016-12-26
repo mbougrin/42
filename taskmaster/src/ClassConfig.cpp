@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/26 12:15:48 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/26 12:17:31 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void			ClassConfig::init(char *conf, Tintin_reporter log)
 		const std::list<string>tmp = (*i)->getEnv();
 		list<string>::const_iterator	j;
 		std::cout << "env" << std::endl;
-		for (j = tmp.cbegin() ; j != tmp.cend() ; ++j)
+		for (j = tmp.begin() ; j != tmp.end() ; ++j)
 		{
 			std::cout << *j << std::endl;
 		}
