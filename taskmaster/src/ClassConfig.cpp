@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/26 12:21:06 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/26 12:22:36 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,7 +157,7 @@ void			ClassConfig::parse(void)
 							break ;
 						_new->setEnv( string(info->substr(erase, find)));
 						info->erase(erase, len + 1);
-						erase = len;
+						erase = len + 1;
 					}
 				}
 		//		else if (strncmp(name->c_str(), "command", name->c_str()) == 0)
