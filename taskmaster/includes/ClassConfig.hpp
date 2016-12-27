@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:20 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/26 20:15:27 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/27 10:51:10 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ class				ClassConfig
 		void		openfile(void);
 		void		printconfig(void);
 		void		run(void);
+		int			countspace(const char *str) const;
 	private:
 		char						*_conf;
 		std::list<string>			_lstconf;

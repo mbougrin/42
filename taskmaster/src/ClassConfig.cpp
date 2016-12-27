@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/26 20:58:54 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/27 11:00:31 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,17 @@ void			ClassConfig::printconfig(void)
 	}
 }
 
-extern char		**environ;
+int				ClassConfig::countspace(const char *str) const
+{
+	int		count = 0;
+
+	for (int i = 0 ; str[i] != '\0' ; ++ i)
+	{
+		if (str[i] == ' ')
+			count++;
+	}
+	return (count);
+}
 
 void			ClassConfig::run(void)
 {
@@ -100,7 +110,6 @@ void			ClassConfig::run(void)
 			int	count = 0;
 			while (count < (*i)->getStartretry())
 			{
-				std::cout << (*i)->getStartretry() << std::endl;
 				pid_t	pid;
 		
 				sleep((*i)->getStarttime());
@@ -108,16 +117,47 @@ void			ClassConfig::run(void)
 					exit(-1);
 				if (pid == 0)
 				{
-					char **ptr;
-					ptr 	= (char **)malloc(sizeof(char *) * 3);
-					ptr[0] = strdup("/bin/ls");
-					ptr[1] = strdup("-l");
-					ptr[2] = NULL;
+					char 	**av = NULL;
+					char	**env = NULL;
+					string	tmp = string((*i)->getCmd().c_str());
+					int		len = countspace(tmp.c_str());
+					int		count = 0;
+
+					av = (char **)malloc(sizeof(char *) * (len + 2));
+					while (1)
+					{
+						int find = tmp.find(' ');
+						if (find == -1)
+							break ;
+						av[count] = strdup(tmp.substr(0, find).c_str());
+						tmp.erase(0, find + 1);
+						i++;
+					}
+					if (count== 0)
+					{
+						av[0] = strdup(tmp.c_str());
+						i++;
+					}
+					av[count] = NULL;
+
+					const std::list<string>tmplst = (*i)->getEnv();
+					list<string>::const_iterator	j;
+					env = (char **)malloc(sizeof(char *) * (tmplst.size() + 1));
+					count = 0;
+					for (j = tmplst.begin() ; j != tmplst.end() ; ++j)
+					{
+						env[count] = strdup(j->c_str());
+						count++;
+					}
+					env[count] = NULL;
+
 					umask((*i)->getUmask());
 					chdir((*i)->getWorkingdir().c_str());
-				//	freopen((*i)->getStdin().c_str(), "w", stdout);
-				//	freopen((*i)->getStderr().c_str(), "w", stderr);
-					//TODO parseur arg
+			//		freopen((*i)->getStdin().c_str(), "w", stdout);
+			//		freopen((*i)->getStderr().c_str(), "w", stderr);
+					//TODO parseur arg		OK
+					//parseur env			OK
+					//thread binary
 					//umask 				OK
 					//starttime 			OK
 					//runing or not			OK
@@ -127,19 +167,39 @@ void			ClassConfig::run(void)
 					//fropen stderr			OK
 					//check autostart		OK
 					//processor set
-					ret = execve((*i)->getCmd().c_str(), ptr, environ);
+					(*i)->setRun(true);
+					ret = execve((*i)->getCmd().c_str(), av, env);
+					count = 0;
+					while (av[count] != NULL)
+					{
+						free(av[count]);
+						av[count] = NULL;
+						count++;
+					}
+					free(av);
+					av = NULL;
+
+					if (env != NULL)
+					{
+						count = 0;
+						while (env[count] != NULL)
+						{
+							free(env[count]);
+							env[count] = NULL;
+							count++;
+						}
+						free(env);
+						env = NULL;
+					}
 				}
 				else
 					wait(NULL);
-				std::cout << ret << " ret" << count << std::endl;
 				count++;
 				if (ret != -1)
 					break ;
 			}
 			if (count == (*i)->getStartretry() || ret == -1)
 				(*i)->setRun(false);
-			else
-				(*i)->setRun(true);
 		}
 	}
 }
