@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/27 15:02:51 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/27 15:10:25 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,7 +165,6 @@ void			ClassConfig::launchbinary(list<ClassProgram*>::iterator i)
 		//		freopen((*i)->getStdin().c_str(), "w", stdout);
 		//		freopen((*i)->getStderr().c_str(), "w", stderr);
 				(*i)->setRun(true);
-				fork();
 				ret = execve(av[0], av, env);
 				CPU_FREE(&mask);
 				count = 0;
@@ -190,6 +189,7 @@ void			ClassConfig::launchbinary(list<ClassProgram*>::iterator i)
 					free(env);
 					env = NULL;
 				}
+				exit();
 			}
 			else
 				wait(NULL);
@@ -202,22 +202,22 @@ void			ClassConfig::launchbinary(list<ClassProgram*>::iterator i)
 		if (check == (*i)->getStartretry() || ret == -1)
 			(*i)->setRun(false);
 	}
+	sleep(10);
 }
 
 void			ClassConfig::run(void)
 {
 	list<ClassProgram*>::iterator i;
-//	int		len = _lstprog.size();
-//	std::thread	*_thread = new std::thread[len];
-//	int	j = 0;
+	int		len = _lstprog.size();
+	std::thread	*_thread = new std::thread[len];
+	int	j = 0;
 	for (i = _lstprog.begin(); i != _lstprog.end(); ++i)
 	{
-		launchbinary(i);
-//		_thread[j] = std::thread(ClassConfig::launchbinary, i);
-//		j++;
+		_thread[j] = std::thread(ClassConfig::launchbinary, i);
+		j++;
 	}
-//	for (int k = 0 ; k < len ; ++k)
-//		_thread[k].detach();
+	for (int k = 0 ; k < len ; ++k)
+		_thread[k].detach();
 }
 
 void			ClassConfig::init(char *conf, Tintin_reporter log)
