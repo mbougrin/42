@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/27 11:47:36 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/27 11:53:51 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,6 +159,11 @@ void			ClassConfig::run(void)
 					}
 					env[count] = NULL;
 
+					cpu_set_t  mask;
+					CPU_ZERO(&mask);
+					CPU_SET((*i)->getProc(), &mask);
+					sched_setaffinity(0, sizeof(mask), &mask);
+
 					umask((*i)->getUmask());
 					chdir((*i)->getWorkingdir().c_str());
 			//		freopen((*i)->getStdin().c_str(), "w", stdout);
@@ -204,7 +209,10 @@ void			ClassConfig::run(void)
 					wait(NULL);
 				check++;
 				if (ret != -1)
+				{
+					exit(-1);
 					break ;
+				}
 			}
 			if (check == (*i)->getStartretry() || ret == -1)
 				(*i)->setRun(false);
