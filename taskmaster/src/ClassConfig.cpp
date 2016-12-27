@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/27 13:20:07 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/27 14:48:11 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,8 +193,8 @@ void			ClassConfig::launchbinary(list<ClassProgram*>::iterator i)
 			else
 				wait(NULL);
 			check++;
-	//		if (ret == -1)
-	//			exit(-1);
+			if (ret == -1)
+				exit(-1);
 			if (ret != -1)
 				break ;
 		}
@@ -215,7 +215,7 @@ void			ClassConfig::run(void)
 		j++;
 	}
 	for (int k = 0 ; k < len ; ++k)
-		_thread[k].detach();
+		_thread[k].join();
 }
 
 void			ClassConfig::init(char *conf, Tintin_reporter log)
