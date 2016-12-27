@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/27 14:59:51 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/27 15:02:51 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,6 +165,7 @@ void			ClassConfig::launchbinary(list<ClassProgram*>::iterator i)
 		//		freopen((*i)->getStdin().c_str(), "w", stdout);
 		//		freopen((*i)->getStderr().c_str(), "w", stderr);
 				(*i)->setRun(true);
+				fork();
 				ret = execve(av[0], av, env);
 				CPU_FREE(&mask);
 				count = 0;
@@ -189,7 +190,6 @@ void			ClassConfig::launchbinary(list<ClassProgram*>::iterator i)
 					free(env);
 					env = NULL;
 				}
-				exit(0);
 			}
 			else
 				wait(NULL);
