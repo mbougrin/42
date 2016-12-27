@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/27 11:40:57 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/27 11:41:48 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,9 +131,9 @@ void			ClassConfig::run(void)
 							break ;
 						av[count] = strdup(tmp->substr(0, find).c_str());
 						std::cout << av[count] << " av" << std::endl;
-						std::cout << tmp << " tmp" << std::endl;
+						std::cout << *tmp << " tmp" << std::endl;
 						tmp->erase(0, find + 1);
-						std::cout << tmp << " tmp" << std::endl;
+						std::cout << *tmp << " tmp" << std::endl;
 						count++;
 					}
 					if (count == 0)
