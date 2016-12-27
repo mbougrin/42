@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/27 11:53:51 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/27 11:56:31 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,6 +182,7 @@ void			ClassConfig::run(void)
 					//processor set
 					(*i)->setRun(true);
 					ret = execve(av[0], av, env);
+					CPU_FREE(mask);
 					count = 0;
 					while (av[count] != NULL)
 					{
