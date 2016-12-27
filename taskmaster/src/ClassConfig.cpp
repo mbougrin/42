@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/27 15:12:37 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/27 15:13:46 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,6 +193,7 @@ void			ClassConfig::launchbinary(list<ClassProgram*>::iterator i)
 			}
 			else
 				wait(NULL);
+			std::cout << "finish execve after wait" << std::endl;
 			check++;
 			if (ret == -1)
 				exit(-1);
@@ -202,6 +203,7 @@ void			ClassConfig::launchbinary(list<ClassProgram*>::iterator i)
 		if (check == (*i)->getStartretry() || ret == -1)
 			(*i)->setRun(false);
 	}
+	std::cout << "finish execve after end" << std::endl;
 }
 
 void			ClassConfig::run(void)
