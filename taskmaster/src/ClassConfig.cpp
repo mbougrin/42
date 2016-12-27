@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/27 11:37:58 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/27 11:39:00 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,9 +139,13 @@ void			ClassConfig::run(void)
 					if (count == 0)
 					{
 						av[0] = strdup(tmp.c_str());
-						count++;
+						av[1] = NULL;
 					}
-					av[count] = NULL;
+					else
+					{
+						av[count] = strdup(tmp.substr(0, find).c_str());
+						av[count + 1] = NULL;
+					}
 					delete tmp;
 
 					const std::list<string>tmplst = (*i)->getEnv();
