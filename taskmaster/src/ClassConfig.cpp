@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/27 11:39:40 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/27 11:40:57 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ void			ClassConfig::run(void)
 					char 	**av = NULL;
 					char	**env = NULL;
 					string	*tmp = new string((*i)->getCmd().c_str());
-					int		len = countspace(tmp.c_str());
+					int		len = countspace(tmp->c_str());
 					int		count = 0;
 
 					av = (char **)malloc(sizeof(char *) * (len + 2));
@@ -132,7 +132,7 @@ void			ClassConfig::run(void)
 						av[count] = strdup(tmp->substr(0, find).c_str());
 						std::cout << av[count] << " av" << std::endl;
 						std::cout << tmp << " tmp" << std::endl;
-						tmp.erase(0, find + 1);
+						tmp->erase(0, find + 1);
 						std::cout << tmp << " tmp" << std::endl;
 						count++;
 					}
@@ -143,7 +143,7 @@ void			ClassConfig::run(void)
 					}
 					else
 					{
-						av[count] = strdup(tmp->substr(0, find).c_str());
+						av[count] = strdup(tmp->substr(0, tmp->length()).c_str());
 						av[count + 1] = NULL;
 					}
 					delete tmp;
