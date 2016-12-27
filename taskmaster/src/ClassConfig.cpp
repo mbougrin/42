@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/27 11:45:15 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/27 11:46:07 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,9 +105,9 @@ void			ClassConfig::run(void)
 	for (i = _lstprog.begin(); i != _lstprog.end(); ++i)
 	{
 	//	i = _lstprog.begin();
+		int	check = 0;
 		if ((*i)->getAutostart() == true)
 		{
-			int	check = 0;
 			while (check < (*i)->getStartretry())
 			{
 				pid_t	pid;
@@ -206,7 +206,7 @@ void			ClassConfig::run(void)
 				if (ret != -1)
 					break ;
 			}
-			if (count == (*i)->getStartretry() || ret == -1)
+			if (check == (*i)->getStartretry() || ret == -1)
 				(*i)->setRun(false);
 		}
 	}
