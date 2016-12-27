@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/27 11:39:00 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/27 11:39:40 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,10 +126,10 @@ void			ClassConfig::run(void)
 					av = (char **)malloc(sizeof(char *) * (len + 2));
 					while (1)
 					{
-						int find = tmp.find(' ');
+						int find = tmp->find(' ');
 						if (find == -1)
 							break ;
-						av[count] = strdup(tmp.substr(0, find).c_str());
+						av[count] = strdup(tmp->substr(0, find).c_str());
 						std::cout << av[count] << " av" << std::endl;
 						std::cout << tmp << " tmp" << std::endl;
 						tmp.erase(0, find + 1);
@@ -138,12 +138,12 @@ void			ClassConfig::run(void)
 					}
 					if (count == 0)
 					{
-						av[0] = strdup(tmp.c_str());
+						av[0] = strdup(tmp->c_str());
 						av[1] = NULL;
 					}
 					else
 					{
-						av[count] = strdup(tmp.substr(0, find).c_str());
+						av[count] = strdup(tmp->substr(0, find).c_str());
 						av[count + 1] = NULL;
 					}
 					delete tmp;
