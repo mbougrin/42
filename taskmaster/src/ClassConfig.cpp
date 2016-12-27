@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/27 11:36:11 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/27 11:37:58 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ void			ClassConfig::run(void)
 				{
 					char 	**av = NULL;
 					char	**env = NULL;
-					string	tmp = string((*i)->getCmd().c_str());
+					string	*tmp = new string((*i)->getCmd().c_str());
 					int		len = countspace(tmp.c_str());
 					int		count = 0;
 
@@ -142,6 +142,7 @@ void			ClassConfig::run(void)
 						count++;
 					}
 					av[count] = NULL;
+					delete tmp;
 
 					const std::list<string>tmplst = (*i)->getEnv();
 					list<string>::const_iterator	j;
