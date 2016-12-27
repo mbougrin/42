@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/27 13:17:42 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/27 13:20:07 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,18 +164,6 @@ void			ClassConfig::launchbinary(list<ClassProgram*>::iterator i)
 				chdir((*i)->getWorkingdir().c_str());
 		//		freopen((*i)->getStdin().c_str(), "w", stdout);
 		//		freopen((*i)->getStderr().c_str(), "w", stderr);
-				//TODO parseur arg		OK
-				//parseur env			OK
-				//thread binary
-				//umask 				OK
-				//starttime 			OK
-				//runing or not			OK
-				//working dir 			OK
-				//start retry			OK
-				//fropen stdin			OK
-				//fropen stderr			OK
-				//check autostart		OK
-				//processor set			OK
 				(*i)->setRun(true);
 				ret = execve(av[0], av, env);
 				CPU_FREE(&mask);
@@ -205,8 +193,8 @@ void			ClassConfig::launchbinary(list<ClassProgram*>::iterator i)
 			else
 				wait(NULL);
 			check++;
-			if (ret == -1)
-				exit(-1);
+	//		if (ret == -1)
+	//			exit(-1);
 			if (ret != -1)
 				break ;
 		}
