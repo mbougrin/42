@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/27 11:59:38 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/27 13:17:42 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void			ClassConfig::printconfig(void)
 	}
 }
 
-int				ClassConfig::countspace(const char *str) const
+int				ClassConfig::countspace(const char *str)
 {
 	int		count = 0;
 
@@ -98,126 +98,136 @@ int				ClassConfig::countspace(const char *str) const
 	return (count);
 }
 
-void			ClassConfig::run(void)
+void			ClassConfig::launchbinary(list<ClassProgram*>::iterator i)
 {
-	int		ret = 0;
-	list<ClassProgram*>::iterator i;
-	for (i = _lstprog.begin(); i != _lstprog.end(); ++i)
+	int	check = 0;
+	int	ret = 0;
+	if ((*i)->getAutostart() == true)
 	{
-	//	i = _lstprog.begin();
-		int	check = 0;
-		if ((*i)->getAutostart() == true)
+		while (check < (*i)->getStartretry())
 		{
-			while (check < (*i)->getStartretry())
+			pid_t	pid;
+	
+			sleep((*i)->getStarttime());
+			if ((pid = fork()) < 0)
+				exit(-1);
+			if (pid == 0)
 			{
-				pid_t	pid;
-		
-				sleep((*i)->getStarttime());
-				if ((pid = fork()) < 0)
-					exit(-1);
-				if (pid == 0)
+				char 	**av = NULL;
+				char	**env = NULL;
+				string	*tmp = new string((*i)->getCmd().c_str());
+				int		len = countspace(tmp->c_str());
+				int		count = 0;
+
+				av = (char **)malloc(sizeof(char *) * (len + 2));
+				while (1)
 				{
-					char 	**av = NULL;
-					char	**env = NULL;
-					string	*tmp = new string((*i)->getCmd().c_str());
-					int		len = countspace(tmp->c_str());
-					int		count = 0;
-
-					av = (char **)malloc(sizeof(char *) * (len + 2));
-					while (1)
-					{
-						int find = tmp->find(' ');
-						if (find == -1)
-							break ;
-						av[count] = strdup(tmp->substr(0, find).c_str());
-						std::cout << av[count] << " av" << std::endl;
-						std::cout << *tmp << " tmp" << std::endl;
-						tmp->erase(0, find + 1);
-						std::cout << *tmp << " tmp" << std::endl;
-						count++;
-					}
-					if (count == 0)
-					{
-						av[0] = strdup(tmp->c_str());
-						av[1] = NULL;
-					}
-					else
-					{
-						av[count] = strdup(tmp->substr(0, tmp->length()).c_str());
-						av[count + 1] = NULL;
-					}
-					delete tmp;
-
-					const std::list<string>tmplst = (*i)->getEnv();
-					list<string>::const_iterator	j;
-					env = (char **)malloc(sizeof(char *) * (tmplst.size() + 1));
-					count = 0;
-					for (j = tmplst.begin() ; j != tmplst.end() ; ++j)
-					{
-						env[count] = strdup(j->c_str());
-						count++;
-					}
-					env[count] = NULL;
-
-					cpu_set_t  mask;
-					CPU_ZERO(&mask);
-					CPU_SET((*i)->getProc(), &mask);
-					sched_setaffinity(0, sizeof(mask), &mask);
-
-					umask((*i)->getUmask());
-					chdir((*i)->getWorkingdir().c_str());
-			//		freopen((*i)->getStdin().c_str(), "w", stdout);
-			//		freopen((*i)->getStderr().c_str(), "w", stderr);
-					//TODO parseur arg		OK
-					//parseur env			OK
-					//thread binary
-					//umask 				OK
-					//starttime 			OK
-					//runing or not			OK
-					//working dir 			OK
-					//start retry			OK
-					//fropen stdin			OK
-					//fropen stderr			OK
-					//check autostart		OK
-					//processor set
-					(*i)->setRun(true);
-					ret = execve(av[0], av, env);
-					CPU_FREE(&mask);
-					count = 0;
-					while (av[count] != NULL)
-					{
-						free(av[count]);
-						av[count] = NULL;
-						count++;
-					}
-					free(av);
-					av = NULL;
-
-					if (env != NULL)
-					{
-						count = 0;
-						while (env[count] != NULL)
-						{
-							free(env[count]);
-							env[count] = NULL;
-							count++;
-						}
-						free(env);
-						env = NULL;
-					}
+					int find = tmp->find(' ');
+					if (find == -1)
+						break ;
+					av[count] = strdup(tmp->substr(0, find).c_str());
+					std::cout << av[count] << " av" << std::endl;
+					std::cout << *tmp << " tmp" << std::endl;
+					tmp->erase(0, find + 1);
+					std::cout << *tmp << " tmp" << std::endl;
+					count++;
+				}
+				if (count == 0)
+				{
+					av[0] = strdup(tmp->c_str());
+					av[1] = NULL;
 				}
 				else
-					wait(NULL);
-				check++;
-				if (ret == -1)
-					exit(-1);
-				if (ret != -1)
-					break ;
+				{
+					av[count] = strdup(tmp->substr(0, tmp->length()).c_str());
+					av[count + 1] = NULL;
+				}
+				delete tmp;
+
+				const std::list<string>tmplst = (*i)->getEnv();
+				list<string>::const_iterator	j;
+				env = (char **)malloc(sizeof(char *) * (tmplst.size() + 1));
+				count = 0;
+				for (j = tmplst.begin() ; j != tmplst.end() ; ++j)
+				{
+					env[count] = strdup(j->c_str());
+					count++;
+				}
+				env[count] = NULL;
+
+				cpu_set_t  mask;
+				CPU_ZERO(&mask);
+				CPU_SET((*i)->getProc(), &mask);
+				sched_setaffinity(0, sizeof(mask), &mask);
+
+				umask((*i)->getUmask());
+				chdir((*i)->getWorkingdir().c_str());
+		//		freopen((*i)->getStdin().c_str(), "w", stdout);
+		//		freopen((*i)->getStderr().c_str(), "w", stderr);
+				//TODO parseur arg		OK
+				//parseur env			OK
+				//thread binary
+				//umask 				OK
+				//starttime 			OK
+				//runing or not			OK
+				//working dir 			OK
+				//start retry			OK
+				//fropen stdin			OK
+				//fropen stderr			OK
+				//check autostart		OK
+				//processor set			OK
+				(*i)->setRun(true);
+				ret = execve(av[0], av, env);
+				CPU_FREE(&mask);
+				count = 0;
+				while (av[count] != NULL)
+				{
+					free(av[count]);
+					av[count] = NULL;
+					count++;
+				}
+				free(av);
+				av = NULL;
+
+				if (env != NULL)
+				{
+					count = 0;
+					while (env[count] != NULL)
+					{
+						free(env[count]);
+						env[count] = NULL;
+						count++;
+					}
+					free(env);
+					env = NULL;
+				}
 			}
-			if (check == (*i)->getStartretry() || ret == -1)
-				(*i)->setRun(false);
+			else
+				wait(NULL);
+			check++;
+			if (ret == -1)
+				exit(-1);
+			if (ret != -1)
+				break ;
 		}
+		if (check == (*i)->getStartretry() || ret == -1)
+			(*i)->setRun(false);
 	}
+}
+
+void			ClassConfig::run(void)
+{
+	list<ClassProgram*>::iterator i;
+	int		len = _lstprog.size();
+	std::thread	*_thread = new std::thread[len];
+	int	j = 0;
+	for (i = _lstprog.begin(); i != _lstprog.end(); ++i)
+	{
+		_thread[j] = std::thread(ClassConfig::launchbinary, i);
+		j++;
+	}
+	for (int k = 0 ; k < len ; ++k)
+		_thread[k].detach();
 }
 
 void			ClassConfig::init(char *conf, Tintin_reporter log)

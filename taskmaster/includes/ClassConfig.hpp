@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:20 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/27 11:52:43 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/27 13:02:12 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <stdio.h>
 # include <ClassProgram.hpp>
 # include <sched.h>
+# include <thread>
 
 class				ClassConfig
 {
@@ -37,7 +38,8 @@ class				ClassConfig
 		void		openfile(void);
 		void		printconfig(void);
 		void		run(void);
-		int			countspace(const char *str) const;
+		static int	countspace(const char *str);
+		static void	launchbinary(list<ClassProgram*>::iterator i);
 	private:
 		char						*_conf;
 		std::list<string>			_lstconf;
