@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 10:34:47 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/22 14:38:04 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/29 09:29:58 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int					ClassSocket::_client;
 Tintin_reporter		ClassSocket::_log;
 ClassConfig			ClassSocket::_configuration;
 bool				ClassSocket::_v;
-extern 				char **environ;
 
 ClassSocket::ClassSocket(void)
 {

@@ -6,11 +6,11 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/27 15:37:54 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/29 13:47:20 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ClassConfig.hpp>
+#fr9include <ClassConfig.hpp>
 
 ClassConfig::ClassConfig(void)
 {
@@ -111,7 +111,7 @@ void			ClassConfig::launchbinary(list<ClassProgram*>::iterator i)
 			sleep((*i)->getStarttime());
 			if ((pid = fork()) < 0)
 				exit(-1);
-			if (pid == 0)
+			if (pid > 0)
 			{
 				char 	**av = NULL;
 				char	**env = NULL;
@@ -160,7 +160,7 @@ void			ClassConfig::launchbinary(list<ClassProgram*>::iterator i)
 				CPU_SET((*i)->getProc(), &mask);
 				sched_setaffinity(0, sizeof(mask), &mask);
 
-				umask((*i)->getUmask());
+	4			umask((*i)->getUmask());
 				chdir((*i)->getWorkingdir().c_str());
 //				freopen((*i)->getStdin().c_str(), "w", stdout);
 //				freopen((*i)->getStderr().c_str(), "w", stderr);
@@ -191,8 +191,8 @@ void			ClassConfig::launchbinary(list<ClassProgram*>::iterator i)
 					env = NULL;
 				}
 			}
-			else
-				wait(NULL);
+	//		else
+	//			wait(NULL);
 			std::cout << "finish execve after wait" << std::endl;
 			check++;
 			if (ret == -1)
@@ -209,16 +209,17 @@ void			ClassConfig::launchbinary(list<ClassProgram*>::iterator i)
 void			ClassConfig::run(void)
 {
 	list<ClassProgram*>::iterator i;
-	int		len = _lstprog.size();
-	std::thread	*_thread = new std::thread[len];
-	int	j = 0;
+//	int		len = _lstprog.size();
+//	std::thread	*_thread = new std::thread[len];
+//	int	j = 0;
 	for (i = _lstprog.begin(); i != _lstprog.end(); ++i)
 	{
-		_thread[j] = std::thread(ClassConfig::launchbinary, i);
-		j++;
+		launchbinary(i);
+//		_thread[j] = std::thread(ClassConfig::launchbinary, i);
+//		j++;
 	}
-	for (int k = 0 ; k < len ; ++k)
-		_thread[k].detach();
+//	for (int k = 0 ; k < len ; ++k)
+//		_thread[k].detach();
 }
 
 void			ClassConfig::init(char *conf, Tintin_reporter log)
