@@ -6,11 +6,11 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/29 13:47:20 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/29 13:48:04 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#fr9include <ClassConfig.hpp>
+#include <ClassConfig.hpp>
 
 ClassConfig::ClassConfig(void)
 {
@@ -160,7 +160,7 @@ void			ClassConfig::launchbinary(list<ClassProgram*>::iterator i)
 				CPU_SET((*i)->getProc(), &mask);
 				sched_setaffinity(0, sizeof(mask), &mask);
 
-	4			umask((*i)->getUmask());
+				umask((*i)->getUmask());
 				chdir((*i)->getWorkingdir().c_str());
 //				freopen((*i)->getStdin().c_str(), "w", stdout);
 //				freopen((*i)->getStderr().c_str(), "w", stderr);
