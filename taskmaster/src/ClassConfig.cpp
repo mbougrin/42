@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/30 11:10:38 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/30 11:11:30 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void			ClassConfig::launchbinary(list<ClassProgram*>::iterator i)
 		{
 			pid_t	pid;
 			int	ret = 0;
-			int		status;
+//			int		status;
 			
 			sleep((*i)->getStarttime());
 			if ((pid = fork()) < 0)
@@ -189,7 +189,8 @@ void			ClassConfig::launchbinary(list<ClassProgram*>::iterator i)
 				}
 			}
 			else
-				waitpid(pid, &status, WNOWAIT);
+				wait(NULL);
+//				waitpid(pid, &status, WNOWAIT);
 			check++;
 //			if (ret == -1)
 //				exit(-1);
