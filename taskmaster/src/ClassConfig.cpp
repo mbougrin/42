@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/30 11:19:00 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/30 11:22:46 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,7 +192,7 @@ void			ClassConfig::launchbinary(list<ClassProgram*>::iterator i)
 			{
 			//	wait(NULL);
 				int waitstatus;
-		        wait(&waitstatus);
+		        waitpid(pid, &waitstatus);
 		        int exitcode = WEXITSTATUS(waitstatus);
 				std::cout << exitcode << " " << (*i)->getName() << std::endl;
 			}
