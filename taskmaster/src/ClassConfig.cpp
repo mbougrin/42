@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/30 10:11:39 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/30 10:12:50 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ void			ClassConfig::launchbinary(list<ClassProgram*>::iterator i)
 			sleep((*i)->getStarttime());
 			if ((pid = fork()) < 0)
 				exit(-1);
-			if (pid > 0)
+			if (pid == 0)
 			{
 				char 	**av = NULL;
 				char	**env = NULL;
