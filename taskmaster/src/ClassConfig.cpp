@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/30 10:22:32 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/30 10:23:38 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,7 +228,7 @@ void			ClassConfig::run(void)
 			_thread[k].detach();
 	}
 	else
-		wait(NULL);
+		exit(1);
 }
 
 void			ClassConfig::init(char *conf, Tintin_reporter log)
