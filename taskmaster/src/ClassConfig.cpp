@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/30 11:02:49 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/30 11:04:58 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,10 +127,7 @@ void			ClassConfig::launchbinary(list<ClassProgram*>::iterator i)
 					if (find == -1)
 						break ;
 					av[count] = strdup(tmp->substr(0, find).c_str());
-					std::cout << av[count] << " av" << std::endl;
-					std::cout << *tmp << " tmp" << std::endl;
 					tmp->erase(0, find + 1);
-					std::cout << *tmp << " tmp" << std::endl;
 					count++;
 				}
 				if (count == 0)
@@ -167,7 +164,6 @@ void			ClassConfig::launchbinary(list<ClassProgram*>::iterator i)
 //				freopen((*i)->getStderr().c_str(), "w", stderr);
 				(*i)->setRun(true);
 				ret = execve(av[0], av, env);
-				std::cout << "finish execve" << std::endl;
 				CPU_FREE(&mask);
 				count = 0;
 				while (av[count] != NULL)
@@ -195,7 +191,6 @@ void			ClassConfig::launchbinary(list<ClassProgram*>::iterator i)
 			else
 				wait(NULL);
 //				waitpid(pid, &status, WNOWAIT);
-			std::cout << "finish execve after wait" << std::endl;
 			check++;
 //			if (ret == -1)
 //				exit(-1);
@@ -207,7 +202,6 @@ void			ClassConfig::launchbinary(list<ClassProgram*>::iterator i)
 		if (check == (*i)->getStartretry())
 			(*i)->setRun(false);
 	}
-	std::cout << "finish execve after end" << std::endl;
 }
 
 void			ClassConfig::run(void)
