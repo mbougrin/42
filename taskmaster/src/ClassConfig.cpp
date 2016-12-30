@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/30 10:27:38 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/30 10:37:55 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,14 +108,7 @@ void			ClassConfig::launchbinary(list<ClassProgram*>::iterator i)
 		{
 			pid_t	pid;
 			int		status;
-			pid_t	child;
 			
-			child = fork();
-			if (child < 0)
-				exit(1);
-			if (child > 0)
-				exit(0);
-
 			sleep((*i)->getStarttime());
 			if ((pid = fork()) < 0)
 				exit(-1);
@@ -163,19 +156,19 @@ void			ClassConfig::launchbinary(list<ClassProgram*>::iterator i)
 				}
 				env[count] = NULL;
 
-				cpu_set_t  mask;
-				CPU_ZERO(&mask);
-				CPU_SET((*i)->getProc(), &mask);
-				sched_setaffinity(0, sizeof(mask), &mask);
+//				cpu_set_t  mask;
+//				CPU_ZERO(&mask);
+//				CPU_SET((*i)->getProc(), &mask);
+//				sched_setaffinity(0, sizeof(mask), &mask);
 
-				umask((*i)->getUmask());
+//				umask((*i)->getUmask());
 				chdir((*i)->getWorkingdir().c_str());
 //				freopen((*i)->getStdin().c_str(), "w", stdout);
 //				freopen((*i)->getStderr().c_str(), "w", stderr);
 				(*i)->setRun(true);
 				ret = execve(av[0], av, env);
 				std::cout << "finish execve" << std::endl;
-				CPU_FREE(&mask);
+//				CPU_FREE(&mask);
 				count = 0;
 				while (av[count] != NULL)
 				{
