@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/30 10:54:42 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/30 10:58:49 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void			ClassConfig::launchbinary(list<ClassProgram*>::iterator i)
 		while (check < (*i)->getStartretry())
 		{
 			pid_t	pid;
-			int		status;
+//			int		status;
 			
 			sleep((*i)->getStarttime());
 			if ((pid = fork()) < 0)
@@ -193,13 +193,14 @@ void			ClassConfig::launchbinary(list<ClassProgram*>::iterator i)
 				}
 			}
 			else
-				waitpid(pid, &status, WNOWAIT);
+				wait(NULL);
+//				waitpid(pid, &status, WNOWAIT);
 			std::cout << "finish execve after wait" << std::endl;
 			check++;
-			if (ret == -1)
-				exit(-1);
-			if (ret != -1)
-				break ;
+//			if (ret == -1)
+//				exit(-1);
+//			if (ret != -1)
+//				break ;
 		}
 		if (check == (*i)->getStartretry() || ret == -1)
 			(*i)->setRun(false);
