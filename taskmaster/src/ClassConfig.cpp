@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/30 12:07:03 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/30 12:07:55 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,12 +101,12 @@ int				ClassConfig::countspace(const char *str)
 void			ClassConfig::launchbinary(list<ClassProgram*>::iterator i)
 {
 	int	check = 0;
+	int	ret = 0;
 	if ((*i)->getAutostart() == true)
 	{
 		while (check < (*i)->getStartretry())
 		{
 			pid_t	pid;
-			int	ret = 0;
 //			int		status;
 			
 			sleep((*i)->getStarttime());
