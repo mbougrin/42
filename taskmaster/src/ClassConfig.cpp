@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/30 10:23:38 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/30 10:27:38 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,10 +97,9 @@ int				ClassConfig::countspace(const char *str)
 	}
 	return (count);
 }
-#include <sys/prctl.h>
+
 void			ClassConfig::launchbinary(list<ClassProgram*>::iterator i)
 {
-	prctl(PR_SET_PDEATHSIG, SIGHUP);
 	int	check = 0;
 	int	ret = 0;
 	if ((*i)->getAutostart() == true)
@@ -109,7 +108,14 @@ void			ClassConfig::launchbinary(list<ClassProgram*>::iterator i)
 		{
 			pid_t	pid;
 			int		status;
-	
+			pid_t	child;
+			
+			child = fork();
+			if (child < 0)
+				exit(1);
+			if (child > 0)
+				exit(0);
+
 			sleep((*i)->getStarttime());
 			if ((pid = fork()) < 0)
 				exit(-1);
@@ -210,25 +216,17 @@ void			ClassConfig::launchbinary(list<ClassProgram*>::iterator i)
 
 void			ClassConfig::run(void)
 {
-	pid_t	pid;
-
-	pid = fork();
-	if (pid == 0)
+	list<ClassProgram*>::iterator i;
+	int		len = _lstprog.size();
+	std::thread	*_thread = new std::thread[len];
+	int	j = 0;
+	for (i = _lstprog.begin(); i != _lstprog.end(); ++i)
 	{
-		list<ClassProgram*>::iterator i;
-		int		len = _lstprog.size();
-		std::thread	*_thread = new std::thread[len];
-			int	j = 0;
-		for (i = _lstprog.begin(); i != _lstprog.end(); ++i)
-		{
-			_thread[j] = std::thread(ClassConfig::launchbinary, i);
-			j++;
-		}
-		for (int k = 0 ; k < len ; ++k)
-			_thread[k].detach();
+		_thread[j] = std::thread(ClassConfig::launchbinary, i);
+		j++;
 	}
-	else
-		exit(1);
+	for (int k = 0 ; k < len ; ++k)
+		_thread[k].detach();
 }
 
 void			ClassConfig::init(char *conf, Tintin_reporter log)
