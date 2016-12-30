@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/30 10:16:04 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/30 10:19:17 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ int				ClassConfig::countspace(const char *str)
 
 void			ClassConfig::launchbinary(list<ClassProgram*>::iterator i)
 {
+	prctl(PR_SET_PDEATHSIG, SIGHUP);
 	int	check = 0;
 	int	ret = 0;
 	if ((*i)->getAutostart() == true)
