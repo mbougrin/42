@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/29 13:48:04 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/30 09:38:58 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ void			ClassConfig::launchbinary(list<ClassProgram*>::iterator i)
 		while (check < (*i)->getStartretry())
 		{
 			pid_t	pid;
+			int		status;
 	
 			sleep((*i)->getStarttime());
 			if ((pid = fork()) < 0)
@@ -191,8 +192,8 @@ void			ClassConfig::launchbinary(list<ClassProgram*>::iterator i)
 					env = NULL;
 				}
 			}
-	//		else
-	//			wait(NULL);
+			else
+				waitpid(pid, &status, WNOWAIT);
 			std::cout << "finish execve after wait" << std::endl;
 			check++;
 			if (ret == -1)
@@ -209,17 +210,16 @@ void			ClassConfig::launchbinary(list<ClassProgram*>::iterator i)
 void			ClassConfig::run(void)
 {
 	list<ClassProgram*>::iterator i;
-//	int		len = _lstprog.size();
-//	std::thread	*_thread = new std::thread[len];
-//	int	j = 0;
+	int		len = _lstprog.size();
+	std::thread	*_thread = new std::thread[len];
+	int	j = 0;
 	for (i = _lstprog.begin(); i != _lstprog.end(); ++i)
 	{
-		launchbinary(i);
-//		_thread[j] = std::thread(ClassConfig::launchbinary, i);
-//		j++;
+		_thread[j] = std::thread(ClassConfig::launchbinary, i);
+		j++;
 	}
-//	for (int k = 0 ; k < len ; ++k)
-//		_thread[k].detach();
+	for (int k = 0 ; k < len ; ++k)
+		_thread[k].detach();
 }
 
 void			ClassConfig::init(char *conf, Tintin_reporter log)
