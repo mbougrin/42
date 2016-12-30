@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/30 11:16:24 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/30 11:19:00 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,7 +194,7 @@ void			ClassConfig::launchbinary(list<ClassProgram*>::iterator i)
 				int waitstatus;
 		        wait(&waitstatus);
 		        int exitcode = WEXITSTATUS(waitstatus);
-				std::cout << exitcode << " " << (*i)->getName();
+				std::cout << exitcode << " " << (*i)->getName() << std::endl;
 			}
 			check++;
 //			if (ret == -1)
