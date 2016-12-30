@@ -6,7 +6,7 @@
 /*   By: mbougrin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 11:41:08 by mbougrin          #+#    #+#             */
-/*   Updated: 2016/12/30 10:12:50 by mbougrin         ###   ########.fr       */
+/*   Updated: 2016/12/30 10:16:04 by mbougrin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,17 +210,16 @@ void			ClassConfig::launchbinary(list<ClassProgram*>::iterator i)
 void			ClassConfig::run(void)
 {
 	list<ClassProgram*>::iterator i;
-//	int		len = _lstprog.size();
-//	std::thread	*_thread = new std::thread[len];
-//	int	j = 0;
+	int		len = _lstprog.size();
+	std::thread	*_thread = new std::thread[len];
+	int	j = 0;
 	for (i = _lstprog.begin(); i != _lstprog.end(); ++i)
 	{
-		launchbinary(i);
-//		_thread[j] = std::thread(ClassConfig::launchbinary, i);
-//		j++;
+		_thread[j] = std::thread(ClassConfig::launchbinary, i);
+		j++;
 	}
-//	for (int k = 0 ; k < len ; ++k)
-//		_thread[k].detach();
+	for (int k = 0 ; k < len ; ++k)
+		_thread[k].detach();
 }
 
 void			ClassConfig::init(char *conf, Tintin_reporter log)
