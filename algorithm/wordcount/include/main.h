@@ -4,7 +4,7 @@
 //size to read for get_next_line
 # define BUFF_SIZE 127
 //size struct word
-# define WORD_SIZE 500000
+# define WORD_SIZE 300000
 
 # include <stdbool.h>
 //include malloc and free
