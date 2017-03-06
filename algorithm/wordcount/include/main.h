@@ -6,6 +6,7 @@
 //size struct word
 # define WORD_SIZE 500000
 
+# include <stdbool.h>
 //include malloc and free
 # include <stdlib.h>
 //include write and pointer NULL

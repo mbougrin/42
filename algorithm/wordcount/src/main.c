@@ -119,16 +119,16 @@ static void	read_line(int fd)
 }
 
 //parsing av for verbose mode
-static void	verbose_parse(const char **av)
+static void	verbose_parse(char **av)
 {
 	int	i;
 
 	i = 1;
 	while (av[i] != NULL)
 	{
-		if (ft_strncmp(av[i], "-v", ft_strlen(av[i]));
+		if (ft_strncmp(av[i], "-v", ft_strlen(av[i])) == 0)
 			g_verbose = true;
-		if (ft_strncmp(av[i], "-l", ft_strlen(av[i]));
+		if (ft_strncmp(av[i], "-l", ft_strlen(av[i])) == 0)
 			g_loading = true;
 		i++;
 	}
