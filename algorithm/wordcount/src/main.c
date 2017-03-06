@@ -8,6 +8,8 @@ extern t_stc	*g_stc[];
 bool		g_verbose;	
 //global bool loading bar
 bool		g_loading;
+//global modulo
+bool		g_modulo;
 
 //printing table hashing and number occurence
 static void	print_hashing(void)
@@ -43,7 +45,8 @@ static int 	hashing_string(const char *str)
 		nb += str[i];
 		i++;
 	}
-//	nb %= 100;
+	if (g_modulo == true)
+		nb %= 100;
 	return (nb);
 }
 
@@ -77,8 +80,6 @@ static void	add_hashing(const char *name, int hashing, t_stc *new)
 	{
 		if (ft_strncmp(name, g_stc[hashing]->name, ft_strlen(g_stc[hashing]->name)) == 0)
 		{
-			if (g_loading == true)
-				loading_bar();
 			g_stc[hashing]->count++;
 			ft_strdel(&new->name);
 			free(new);
@@ -102,10 +103,12 @@ static void	read_line(int fd)
 	name = NULL;
 	while (get_next_line(fd, &line))
 	{
-		if (line[0] != '\0' || line[0] != '#')
+		if (line[0] != '\0' && line[0] != '#')
 		{
 			if (g_verbose == true)
 				ft_putendl(line);
+			if (g_loading == true)
+				loading_bar();
 			name = ft_strsub(line, 0, find_char(line, ' ')); 
 			hashing = hashing_string(name);
 			new = (t_stc *)malloc(sizeof(t_stc));		
@@ -130,6 +133,8 @@ static void	verbose_parse(char **av)
 			g_verbose = true;
 		if (ft_strncmp(av[i], "-l", ft_strlen(av[i])) == 0)
 			g_loading = true;
+		if (ft_strncmp(av[i], "-m", ft_strlen(av[i])) == 0)
+			g_modulo = true;
 		i++;
 	}
 }
@@ -162,6 +167,9 @@ static void	show_help(char *name)
 {
 	ft_putstr(name);
 	ft_putendl(" dicfile [inputfile ...]");
+	ft_putendl("\t\t-v verbose mode");
+	ft_putendl("\t\t-l loading bar");
+	ft_putendl("\t\t-m modulo hashing");
 }
 
 int		main(int ac, char **av)
