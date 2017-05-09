@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCase name="testSuites::BuildCache">
+<Environment>
+    <QtVersion>5.6.1</QtVersion>
+    <QtBuild>Qt 5.6.1 (x86_64&#x002D;little_endian&#x002D;llp64 shared (dynamic) release build; by MSVC 2015)</QtBuild>
+    <QTestVersion>5.6.1</QTestVersion>
+</Environment>
+<TestFunction name="initTestCase">
+<Incident type="pass" file="" line="0" />
+    <Duration msecs="755.205072"/>
+</TestFunction>
+<TestFunction name="verifyCiTableContent">
+<Incident type="pass" file="" line="0" />
+    <Duration msecs="0.014616"/>
+</TestFunction>
+<TestFunction name="verifyLinksTableContent">
+<Incident type="pass" file="" line="0" />
+    <Duration msecs="0.011060"/>
+</TestFunction>
+<TestFunction name="verifyNisTableContent">
+<Incident type="pass" file="" line="0" />
+    <Duration msecs="0.010665"/>
+</TestFunction>
+<TestFunction name="verifyNisLinksTableContent">
+<Incident type="pass" file="" line="0" />
+    <Duration msecs="0.010665"/>
+</TestFunction>
+<TestFunction name="cleanupTestCase">
+<Incident type="pass" file="" line="0" />
+    <Duration msecs="0.009875"/>
+</TestFunction>
+<Duration msecs="755.380072"/>
+</TestCase>

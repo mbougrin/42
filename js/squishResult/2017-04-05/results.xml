@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SquishReport version="3" xmlns="http://www.froglogic.com/resources/schemas/xml3">
+    <test type="testsuite">
+        <prolog time="2017-05-04T14:12:37+02:00">
+            <name><![CDATA[suite_3G]]></name>
+            <location>
+                <uri><![CDATA[file:///D:/test_suite/suite_3G]]></uri>
+            </location>
+        </prolog>
+        <test type="testcase">
+            <prolog time="2017-05-04T14:12:37+02:00">
+                <name><![CDATA[tst_menu]]></name>
+                <location>
+                    <uri><![CDATA[x-testsuite:/tst_menu]]></uri>
+                </location>
+            </prolog>
+            <verification>
+                <location>
+                    <uri><![CDATA[x-testcase:/test.py]]></uri>
+                    <lineNo><![CDATA[8]]></lineNo>
+                </location>
+                <screenshotVerificationResult type="FAIL" time="2017-05-04T14:12:47+02:00">
+                    <objectLocation>
+                        <uri><![CDATA[x-testcase:/verificationPoints/VP2]]></uri>
+                        <objectName><![CDATA[:RibbonMainWindow_see::SeeTool]]></objectName>
+                    </objectLocation>
+                    <text><![CDATA[VP2: Screenshot comparison of ':RibbonMainWindow_see::SeeTool' failed]]></text>
+                    <detail><![CDATA[Screenshots do not match. Differing screenshot saved as 'failedImages\failed_1.png']]></detail>
+                    <failedImage>
+                        <uri><![CDATA[x-results:/suite_3G/tst_menu/VP2/failedImages/failed_1.png]]></uri>
+                    </failedImage>
+                </screenshotVerificationResult>
+            </verification>
+            <epilog time="2017-05-04T14:12:48+02:00"/>
+        </test>
+        <test type="testcase">
+            <prolog time="2017-05-04T14:12:51+02:00">
+                <name><![CDATA[tst_create_new_diag]]></name>
+                <location>
+                    <uri><![CDATA[x-testsuite:/tst_create_new_diag]]></uri>
+                </location>
+            </prolog>
+            <verification>
+                <location>
+                    <uri><![CDATA[x-testcase:/test.py]]></uri>
+                    <lineNo><![CDATA[11]]></lineNo>
+                </location>
+                <scriptedVerificationResult type="PASS" time="2017-05-04T14:13:04+02:00">
+                    <scriptedLocation>
+                        <uri><![CDATA[x-testcase:/test.py]]></uri>
+                        <lineNo><![CDATA[11]]></lineNo>
+                    </scriptedLocation>
+                    <text><![CDATA[Comparison]]></text>
+                    <detail><![CDATA['diagram1' and 'diagram1' are equal]]></detail>
+                </scriptedVerificationResult>
+            </verification>
+            <epilog time="2017-05-04T14:13:05+02:00"/>
+        </test>
+        <epilog time="2017-05-04T14:13:08+02:00"/>
+    </test>
+</SquishReport>
